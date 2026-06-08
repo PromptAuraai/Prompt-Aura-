@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="PromptAura - View and copy detailed AI prompt">
+  <meta name="theme-color" content="#7b5cff">
+  <title>Prompt Details - PromptAura | AI Prompt Library</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Additional styles for prompt detail page */
+    .prompt-detail-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      border: 1px solid #e0e0e0;
+      padding: 10px 20px;
+      border-radius: 50px;
+      color: #555555;
+      text-decoration: none;
+      margin-bottom: 30px;
+      transition: all 0.2s;
+    }
+    
+    .back-button:hover {
+      background: #f5f6f8;
+      transform: translateX(-3px);
+    }
+    
+    /* Search on prompt page */
+    .prompt-page-search {
+      margin-bottom: 20px;
+    }
+    
+    .prompt-page-search .search-wrapper {
+      max-width: 100%;
+    }
+    
+    /* Related Prompts Pagination */
+    .related-pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 25px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    
+    .related-page-btn {
+      min-width: 36px;
+      height: 36px;
+      padding: 0 10px;
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .related-page-btn:hover:not(:disabled) {
+      background: #f5f6f8;
+      border-color: #7b5cff;
+    }
+    
+    .related-page-btn.active {
+      background: linear-gradient(135deg, #7b5cff, #a855f7);
+      color: white;
+      border: none;
+    }
+    
+    .related-page-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    /* Main Prompt Detail Card with Dynamic Image Ratio */
+    .prompt-detail-card {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    
+    .prompt-detail-img-wrapper {
+      width: 100%;
+      overflow: hidden;
+      background: #f0f2f5;
+    }
+    
+    .prompt-detail-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .prompt-detail-content {
+      padding: 30px;
+    }
+    
+    .prompt-title {
+      font-size: 32px;
+      color: #111111;
+      margin-bottom: 15px;
+    }
+    
+    .prompt-meta {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #f0f2f5;
+    }
+    
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #7b5cff;
+    }
+    
+    .category-badge {
+      background: linear-gradient(135deg, #7b5cff20, #a855f720);
+      color: #7b5cff;
+      padding: 6px 12px;
+      border-radius: 50px;
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    
+    .category-badge:hover {
+      background: linear-gradient(135deg, #7b5cff, #a855f7);
+      color: white;
+    }
+    
+    .prompt-description {
+      margin-bottom: 30px;
+    }
+    
+    .prompt-description h3 {
+      font-size: 20px;
+      color: #111111;
+      margin-bottom: 15px;
+    }
+    
+    .short-prompt-box {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      border-left: 4px solid #7b5cff;
+    }
+    
+    .full-prompt-box {
+      background: #f5f6f8;
+      padding: 25px;
+      border-radius: 16px;
+      margin: 20px 0;
+    }
+    
+    .full-prompt-box pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: inherit;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #555555;
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+    
+    .btn-copy-large {
+      flex: 1;
+      background: linear-gradient(135deg, #7b5cff, #a855f7);
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    
+    .btn-copy-large:hover {
+      transform: translateY(-2px);
+    }
+    
+    .btn-share {
+      background: white;
+      border: 1px solid #e0e0e0;
+      padding: 14px 24px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .btn-share:hover {
+      background: #f5f6f8;
+    }
+    
+    .related-prompts {
+      margin-top: 40px;
+    }
+    
+    .related-prompts h3 {
+      font-size: 24px;
+      color: #111111;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    
+    .related-count {
+      font-size: 14px;
+      color: #7b5cff;
+      font-weight: normal;
+    }
+    
+    /* Related Grid - Same as home page prompts grid */
+    .related-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    
+    /* Related Card - Same as home page prompt-card */
+    .related-card {
+      background: white;
+      border-radius: 16px;
+      padding: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .related-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    
+    /* Title ABOVE Image - Center Aligned */
+    .related-card h4 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 12px;
+      text-align: center;
+      line-height: 1.3;
+    }
+    
+    /* Related card image wrapper */
+    .related-img-wrapper {
+      width: 100%;
+      overflow: hidden;
+      border-radius: 14px;
+      margin-bottom: 12px;
+      background: #f0f2f5;
+    }
+    
+    .related-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .related-card .short-prompt {
+      font-size: 14px;
+      color: #555555;
+      line-height: 1.5;
+      margin-bottom: 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-align: left;
+    }
+    
+    .related-card .full-prompt {
+      display: none;
+      background: #f9f9f9;
+      padding: 12px;
+      border-radius: 12px;
+      margin: 12px 0;
+      font-size: 14px;
+      color: #555555;
+      line-height: 1.6;
+    }
+    
+    .related-card .full-prompt.show {
+      display: block;
+    }
+    
+    .related-card .card-buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: auto;
+    }
+    
+    .related-card .btn-copy {
+      flex: 1;
+      background: linear-gradient(135deg, #7b5cff, #a855f7);
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    
+    .related-card .btn-copy:hover {
+      opacity: 0.9;
+    }
+    
+    .related-card .btn-show-more {
+      background: #f1f1f1;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    
+    .related-card .btn-show-more:hover {
+      background: #e0e0e0;
+    }
+    
+    .toast-message {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #111111;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 50px;
+      z-index: 2000;
+      animation: slideUp 0.3s ease;
+    }
+    
+    @keyframes slideUp {
+      from {
+        transform: translateX(-50%) translateY(100px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .prompt-detail-content {
+        padding: 20px;
+      }
+      
+      .prompt-title {
+        font-size: 24px;
+      }
+      
+      .action-buttons {
+        flex-direction: column;
+      }
+      
+      .related-prompts h3 {
+        font-size: 20px;
+      }
+      
+      .related-card h4 {
+        font-size: 16px;
+      }
+    }
+    
+    /* Tablet and Desktop styles for related grid */
+    @media (min-width: 768px) {
+      .related-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (min-width: 1024px) {
+      .related-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    .loading-spinner {
+      text-align: center;
+      padding: 60px;
+    }
+    
+    .error-message {
+      text-align: center;
+      padding: 60px;
+      color: #ff4444;
+    }
+    
+    /* Search Results Banner on Prompt Page */
+    .search-results-banner {
+      background: linear-gradient(135deg, #7b5cff10, #a855f710);
+      border-left: 4px solid #7b5cff;
+      border-radius: 12px;
+      padding: 12px 18px;
+      margin-bottom: 20px;
+    }
+    
+    .search-banner-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    
+    .clear-search-banner {
+      background: white;
+      border: 1px solid #e0e0e0;
+      padding: 6px 14px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    
+    /* ========== ENHANCED SEARCH SUGGESTIONS STYLES ========== */
+    .search-suggestions {
+      max-width: 600px;
+      margin: 10px auto 0;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      display: none;
+      overflow: hidden;
+      z-index: 1001;
+    }
+    
+    .search-suggestions.active {
+      display: block;
+    }
+    
+    .suggestions-scroll-container {
+      max-height: 400px;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    
+    .suggestions-scroll-container::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .suggestions-scroll-container::-webkit-scrollbar-track {
+      background: #f0f2f5;
+      border-radius: 10px;
+    }
+    
+    .suggestions-scroll-container::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #7b5cff, #a855f7);
+      border-radius: 10px;
+    }
+    
+    .suggestion-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 15px;
+      cursor: pointer;
+      border-bottom: 1px solid #f0f2f5;
+      transition: background 0.2s ease;
+    }
+    
+    .suggestion-item:last-child {
+      border-bottom: none;
+    }
+    
+    .suggestion-item:hover {
+      background: #f5f6f8;
+    }
+    
+    .suggestion-thumbnail {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: #f0f2f5;
+    }
+    
+    .suggestion-info {
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .suggestion-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #111111;
+      margin-bottom: 4px;
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .suggestion-title strong {
+      color: #7b5cff;
+    }
+    
+    .suggestion-category {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      color: #7b5cff;
+      background: #f0f2f5;
+      padding: 2px 8px;
+      border-radius: 20px;
+      margin-top: 4px;
+    }
+    
+    .suggestion-match {
+      font-size: 12px;
+      color: #888888;
+      margin-top: 4px;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .suggestion-match strong {
+      color: #7b5cff;
+      font-weight: 600;
+    }
+    
+    .suggestion-no-results {
+      padding: 20px;
+      text-align: center;
+      color: #888888;
+      font-size: 14px;
+    }
+    
+    @media (max-width: 640px) {
+      .suggestion-thumbnail {
+        width: 40px;
+        height: 40px;
+      }
+      
+      .suggestion-title {
+        font-size: 13px;
+      }
+      
+      .suggestions-scroll-container {
+        max-height: 300px;
+      }
+    }
+
+    /* Developer Credit Styles */
+.developer-credit {
+  font-size: 13px;
+  color: #888888;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.developer-credit i {
+  animation: heartbeat 1.5s ease infinite;
+  margin: 0 2px;
+}
+
+.developer-name {
+  font-weight: 600;
+  background: linear-gradient(135deg, #7b5cff, #a855f7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.developer-name:hover {
+  background: linear-gradient(135deg, #a855f7, #7b5cff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transform: scale(1.02);
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+  .developer-credit {
+    font-size: 11px;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .developer-name {
+    display: inline-block;
+  }
+}
+
+    
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-container">
+      <div class="logo">
+        <img src="../assets/prompts/logo.png" alt="PromptAura Logo">
+        <span>PromptAura</span>
+      </div>
+      <div class="header-actions">
+        <a href="../index.html" class="icon-btn" aria-label="Home">
+          <i class="fas fa-home"></i>
+        </a>
+        <button class="icon-btn search-toggle-btn" id="searchToggleBtn" aria-label="Search">
+          <i class="fas fa-search"></i>
+        </button>
+        <button class="icon-btn menu-toggle-btn" id="menuToggleBtn" aria-label="Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+    <div class="search-expand" id="searchExpand">
+      <div class="search-wrapper">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" id="liveSearchInput" placeholder="Search related prompts..." autocomplete="off">
+        <button id="clearSearchBtn" class="clear-search"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="searchSuggestions" class="search-suggestions"></div>
+    </div>
+  </header>
+
+  <!-- Sliding Menu -->
+  <div class="menu-overlay" id="menuOverlay"></div>
+  <div class="sliding-menu" id="slidingMenu">
+    <div class="menu-header">
+      <div class="menu-logo">
+        <img src="../assets/prompts/logo.png" alt="PromptAura Logo">
+        <span>PromptAura</span>
+      </div>
+      <button class="menu-close" id="menuCloseBtn">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="menu-content">
+      <div class="menu-section">
+        <a href="../index.html" class="menu-item">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </a>
+        <a href="../category.html?category=all" class="menu-item">
+          <i class="fas fa-tags"></i>
+          <span>Categories</span>
+        </a>
+        <a href="../index.html#trending" class="menu-item">
+          <i class="fas fa-chart-line"></i>
+          <span>Trending</span>
+        </a>
+        <a href="../index.html#jstylehub" class="menu-item">
+          <i class="fas fa-layer-group"></i>
+          <span>Collections</span>
+        </a>
+      </div>
+      <div class="menu-divider"></div>
+      <div class="menu-section">
+        <a href="../about.html" class="menu-item">
+          <i class="fas fa-info-circle"></i>
+          <span>About Us</span>
+        </a>
+        <a href="../contact.html" class="menu-item">
+          <i class="fas fa-envelope"></i>
+          <span>Contact Us</span>
+        </a>
+        <a href="../privacy.html" class="menu-item">
+          <i class="fas fa-lock"></i>
+          <span>Privacy Policy</span>
+        </a>
+        <a href="../terms.html" class="menu-item">
+          <i class="fas fa-file-contract"></i>
+          <span>Terms & Conditions</span>
+        </a>
+        <a href="../disclaimer.html" class="menu-item">
+          <i class="fas fa-exclamation-triangle"></i>
+          <span>Disclaimer</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main class="main-container">
+    <div class="prompt-detail-container" id="promptDetailContainer">
+      <a href="javascript:history.back()" class="back-button">
+        <i class="fas fa-arrow-left"></i> Back
+      </a>
+      
+      <div id="promptContent">
+        <div class="loading-spinner">
+          <i class="fas fa-spinner fa-spin" style="font-size: 48px; color: #7b5cff;"></i>
+          <p>Loading prompt details...</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- New Professional Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo">
+            <img src="../assets/prompts/logo.png" alt="PromptAura Logo">
+            <span>PromptAura</span>
+          </div>
+          <p class="footer-description">Your ultimate destination for high-quality AI prompts. Generate stunning images with our carefully curated prompts.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../category.html?category=all">Categories</a></li>
+            <li><a href="../index.html#trending">Trending</a></li>
+            <li><a href="../index.html#jstylehub">Collections</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul class="footer-links">
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact Us</a></li>
+            <li><a href="../privacy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms & Conditions</a></li>
+            <li><a href="../disclaimer.html">Disclaimer</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+  <p>&copy; 2026 PromptAura. All Rights Reserved.</p>
+  <p class="developer-credit">
+    Developed with <i class="fas fa-heart" style="color: #ff4d4d;"></i> by <span class="developer-name">Subhankar Bairagi</span>
+  </p>
+  <p class="footer-tagline">PromptAura is a free AI prompt library where users can find prompts for AI image generation, cinematic prompts, wedding prompts, birthday prompts, anime prompts and more.</p>
+</div>
+    </div>
+  </footer>
+
+  <div class="sticky-bottom-ad mobile-only" id="stickyBottomAd">
+    <div class="ad-label">Advertisement</div>
+    <div class="ad-placeholder">Mobile Sticky Ad</div>
+    <button id="closeStickyAd" class="close-sticky"><i class="fas fa-times"></i></button>
+  </div>
+
+  <script src="../menu.js"></script>
+  <script>
+    // Global variables
+    const urlParams = new URLSearchParams(window.location.search);
+    const promptId = parseInt(urlParams.get('id'));
+    let currentPrompt = null;
+    let allPrompts = [];
+    let relatedPrompts = [];
+    let shuffledRelatedPrompts = [];
+    let currentRelatedPage = 1;
+    const relatedPerPage = 10;
+    let isSearchMode = false;
+    let searchResults = [];
+    let currentSearchQuery = '';
+
+    // Flag to check if coming from related prompt click
+    let isFromRelatedClick = false;
+
+    // ========== UNIQUE KEY FOR STORAGE ==========
+    function getRelatedOrderKey() {
+      return `related_prompts_order_${promptId}`;
+    }
+
+    // ========== SAVE & RESTORE FUNCTIONS ==========
+    function getSavedRelatedOrder() {
+      try {
+        const key = getRelatedOrderKey();
+        const saved = sessionStorage.getItem(key);
+        if (saved) {
+          return JSON.parse(saved);
+        }
+        return null;
+      } catch(e) {
+        console.warn('Failed to get saved order:', e);
+        return null;
+      }
+    }
+
+    function saveRelatedOrder(order) {
+      try {
+        const key = getRelatedOrderKey();
+        sessionStorage.setItem(key, JSON.stringify(order));
+      } catch(e) {
+        console.warn('Failed to save order:', e);
+      }
+    }
+
+    function clearOldRelatedOrders() {
+      try {
+        const keysToRemove = [];
+        for (let i = 0; i < sessionStorage.length; i++) {
+          const key = sessionStorage.key(i);
+          if (key && key.startsWith('related_prompts_order_') && key !== getRelatedOrderKey()) {
+            keysToRemove.push(key);
+          }
+        }
+        // Keep only current and remove others (max 3)
+        keysToRemove.slice(0, -3).forEach(key => sessionStorage.removeItem(key));
+      } catch(e) {
+        console.warn('Cleanup failed:', e);
+      }
+    }
+
+    // Function to get aspect ratio based on ratio string
+    function getAspectRatio(ratio) {
+      if (!ratio) return '16 / 9';
+      switch(ratio) {
+        case '16:9': return '16 / 9';
+        case '9:16': return '9 / 16';
+        case '4:5': return '4 / 5';
+        case '1:1': return '1 / 1';
+        default: return '16 / 9';
+      }
+    }
+
+    // Save page number only (for pagination restore)
+    function saveRelatedPageNumber() {
+      sessionStorage.setItem('savedRelatedPage', currentRelatedPage);
+    }
+
+    // Restore page number - Default to 1 if no saved page
+    function restoreRelatedPageNumber() {
+      const savedPage = sessionStorage.getItem('savedRelatedPage');
+      if (savedPage && parseInt(savedPage) >= 1) {
+        currentRelatedPage = parseInt(savedPage);
+      } else {
+        currentRelatedPage = 1;
+      }
+    }
+
+    // Save scroll position for related prompts section (only for back button)
+    function saveRelatedScrollPosition() {
+      const relatedSection = document.getElementById('relatedPromptsSection');
+      if (relatedSection) {
+        const scrollY = window.scrollY;
+        sessionStorage.setItem('relatedScrollPosition', scrollY);
+      }
+    }
+
+    // Force scroll to top of page
+    function forceScrollToTop() {
+      window.scrollTo(0, 0);
+    }
+
+    // Scroll to related section top using window.scrollTo
+    function scrollToRelatedSectionTop() {
+      const section = document.getElementById('relatedPromptsSection');
+      if (section) {
+        window.scrollTo({
+          top: section.offsetTop - 10,
+          behavior: 'smooth'
+        });
+      }
+    }
+
+    // Helper function to fix image path for pages folder
+    function fixImagePath(imageUrl) {
+      if (!imageUrl) return 'https://via.placeholder.com/800x400?text=No+Image';
+      
+      if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
+        return imageUrl;
+      }
+      
+      if (imageUrl.startsWith('../')) {
+        return imageUrl;
+      }
+      
+      if (imageUrl.startsWith('assets/')) {
+        return '../' + imageUrl;
+      }
+      
+      return '../' + imageUrl;
+    }
+
+    // Highlight matching text
+    function highlightMatch(text, query) {
+      if (!query) return escapeHtml(text);
+      const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
+      return escapeHtml(text).replace(regex, '<strong>$1</strong>');
+    }
+
+    function escapeRegex(string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    // ========== FUZZY MATCH FUNCTION ==========
+    function fuzzyMatch(str, pattern) {
+      str = str.toLowerCase();
+      pattern = pattern.toLowerCase();
+      
+      if (str.includes(pattern)) return true;
+      
+      if (pattern.length <= 10) {
+        let distance = 0;
+        let i = 0, j = 0;
+        while (i < str.length && j < pattern.length) {
+          if (str[i] !== pattern[j]) {
+            distance++;
+            if (distance > Math.floor(pattern.length * 0.3)) break;
+            i++;
+          } else {
+            i++;
+            j++;
+          }
+        }
+        if (j === pattern.length && distance <= Math.floor(pattern.length * 0.3)) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    // ========== CALCULATE SEARCH SCORE ==========
+    function calculateSearchScore(prompt, query) {
+      let score = 0;
+      const title = prompt.title.toLowerCase();
+      const shortPrompt = prompt.short_prompt.toLowerCase();
+      const fullPrompt = prompt.full_prompt.toLowerCase();
+      const category = prompt.category.toLowerCase();
+      const tags = prompt.tags ? prompt.tags.map(t => t.toLowerCase()) : [];
+      
+      if (title.includes(query)) score += 10;
+      else if (fuzzyMatch(title, query)) score += 5;
+      
+      if (title === query) score += 15;
+      
+      if (category.includes(query)) score += 8;
+      else if (fuzzyMatch(category, query)) score += 4;
+      
+      if (category === query) score += 10;
+      
+      tags.forEach(tag => {
+        if (tag.includes(query)) score += 5;
+        else if (fuzzyMatch(tag, query)) score += 2;
+        if (tag === query) score += 8;
+      });
+      
+      if (shortPrompt.includes(query)) score += 3;
+      else if (fuzzyMatch(shortPrompt.substring(0, 50), query)) score += 1;
+      
+      if (fullPrompt.includes(query)) score += 1;
+      
+      return score;
+    }
+
+    // ========== GET SEARCH SUGGESTIONS (ALL MATCHING) ==========
+    function getSearchSuggestions(query) {
+      if (!query || query.trim().length === 0) return [];
+      
+      const searchTerm = query.toLowerCase().trim();
+      
+      const scoredResults = relatedPrompts.map(prompt => {
+        const score = calculateSearchScore(prompt, searchTerm);
+        return { prompt, score };
+      });
+      
+      const results = scoredResults
+        .filter(item => item.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .map(item => item.prompt);
+      
+      return results;
+    }
+
+    // Load prompt data
+    async function loadPromptDetails() {
+      try {
+        const response = await fetch('../data/prompts.json');
+        allPrompts = await response.json();
+        
+        currentPrompt = allPrompts.find(p => p.id === promptId);
+        
+        if (!currentPrompt) {
+          showError('Prompt not found');
+          return;
+        }
+        
+        if (currentPrompt.image) {
+          currentPrompt.image = fixImagePath(currentPrompt.image);
+        }
+        
+        // Handle both category and collection
+        if (currentPrompt.category) {
+          relatedPrompts = allPrompts.filter(p => p.category === currentPrompt.category && p.id !== currentPrompt.id);
+        } else if (currentPrompt.collection) {
+          relatedPrompts = allPrompts.filter(p => p.collection === currentPrompt.collection && p.id !== currentPrompt.id);
+        } else {
+          relatedPrompts = [];
+        }
+        
+        relatedPrompts = relatedPrompts.map(p => {
+          if (p.image) {
+            p.image = fixImagePath(p.image);
+          }
+          return p;
+        });
+        
+        // ✅ FIXED: Properly save and restore related prompts order
+        const savedOrder = getSavedRelatedOrder();
+        
+        if (savedOrder && savedOrder.length === relatedPrompts.length) {
+          // Restore saved order (back navigation)
+          shuffledRelatedPrompts = savedOrder;
+        } else {
+          // First time - randomize and save
+          shuffledRelatedPrompts = shuffleArray([...relatedPrompts]);
+          saveRelatedOrder(shuffledRelatedPrompts);
+          clearOldRelatedOrders();
+        }
+        
+        renderPromptDetails();
+        
+        // Restore page number BEFORE rendering related prompts
+        restoreRelatedPageNumber();
+        
+        renderRelatedPrompts();
+        
+        document.title = `${currentPrompt.title} - PromptAura`;
+        
+        const searchQuery = urlParams.get('q') || urlParams.get('search');
+        if (searchQuery) {
+          performSearch(searchQuery.toLowerCase());
+        }
+        
+        setupSearch();
+        
+        // Check if this is a related click - if yes, force scroll to top
+        const fromRelated = sessionStorage.getItem('fromRelatedClick');
+        if (fromRelated === 'true') {
+          sessionStorage.removeItem('fromRelatedClick');
+          forceScrollToTop();
+        } else {
+          // Normal back navigation - restore scroll position
+          const savedPosition = sessionStorage.getItem('relatedScrollPosition');
+          if (savedPosition) {
+            setTimeout(() => {
+              window.scrollTo(0, parseInt(savedPosition));
+              sessionStorage.removeItem('relatedScrollPosition');
+            }, 150);
+          }
+        }
+        
+      } catch (error) {
+        console.error('Error loading prompt:', error);
+        showError('Failed to load prompt details');
+      }
+    }
+    
+    function shuffleArray(array) {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+    
+    function calculateRelevance(prompt, query) {
+      let score = 0;
+      const title = prompt.title.toLowerCase();
+      const shortPrompt = prompt.short_prompt.toLowerCase();
+      const fullPrompt = prompt.full_prompt.toLowerCase();
+      const category = prompt.category.toLowerCase();
+      const tags = prompt.tags ? prompt.tags.map(t => t.toLowerCase()) : [];
+      
+      if (title.includes(query)) score += 10;
+      if (title === query) score += 20;
+      if (category.includes(query)) score += 8;
+      tags.forEach(tag => { if (tag.includes(query)) score += 5; });
+      if (shortPrompt.includes(query)) score += 3;
+      if (fullPrompt.includes(query)) score += 1;
+      
+      return score;
+    }
+    
+    function performSearch(query) {
+      if (!query || query.trim() === '') {
+        clearSearch();
+        return;
+      }
+      
+      const results = relatedPrompts.filter(p => {
+        const title = p.title.toLowerCase();
+        const shortPrompt = p.short_prompt.toLowerCase();
+        const fullPrompt = p.full_prompt.toLowerCase();
+        const category = p.category.toLowerCase();
+        const tags = p.tags ? p.tags.map(t => t.toLowerCase()) : [];
+        
+        return title.includes(query) ||
+               shortPrompt.includes(query) ||
+               fullPrompt.includes(query) ||
+               category.includes(query) ||
+               tags.some(tag => tag.includes(query));
+      });
+      
+      results.forEach(result => {
+        result.relevanceScore = calculateRelevance(result, query);
+      });
+      results.sort((a, b) => b.relevanceScore - a.relevanceScore);
+      
+      searchResults = results;
+      isSearchMode = true;
+      currentSearchQuery = query;
+      currentRelatedPage = 1;
+      
+      showSearchBanner(query, results.length);
+      renderRelatedPrompts();
+    }
+    
+    function clearSearch() {
+      isSearchMode = false;
+      currentSearchQuery = '';
+      searchResults = [];
+      currentRelatedPage = 1;
+      
+      const banner = document.getElementById('searchResultsBanner');
+      if (banner) banner.remove();
+      
+      renderRelatedPrompts();
+    }
+    
+    function showSearchBanner(query, count) {
+      const existingBanner = document.getElementById('searchResultsBanner');
+      if (existingBanner) existingBanner.remove();
+      
+      const relatedSection = document.getElementById('relatedPromptsSection');
+      if (!relatedSection) return;
+      
+      const banner = document.createElement('div');
+      banner.id = 'searchResultsBanner';
+      banner.className = 'search-results-banner';
+      banner.innerHTML = `
+        <div class="search-banner-content">
+          <div>
+            <i class="fas fa-search" style="color: #7b5cff;"></i>
+            <strong style="margin-left: 8px;">Search: "${escapeHtml(query)}"</strong>
+            <span style="margin-left: 8px; color: #7b5cff;">${count} results found</span>
+          </div>
+          <button id="clearSearchBanner" class="clear-search-banner">Clear Search</button>
+        </div>
+      `;
+      
+      relatedSection.parentNode.insertBefore(banner, relatedSection);
+      
+      document.getElementById('clearSearchBanner').addEventListener('click', () => {
+        clearSearch();
+        const searchInput = document.getElementById('liveSearchInput');
+        if (searchInput) searchInput.value = '';
+      });
+    }
+    
+    // Render prompt details with DYNAMIC IMAGE RATIO
+    function renderPromptDetails() {
+      const aspectRatio = getAspectRatio(currentPrompt.ratio);
+      
+      const container = document.getElementById('promptContent');
+      container.innerHTML = `
+        <div class="prompt-detail-card">
+          <div class="prompt-detail-img-wrapper" style="aspect-ratio: ${aspectRatio} !important;">
+            <img src="${currentPrompt.image}" alt="${escapeHtml(currentPrompt.title)}" onerror="this.src='https://via.placeholder.com/800x400?text=Image+Not+Found'">
+          </div>
+          <div class="prompt-detail-content">
+            <h1 class="prompt-title">${escapeHtml(currentPrompt.title)}</h1>
+            <div class="prompt-meta">
+              <div class="meta-item">
+                <i class="fas fa-tag"></i>
+                <a href="category.html?category=${currentPrompt.category}" class="category-badge">
+                  ${escapeHtml(currentPrompt.category.charAt(0).toUpperCase() + currentPrompt.category.slice(1))}
+                </a>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-file-alt"></i>
+                <span>AI Prompt</span>
+              </div>
+            </div>
+            
+            <div class="prompt-description">
+              <h3>Short Description</h3>
+              <div class="short-prompt-box">
+                <p>${escapeHtml(currentPrompt.short_prompt)}</p>
+              </div>
+              
+              <h3>Full Prompt</h3>
+              <div class="full-prompt-box">
+                <pre>${escapeHtml(currentPrompt.full_prompt)}</pre>
+              </div>
+            </div>
+            
+            <div class="action-buttons">
+              <button class="btn-copy-large" id="copyFullPromptBtn">
+                <i class="fas fa-copy"></i> Copy Full Prompt
+              </button>
+              <button class="btn-share" id="sharePromptBtn">
+                <i class="fas fa-share-alt"></i> Share Prompt
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="related-prompts" id="relatedPromptsSection">
+          <h3>
+            <span><i class="fas fa-chart-line"></i> Related Prompts</span>
+            <span class="related-count" id="relatedCount">${relatedPrompts.length} prompts available</span>
+          </h3>
+          <div class="related-grid" id="relatedGrid"></div>
+          <div id="relatedPagination"></div>
+        </div>
+      `;
+      
+      const copyBtn = document.getElementById('copyFullPromptBtn');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => copyToClipboard(currentPrompt.full_prompt));
+      }
+      
+      const shareBtn = document.getElementById('sharePromptBtn');
+      if (shareBtn) {
+        shareBtn.addEventListener('click', sharePrompt);
+      }
+    }
+    
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+    
+    // ========== RENDER RELATED PROMPTS WITH ADS AFTER EVERY 2 CARDS ==========
+    function renderRelatedPrompts() {
+      let promptsList = isSearchMode ? searchResults : shuffledRelatedPrompts;
+      const totalItems = promptsList.length;
+      const totalPages = Math.ceil(totalItems / relatedPerPage);
+      
+      const relatedCountSpan = document.getElementById('relatedCount');
+      if (relatedCountSpan) {
+        if (isSearchMode) {
+          relatedCountSpan.textContent = `${totalItems} search results`;
+        } else {
+          relatedCountSpan.textContent = `${totalItems} related prompts`;
+        }
+      }
+      
+      const start = (currentRelatedPage - 1) * relatedPerPage;
+      const end = start + relatedPerPage;
+      const paginated = promptsList.slice(start, end);
+      
+      const relatedGrid = document.getElementById('relatedGrid');
+      
+      if (paginated.length === 0) {
+        relatedGrid.innerHTML = '<p style="text-align: center; color: #888888; grid-column: 1/-1;">No related prompts found</p>';
+        document.getElementById('relatedPagination').innerHTML = '';
+        return;
+      }
+      
+      // Generate cards HTML
+      let cardsHTML = '';
+      paginated.forEach((prompt, index) => {
+        const aspectRatio = getAspectRatio(prompt.ratio);
+        
+        cardsHTML += `
+          <div class="related-card" data-id="${prompt.id}">
+            <h4>${escapeHtml(prompt.title)}</h4>
+            <div class="related-img-wrapper" style="aspect-ratio: ${aspectRatio} !important;">
+              <img src="${prompt.image}" alt="${escapeHtml(prompt.title)}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=No+Image'">
+            </div>
+            <div class="short-prompt">${escapeHtml(prompt.short_prompt)}</div>
+            <div class="full-prompt" id="related-full-${prompt.id}">${escapeHtml(prompt.full_prompt)}</div>
+            <div class="card-buttons">
+              <button class="btn-copy" data-prompt="${prompt.full_prompt.replace(/"/g, '&quot;')}">Copy Prompt</button>
+              <button class="btn-show-more" data-id="${prompt.id}">Show More</button>
+            </div>
+          </div>
+        `;
+        
+        // Insert ad after every 2 cards (but not after the last card)
+        if ((index + 1) % 2 === 0 && index + 1 < paginated.length) {
+          cardsHTML += `
+            <div class="ad-container" style="margin: 0; margin-bottom: 20px;">
+              <div class="ad-label">Sponsored</div>
+              <div class="ad-placeholder">
+                <i class="fas fa-ad" style="margin-right: 8px;"></i>
+                Advertisement Space
+              </div>
+            </div>
+          `;
+        }
+      });
+      
+      relatedGrid.innerHTML = cardsHTML;
+      
+      // Add click event to related cards
+      document.querySelectorAll('.related-card').forEach(card => {
+        const cardId = card.dataset.id;
+        
+        card.addEventListener('click', (e) => {
+          if (e.target.classList.contains('btn-copy') || 
+              e.target.classList.contains('btn-show-more') ||
+              e.target.closest('.btn-copy') ||
+              e.target.closest('.btn-show-more')) {
+            return;
+          }
+          
+          saveRelatedScrollPosition();
+          saveRelatedPageNumber();
+          sessionStorage.setItem('fromRelatedClick', 'true');
+          window.location.href = `prompt.html?id=${cardId}`;
+        });
+      });
+      
+      document.querySelectorAll('.related-card .btn-copy').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          copyToClipboard(btn.dataset.prompt);
+        });
+      });
+      
+      document.querySelectorAll('.related-card .btn-show-more').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const id = btn.dataset.id;
+          const fullPromptDiv = document.getElementById(`related-full-${id}`);
+          if (fullPromptDiv.classList.contains('show')) {
+            fullPromptDiv.classList.remove('show');
+            btn.textContent = 'Show More';
+          } else {
+            fullPromptDiv.classList.add('show');
+            btn.textContent = 'Show Less';
+          }
+        });
+      });
+      
+      renderRelatedPagination(totalPages);
+    }
+    
+    function renderRelatedPagination(totalPages) {
+      const paginationContainer = document.getElementById('relatedPagination');
+      
+      if (totalPages <= 1) {
+        paginationContainer.innerHTML = '';
+        return;
+      }
+      
+      let paginationHTML = '<div class="related-pagination">';
+      
+      paginationHTML += `<button class="related-page-btn" ${currentRelatedPage === 1 ? 'disabled' : ''} id="relatedPrevBtn">
+        <i class="fas fa-chevron-left"></i>
+      </button>`;
+      
+      let startPage = Math.max(1, currentRelatedPage - 2);
+      let endPage = Math.min(totalPages, startPage + 4);
+      
+      if (endPage - startPage < 4) {
+        startPage = Math.max(1, endPage - 4);
+      }
+      
+      if (startPage > 1) {
+        paginationHTML += `<button class="related-page-btn" data-page="1">1</button>`;
+        if (startPage > 2) paginationHTML += `<span class="page-dots">...</span>`;
+      }
+      
+      for (let i = startPage; i <= endPage; i++) {
+        paginationHTML += `<button class="related-page-btn ${i === currentRelatedPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+      }
+      
+      if (endPage < totalPages) {
+        if (endPage < totalPages - 1) paginationHTML += `<span class="page-dots">...</span>`;
+        paginationHTML += `<button class="related-page-btn" data-page="${totalPages}">${totalPages}</button>`;
+      }
+      
+      paginationHTML += `<button class="related-page-btn" ${currentRelatedPage === totalPages ? 'disabled' : ''} id="relatedNextBtn">
+        <i class="fas fa-chevron-right"></i>
+      </button>`;
+      
+      paginationHTML += '</div>';
+      paginationContainer.innerHTML = paginationHTML;
+      
+      document.querySelectorAll('.related-page-btn[data-page]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentRelatedPage = parseInt(btn.dataset.page);
+          renderRelatedPrompts();
+          setTimeout(() => {
+            scrollToRelatedSectionTop();
+          }, 100);
+        });
+      });
+      
+      const prevBtn = document.getElementById('relatedPrevBtn');
+      const nextBtn = document.getElementById('relatedNextBtn');
+      
+      if (prevBtn && !prevBtn.disabled) {
+        prevBtn.addEventListener('click', () => {
+          if (currentRelatedPage > 1) {
+            currentRelatedPage--;
+            renderRelatedPrompts();
+            setTimeout(() => {
+              scrollToRelatedSectionTop();
+            }, 100);
+          }
+        });
+      }
+      
+      if (nextBtn && !nextBtn.disabled) {
+        nextBtn.addEventListener('click', () => {
+          if (currentRelatedPage < totalPages) {
+            currentRelatedPage++;
+            renderRelatedPrompts();
+            setTimeout(() => {
+              scrollToRelatedSectionTop();
+            }, 100);
+          }
+        });
+      }
+    }
+    
+    // ========== ENHANCED SEARCH WITH DIRECT SUGGESTION CLICK ==========
+    function setupSearch() {
+      const searchToggle = document.getElementById('searchToggleBtn');
+      const searchExpand = document.getElementById('searchExpand');
+      const searchInput = document.getElementById('liveSearchInput');
+      const suggestionsDiv = document.getElementById('searchSuggestions');
+      const clearSearchBtn = document.getElementById('clearSearchBtn');
+      let debounceTimer;
+      
+      if (searchToggle) {
+        searchToggle.addEventListener('click', () => {
+          searchExpand.classList.toggle('active');
+        });
+      }
+      
+      if (clearSearchBtn) {
+        clearSearchBtn.addEventListener('click', () => {
+          searchInput.value = '';
+          clearSearch();
+          suggestionsDiv.classList.remove('active');
+        });
+      }
+      
+      if (!searchInput) return;
+      
+      function renderSuggestions(query) {
+        if (query.length < 1) {
+          suggestionsDiv.classList.remove('active');
+          return;
+        }
+        
+        const suggestions = getSearchSuggestions(query);
+        
+        if (suggestions.length === 0) {
+          suggestionsDiv.innerHTML = `
+            <div class="suggestion-no-results">
+              <i class="fas fa-search"></i> No results found for "${escapeHtml(query)}"
+            </div>
+          `;
+          suggestionsDiv.classList.add('active');
+          return;
+        }
+        
+        suggestionsDiv.innerHTML = `
+          <div class="suggestions-scroll-container">
+            ${suggestions.map(prompt => `
+              <div class="suggestion-item" data-id="${prompt.id}" data-title="${escapeHtml(prompt.title)}">
+                <img class="suggestion-thumbnail" src="${prompt.image}" alt="${escapeHtml(prompt.title)}" loading="lazy" onerror="this.src='https://via.placeholder.com/48x48?text=No+Image'">
+                <div class="suggestion-info">
+                  <div class="suggestion-title">${highlightMatch(prompt.title, query)}</div>
+                  <span class="suggestion-category">${escapeHtml(prompt.category)}</span>
+                  <div class="suggestion-match">${highlightMatch(prompt.short_prompt.substring(0, 60), query)}...</div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        
+        suggestionsDiv.classList.add('active');
+        
+        document.querySelectorAll('.suggestion-item').forEach(item => {
+          item.addEventListener('click', () => {
+            const promptTitle = item.dataset.title;
+            searchInput.value = promptTitle;
+            performSearch(promptTitle);
+            suggestionsDiv.classList.remove('active');
+            searchExpand.classList.remove('active');
+          });
+        });
+      }
+      
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.trim();
+        
+        clearTimeout(debounceTimer);
+        
+        if (query.length === 0) {
+          suggestionsDiv.classList.remove('active');
+          if (isSearchMode) {
+            performSearch('');
+          }
+          return;
+        }
+        
+        debounceTimer = setTimeout(() => {
+          renderSuggestions(query);
+        }, 150);
+      });
+      
+      searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          const query = searchInput.value.trim();
+          if (query) {
+            performSearch(query);
+            suggestionsDiv.classList.remove('active');
+            searchExpand.classList.remove('active');
+          }
+        }
+      });
+      
+      document.addEventListener('click', (e) => {
+        if (!searchInput.contains(e.target) && !suggestionsDiv.contains(e.target)) {
+          suggestionsDiv.classList.remove('active');
+        }
+      });
+    }
+    
+    // ========== COPY TO CLIPBOARD WITH BUTTON ELEMENT ==========
+    function copyToClipboard(text, buttonElement = null) {
+      navigator.clipboard.writeText(text).then(() => {
+        let btn = buttonElement;
+        if (!btn && window.event && window.event.target) {
+          btn = window.event.target;
+        }
+        
+        if (btn && btn.classList && btn.classList.contains('btn-copy')) {
+          const originalText = btn.textContent;
+          btn.textContent = 'Copied! ✓';
+          setTimeout(() => {
+            btn.textContent = originalText;
+          }, 1500);
+        } else {
+          showToast('Prompt copied to clipboard!');
+        }
+      }).catch(() => {
+        showToast('Failed to copy prompt', 'error');
+      });
+    }
+    
+    // ========== SHARE PROMPT ==========
+    function sharePrompt() {
+      if (!currentPrompt) return;
+      
+      const shareData = {
+        title: currentPrompt.title,
+        text: currentPrompt.short_prompt,
+        url: window.location.href
+      };
+      
+      if (navigator.share) {
+        navigator.share(shareData).catch((err) => {
+          console.log('Share cancelled or failed:', err);
+          copyToClipboard(window.location.href);
+          showToast('Link copied to clipboard!');
+        });
+      } else {
+        copyToClipboard(window.location.href);
+        showToast('Link copied to clipboard!');
+      }
+    }
+    
+    // ========== SHOW TOAST ==========
+    function showToast(message, type = 'success') {
+      const existingToast = document.querySelector('.toast-message');
+      if (existingToast) existingToast.remove();
+      
+      const toast = document.createElement('div');
+      toast.className = 'toast-message';
+      toast.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${message}`;
+      toast.style.backgroundColor = type === 'success' ? '#10b981' : '#ef4444';
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.remove();
+      }, 3000);
+    }
+    
+    function showError(message) {
+      const container = document.getElementById('promptContent');
+      container.innerHTML = `
+        <div class="error-message">
+          <i class="fas fa-exclamation-triangle" style="font-size: 48px; color: #ef4444;"></i>
+          <h3>${message}</h3>
+          <p>Please go back to the <a href="../index.html" style="color: #7b5cff;">homepage</a> to browse other prompts.</p>
+        </div>
+      `;
+    }
+    
+    // ========== STICKY AD CLOSE BUTTON ==========
+    function initStickyAdClose() {
+      const closeBtn = document.getElementById('closeStickyAd');
+      const stickyAd = document.getElementById('stickyBottomAd');
+      
+      if (closeBtn && stickyAd) {
+        closeBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          stickyAd.style.display = 'none';
+          sessionStorage.setItem('stickyAdClosed', 'true');
+        });
+        
+        if (sessionStorage.getItem('stickyAdClosed') === 'true') {
+          stickyAd.style.display = 'none';
+        }
+      }
+    }
+    
+    if (promptId) {
+      loadPromptDetails();
+      setTimeout(initStickyAdClose, 500);
+    } else {
+      showError('No prompt selected');
+    }
+  </script>
+</body>
+</html>

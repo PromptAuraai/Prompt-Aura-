@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="PromptAura - Browse AI prompts by category">
+  <meta name="theme-color" content="#7b5cff">
+  <title>Categories - PromptAura | AI Prompt Library</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Additional styles specific to category page */
+    .category-hero {
+      background: linear-gradient(135deg, #7b5cff20, #a855f720);
+      padding: 40px 20px;
+      text-align: center;
+      margin-bottom: 30px;
+      border-radius: 20px;
+    }
+    
+    .category-hero h1 {
+      font-size: 32px;
+      color: #111111;
+      margin-bottom: 10px;
+    }
+    
+    .category-hero p {
+      color: #666666;
+      font-size: 16px;
+    }
+    
+    .category-info {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    .category-stats {
+      display: flex;
+      gap: 20px;
+    }
+    
+    .stat {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #7b5cff;
+    }
+    
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      border: 1px solid #e0e0e0;
+      padding: 10px 20px;
+      border-radius: 50px;
+      color: #555555;
+      text-decoration: none;
+      margin-bottom: 20px;
+      transition: all 0.2s;
+    }
+    
+    .back-button:hover {
+      background: #f5f6f8;
+      transform: translateX(-3px);
+    }
+    
+    .category-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    
+    .sort-options {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .sort-btn {
+      background: white;
+      border: 1px solid #e0e0e0;
+      padding: 8px 16px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .sort-btn.active {
+      background: linear-gradient(135deg, #7b5cff, #a855f7);
+      color: white;
+      border: none;
+    }
+    
+    /* Category Tags Section */
+    .category-tags-section {
+      margin-bottom: 30px;
+    }
+    
+    .category-tags-scroll {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    
+    .category-tag-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 20px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #555555;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    
+    .category-tag-pill:hover {
+      background: #f9fafb;
+      border-color: #7b5cff;
+      transform: translateY(-1px);
+    }
+    
+    .category-tag-pill.active {
+      background: linear-gradient(135deg, #7b5cff, #a855f7);
+      color: white;
+      border: none;
+      box-shadow: 0 4px 12px rgba(123, 92, 255, 0.25);
+    }
+    
+    .no-results {
+      text-align: center;
+      padding: 60px 20px;
+      background: white;
+      border-radius: 16px;
+    }
+    
+    .no-results i {
+      font-size: 64px;
+      color: #cccccc;
+      margin-bottom: 20px;
+    }
+    
+    /* ========== ENHANCED SEARCH SUGGESTIONS STYLES ========== */
+    .search-suggestions {
+      max-width: 600px;
+      margin: 10px auto 0;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      display: none;
+      overflow: hidden;
+      z-index: 1001;
+    }
+    
+    .search-suggestions.active {
+      display: block;
+    }
+    
+    /* Scrollable suggestions container */
+    .suggestions-scroll-container {
+      max-height: 400px;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    
+    /* Custom scrollbar for suggestions */
+    .suggestions-scroll-container::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .suggestions-scroll-container::-webkit-scrollbar-track {
+      background: #f0f2f5;
+      border-radius: 10px;
+    }
+    
+    .suggestions-scroll-container::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #7b5cff, #a855f7);
+      border-radius: 10px;
+    }
+    
+    /* Enhanced Suggestion Item with Thumbnail */
+    .suggestion-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 15px;
+      cursor: pointer;
+      border-bottom: 1px solid #f0f2f5;
+      transition: background 0.2s ease;
+    }
+    
+    .suggestion-item:last-child {
+      border-bottom: none;
+    }
+    
+    .suggestion-item:hover {
+      background: #f5f6f8;
+    }
+    
+    .suggestion-thumbnail {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: #f0f2f5;
+    }
+    
+    .suggestion-info {
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .suggestion-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #111111;
+      margin-bottom: 4px;
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .suggestion-title strong {
+      color: #7b5cff;
+    }
+    
+    .suggestion-category {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      color: #7b5cff;
+      background: #f0f2f5;
+      padding: 2px 8px;
+      border-radius: 20px;
+      margin-top: 4px;
+    }
+    
+    .suggestion-match {
+      font-size: 12px;
+      color: #888888;
+      margin-top: 4px;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .suggestion-match strong {
+      color: #7b5cff;
+      font-weight: 600;
+    }
+    
+    /* No Results in Suggestions */
+    .suggestion-no-results {
+      padding: 20px;
+      text-align: center;
+      color: #888888;
+      font-size: 14px;
+    }
+    
+    @media (max-width: 640px) {
+      .suggestion-thumbnail {
+        width: 40px;
+        height: 40px;
+      }
+      
+      .suggestion-title {
+        font-size: 13px;
+      }
+      
+      .suggestions-scroll-container {
+        max-height: 300px;
+      }
+    }
+
+    /* Developer Credit Styles */
+.developer-credit {
+  font-size: 13px;
+  color: #888888;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.developer-credit i {
+  animation: heartbeat 1.5s ease infinite;
+  margin: 0 2px;
+}
+
+.developer-name {
+  font-weight: 600;
+  background: linear-gradient(135deg, #7b5cff, #a855f7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.developer-name:hover {
+  background: linear-gradient(135deg, #a855f7, #7b5cff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transform: scale(1.02);
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+  .developer-credit {
+    font-size: 11px;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .developer-name {
+    display: inline-block;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-container">
+      <div class="logo">
+        <img src="../assets/prompts/logo.png" alt="PromptAura Logo">
+        <span>PromptAura</span>
+      </div>
+      <div class="header-actions">
+        <a href="../index.html" class="icon-btn" aria-label="Home">
+          <i class="fas fa-home"></i>
+        </a>
+        <button class="icon-btn search-toggle-btn" id="searchToggleBtn" aria-label="Search">
+          <i class="fas fa-search"></i>
+        </button>
+        <button class="icon-btn menu-toggle-btn" id="menuToggleBtn" aria-label="Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+    <div class="search-expand" id="searchExpand">
+      <div class="search-wrapper">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" id="liveSearchInput" placeholder="Search prompts in this category..." autocomplete="off">
+        <button id="clearSearchBtn" class="clear-search"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="searchSuggestions" class="search-suggestions"></div>
+    </div>
+  </header>
+
+  <!-- Sliding Menu -->
+  <div class="menu-overlay" id="menuOverlay"></div>
+  <div class="sliding-menu" id="slidingMenu">
+    <div class="menu-header">
+      <div class="menu-logo">
+        <img src="../assets/prompts/logo.png" alt="PromptAura Logo">
+        <span>PromptAura</span>
+      </div>
+      <button class="menu-close" id="menuCloseBtn">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="menu-content">
+      <div class="menu-section">
+        <a href="../index.html" class="menu-item">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </a>
+        <a href="../category.html?category=all" class="menu-item">
+          <i class="fas fa-tags"></i>
+          <span>Categories</span>
+        </a>
+        <a href="../index.html#trending" class="menu-item">
+          <i class="fas fa-chart-line"></i>
+          <span>Trending</span>
+        </a>
+        <a href="../index.html#jstylehub" class="menu-item">
+          <i class="fas fa-layer-group"></i>
+          <span>Collections</span>
+        </a>
+      </div>
+      <div class="menu-divider"></div>
+      <div class="menu-section">
+        <a href="../about.html" class="menu-item">
+          <i class="fas fa-info-circle"></i>
+          <span>About Us</span>
+        </a>
+        <a href="../contact.html" class="menu-item">
+          <i class="fas fa-envelope"></i>
+          <span>Contact Us</span>
+        </a>
+        <a href="../privacy.html" class="menu-item">
+          <i class="fas fa-lock"></i>
+          <span>Privacy Policy</span>
+        </a>
+        <a href="../terms.html" class="menu-item">
+          <i class="fas fa-file-contract"></i>
+          <span>Terms & Conditions</span>
+        </a>
+        <a href="../disclaimer.html" class="menu-item">
+          <i class="fas fa-exclamation-triangle"></i>
+          <span>Disclaimer</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main class="main-container">
+    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+      <a href="javascript:history.back()" class="back-button">
+        <i class="fas fa-arrow-left"></i> Back
+      </a>
+      
+      <div class="category-hero" id="categoryHero">
+        <h1 id="categoryTitle">Loading...</h1>
+        <p id="categoryDescription">Browse and discover amazing AI prompts in this category</p>
+      </div>
+      
+      <div class="category-info" id="categoryInfo">
+        <div class="category-stats" id="categoryStats">
+          <div class="stat">
+            <i class="fas fa-file-alt"></i>
+            <span id="promptCount">0 prompts</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Category Tags Section -->
+      <div class="category-tags-section" id="categoryTagsSection">
+        <div class="category-tags-scroll" id="categoryTagsList"></div>
+      </div>
+      
+      <div class="category-header">
+        <h2><i class="fas fa-list"></i> All Prompts</h2>
+        <div class="sort-options">
+          
+        </div>
+      </div>
+      
+      <div class="prompts-grid" id="promptsGrid"></div>
+      
+      <div class="pagination-container" id="paginationContainer"></div>
+    </div>
+  </main>
+
+  <!-- New Professional Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo">
+            <img src="../assets/prompts/logo.png" alt="PromptAura Logo">
+            <span>PromptAura</span>
+          </div>
+          <p class="footer-description">Your ultimate destination for high-quality AI prompts. Generate stunning images with our carefully curated prompts.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../category.html?category=all">Categories</a></li>
+            <li><a href="../index.html#trending">Trending</a></li>
+            <li><a href="../index.html#jstylehub">Collections</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul class="footer-links">
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact Us</a></li>
+            <li><a href="../privacy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms & Conditions</a></li>
+            <li><a href="../disclaimer.html">Disclaimer</a></li>
+          </ul>
+        </div>
+        
+      </div>
+      <div class="footer-bottom">
+  <p>&copy; 2026 PromptAura. All Rights Reserved.</p>
+  <p class="developer-credit">
+    Developed with <i class="fas fa-heart" style="color: #ff4d4d;"></i> by <span class="developer-name">Subhankar Bairagi</span>
+  </p>
+  <p class="footer-tagline">PromptAura is a free AI prompt library where users can find prompts for AI image generation, cinematic prompts, wedding prompts, birthday prompts, anime prompts and more.</p>
+</div>
+    </div>
+  </footer>
+
+  <div class="sticky-bottom-ad mobile-only" id="stickyBottomAd">
+    <div class="ad-label">Advertisement</div>
+    <div class="ad-placeholder">Mobile Sticky Ad</div>
+    <button id="closeStickyAd" class="close-sticky"><i class="fas fa-times"></i></button>
+  </div>
+
+  <script src="../menu.js"></script>
+  <script>
+    // Get category from URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    let currentCategory = urlParams.get('category') || 'all';
+    let allPrompts = [];
+    let allCategories = [];
+    let filteredPrompts = [];
+    let currentPage = 1;
+    let promptsPerPage = 10;
+    let currentSort = 'random';
+    let isSearchMode = false;
+    let searchResults = [];
+    let currentSearchQuery = '';
+
+    // ========== SHUFFLE FUNCTION ==========
+    function shuffleArray(array) {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+
+    // ========== SAVE & RESTORE RANDOM ORDER FOR BACK BUTTON ==========
+    function saveRandomOrderKey() {
+      return `category_random_order_${currentCategory}`;
+    }
+
+    function getSavedRandomOrder() {
+      const key = saveRandomOrderKey();
+      const saved = sessionStorage.getItem(key);
+      return saved ? JSON.parse(saved) : null;
+    }
+
+    function saveRandomOrder(order) {
+      const key = saveRandomOrderKey();
+      sessionStorage.setItem(key, JSON.stringify(order));
+    }
+
+    // Function to get aspect ratio based on ratio string
+    function getAspectRatio(ratio) {
+      if (!ratio) return '16 / 9';
+      switch(ratio) {
+        case '16:9': return '16 / 9';
+        case '9:16': return '9 / 16';
+        case '4:5': return '4 / 5';
+        case '1:1': return '1 / 1';
+        default: return '16 / 9';
+      }
+    }
+
+    // ========== SCROLL POSITION & PAGE FUNCTIONS ==========
+    function saveScrollPositionAndPage() {
+      const key = `category_scroll_${currentCategory}_page_${currentPage}`;
+      sessionStorage.setItem(key, window.scrollY);
+      sessionStorage.setItem('savedCategoryPage', currentPage);
+      sessionStorage.setItem('savedCategoryName', currentCategory);
+    }
+
+    function saveScrollPosition() {
+      const key = `category_scroll_${currentCategory}_page_${currentPage}`;
+      sessionStorage.setItem(key, window.scrollY);
+    }
+
+    function restoreScrollPositionAndPage() {
+      const savedPage = sessionStorage.getItem('savedCategoryPage');
+      const savedCategory = sessionStorage.getItem('savedCategoryName');
+      
+      if (savedPage && savedCategory === currentCategory) {
+        currentPage = parseInt(savedPage);
+        sessionStorage.removeItem('savedCategoryPage');
+        sessionStorage.removeItem('savedCategoryName');
+      }
+      
+      const key = `category_scroll_${currentCategory}_page_${currentPage}`;
+      const savedPosition = sessionStorage.getItem(key);
+      if (savedPosition) {
+        setTimeout(() => {
+          window.scrollTo(0, parseInt(savedPosition));
+        }, 150);
+      }
+    }
+
+    // Escape HTML
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Highlight matching text
+    function highlightMatch(text, query) {
+      if (!query) return escapeHtml(text);
+      const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
+      return escapeHtml(text).replace(regex, '<strong>$1</strong>');
+    }
+
+    function escapeRegex(string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    // ========== FUZZY MATCH FUNCTION ==========
+    function fuzzyMatch(str, pattern) {
+      str = str.toLowerCase();
+      pattern = pattern.toLowerCase();
+      
+      if (str.includes(pattern)) return true;
+      
+      if (pattern.length <= 10) {
+        let distance = 0;
+        let i = 0, j = 0;
+        while (i < str.length && j < pattern.length) {
+          if (str[i] !== pattern[j]) {
+            distance++;
+            if (distance > Math.floor(pattern.length * 0.3)) break;
+            i++;
+          } else {
+            i++;
+            j++;
+          }
+        }
+        if (j === pattern.length && distance <= Math.floor(pattern.length * 0.3)) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    // ========== CALCULATE SEARCH SCORE ==========
+    function calculateSearchScore(prompt, query) {
+      let score = 0;
+      const title = prompt.title.toLowerCase();
+      const shortPrompt = prompt.short_prompt.toLowerCase();
+      const fullPrompt = prompt.full_prompt.toLowerCase();
+      const category = prompt.category.toLowerCase();
+      const tags = prompt.tags ? prompt.tags.map(t => t.toLowerCase()) : [];
+      
+      if (title.includes(query)) score += 10;
+      else if (fuzzyMatch(title, query)) score += 5;
+      
+      if (title === query) score += 15;
+      
+      if (category.includes(query)) score += 8;
+      else if (fuzzyMatch(category, query)) score += 4;
+      
+      if (category === query) score += 10;
+      
+      tags.forEach(tag => {
+        if (tag.includes(query)) score += 5;
+        else if (fuzzyMatch(tag, query)) score += 2;
+        if (tag === query) score += 8;
+      });
+      
+      if (shortPrompt.includes(query)) score += 3;
+      else if (fuzzyMatch(shortPrompt.substring(0, 50), query)) score += 1;
+      
+      if (fullPrompt.includes(query)) score += 1;
+      
+      return score;
+    }
+
+    // ========== GET SEARCH SUGGESTIONS (ALL MATCHING - SCROLLABLE) ==========
+    function getSearchSuggestions(query) {
+      if (!query || query.trim().length === 0) return [];
+      
+      const searchTerm = query.toLowerCase().trim();
+      
+      const scoredResults = filteredPrompts.map(prompt => {
+        const score = calculateSearchScore(prompt, searchTerm);
+        return { prompt, score };
+      });
+      
+      // Return ALL results with score > 0 (no limit)
+      const results = scoredResults
+        .filter(item => item.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .map(item => item.prompt);
+      
+      return results;
+    }
+
+    // ========== COPY TO CLIPBOARD ==========
+    function copyToClipboard(text, buttonElement = null) {
+      navigator.clipboard.writeText(text).then(() => {
+        let btn = buttonElement;
+        if (!btn && window.event && window.event.target) {
+          btn = window.event.target;
+        }
+        
+        if (btn && btn.classList && btn.classList.contains('btn-copy')) {
+          const originalText = btn.textContent;
+          btn.textContent = 'Copied! ✓';
+          setTimeout(() => {
+            btn.textContent = originalText;
+          }, 1500);
+        }
+      }).catch((err) => {
+        console.error('Clipboard write failed:', err);
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.top = '-9999px';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          alert('Prompt copied to clipboard!');
+        } catch (e) {
+          alert('Failed to copy prompt. Please copy manually.');
+        }
+        document.body.removeChild(textarea);
+      });
+    }
+
+    // Load prompts data
+    async function loadCategoryData() {
+      try {
+        const [promptsRes, categoriesRes] = await Promise.all([
+          fetch('../data/prompts.json'),
+          fetch('../data/categories.json')
+        ]);
+        
+        allPrompts = await promptsRes.json();
+        allCategories = await categoriesRes.json();
+        
+        if (currentCategory !== 'all') {
+          const rawPrompts = allPrompts.filter(p => p.category === currentCategory);
+          // Check if we have saved random order for this category (for back button)
+          const savedOrder = getSavedRandomOrder();
+          
+          if (savedOrder && savedOrder.length === rawPrompts.length) {
+            // Restore saved order (back navigation)
+            filteredPrompts = savedOrder;
+          } else {
+            // First time - randomize and save
+            filteredPrompts = shuffleArray([...rawPrompts]);
+            saveRandomOrder(filteredPrompts);
+          }
+        } else {
+          filteredPrompts = [...allPrompts];
+          // For "All" category - no random needed
+        }
+        
+        filteredPrompts = filteredPrompts.map(p => {
+          if (p.image) {
+            if (p.image.startsWith('assets/')) {
+              p.image = '../' + p.image;
+            }
+          }
+          return p;
+        });
+        
+        const categoryInfo = allCategories.find(c => c.id === currentCategory);
+        if (categoryInfo) {
+          document.getElementById('categoryTitle').textContent = categoryInfo.name;
+          document.getElementById('categoryDescription').textContent = `Browse ${filteredPrompts.length} amazing ${categoryInfo.name.toLowerCase()} prompts`;
+        } else if (currentCategory === 'all') {
+          document.getElementById('categoryTitle').textContent = 'All Prompts';
+          document.getElementById('categoryDescription').textContent = `Browse all ${filteredPrompts.length} amazing prompts`;
+        } else {
+          document.getElementById('categoryTitle').textContent = currentCategory.charAt(0).toUpperCase() + currentCategory.slice(1);
+        }
+        
+        document.getElementById('promptCount').textContent = `${filteredPrompts.length} prompts`;
+        
+        initializeCategoryTags();
+        
+        restoreScrollPositionAndPage();
+        renderPrompts();
+        setupEventListeners();
+        
+        // Initialize sticky ad close button
+        initStickyAdClose();
+        
+      } catch (error) {
+        console.error('Error loading category data:', error);
+      }
+    }
+    
+    // ========== STICKY AD CLOSE FUNCTION ==========
+    function initStickyAdClose() {
+      const closeBtn = document.getElementById('closeStickyAd');
+      const stickyAd = document.getElementById('stickyBottomAd');
+      
+      if (closeBtn && stickyAd) {
+        closeBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          stickyAd.style.display = 'none';
+          // Save to session storage so it stays closed
+          sessionStorage.setItem('stickyAdClosed_category', 'true');
+        });
+        
+        // Check if user already closed it before
+        if (sessionStorage.getItem('stickyAdClosed_category') === 'true') {
+          stickyAd.style.display = 'none';
+        }
+      }
+    }
+    
+    function initializeCategoryTags() {
+      const container = document.getElementById('categoryTagsList');
+      if (!container) return;
+      
+      container.innerHTML = `
+        <button class="category-tag-pill ${currentCategory === 'all' ? 'active' : ''}" data-category="all">All</button>
+        ${allCategories.map(cat => `
+          <button class="category-tag-pill ${currentCategory === cat.id ? 'active' : ''}" data-category="${cat.id}">${escapeHtml(cat.name)}</button>
+        `).join('')}
+      `;
+      
+      container.querySelectorAll('.category-tag-pill').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const category = btn.dataset.category;
+          saveScrollPositionAndPage();
+          if (category === 'all') {
+            window.location.href = `category.html?category=all`;
+          } else {
+            window.location.href = `category.html?category=${category}`;
+          }
+        });
+      });
+    }
+    
+    function getCurrentPrompts() {
+      if (isSearchMode) {
+        return searchResults;
+      }
+      return filteredPrompts;
+    }
+    
+    function scrollToPromptsSection() {
+      const promptsSection = document.querySelector('.prompts-grid');
+      if (promptsSection) {
+        const offset = 80;
+        const elementPosition = promptsSection.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+          top: elementPosition - offset,
+          behavior: 'smooth'
+        });
+      }
+    }
+    
+    function renderPagination(totalItems) {
+      const totalPages = Math.ceil(totalItems / promptsPerPage);
+      const paginationContainer = document.getElementById('paginationContainer');
+      
+      if (totalPages <= 1) {
+        paginationContainer.innerHTML = '';
+        return;
+      }
+      
+      let paginationHTML = '<div class="pagination">';
+      
+      paginationHTML += `<button class="page-btn prev-btn" ${currentPage === 1 ? 'disabled' : ''} data-page="${currentPage - 1}">
+        <i class="fas fa-chevron-left"></i>
+      </button>`;
+      
+      let startPage = Math.max(1, currentPage - 2);
+      let endPage = Math.min(totalPages, startPage + 4);
+      
+      if (endPage - startPage < 4) {
+        startPage = Math.max(1, endPage - 4);
+      }
+      
+      if (startPage > 1) {
+        paginationHTML += `<button class="page-btn" data-page="1">1</button>`;
+        if (startPage > 2) paginationHTML += `<span class="page-dots">...</span>`;
+      }
+      
+      for (let i = startPage; i <= endPage; i++) {
+        paginationHTML += `<button class="page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+      }
+      
+      if (endPage < totalPages) {
+        if (endPage < totalPages - 1) paginationHTML += `<span class="page-dots">...</span>`;
+        paginationHTML += `<button class="page-btn" data-page="${totalPages}">${totalPages}</button>`;
+      }
+      
+      paginationHTML += `<button class="page-btn next-btn" ${currentPage === totalPages ? 'disabled' : ''} data-page="${currentPage + 1}">
+        <i class="fas fa-chevron-right"></i>
+      </button>`;
+      
+      paginationHTML += '</div>';
+      paginationContainer.innerHTML = paginationHTML;
+      
+      document.querySelectorAll('.page-btn').forEach(btn => {
+        if (!btn.disabled && btn.dataset.page) {
+          btn.addEventListener('click', () => {
+            saveScrollPositionAndPage();
+            currentPage = parseInt(btn.dataset.page);
+            renderPrompts();
+            setTimeout(() => {
+              scrollToPromptsSection();
+            }, 100);
+          });
+        }
+      });
+    }
+    
+    // ========== RENDER PROMPTS WITH ADS AFTER EVERY 2 CARDS ==========
+    function renderPrompts() {
+      let promptsList = getCurrentPrompts();
+      const totalItems = promptsList.length;
+      
+      const start = (currentPage - 1) * promptsPerPage;
+      const end = start + promptsPerPage;
+      const paginated = promptsList.slice(start, end);
+      
+      const grid = document.getElementById('promptsGrid');
+      
+      if (paginated.length === 0) {
+        grid.innerHTML = `
+          <div class="no-results" style="grid-column: 1/-1;">
+            <i class="fas fa-search"></i>
+            <h3>No prompts found</h3>
+            <p>Try a different category or check back later for new prompts!</p>
+            <a href="../index.html" style="display: inline-block; margin-top: 20px; background: linear-gradient(135deg, #7b5cff, #a855f7); color: white; padding: 10px 24px; border-radius: 50px; text-decoration: none;">Browse Homepage</a>
+          </div>
+        `;
+        renderPagination(0);
+        return;
+      }
+      
+      // Generate cards HTML with inline ads after every 2 cards
+      let cardsHTML = '';
+      paginated.forEach((prompt, index) => {
+        const aspectRatio = getAspectRatio(prompt.ratio);
+        
+        cardsHTML += `
+          <div class="prompt-card" data-id="${prompt.id}" style="cursor: pointer;">
+            <h3>${escapeHtml(prompt.title)}</h3>
+            <div style="width: 100%; overflow: hidden; border-radius: 14px; margin-bottom: 12px; background: #f0f2f5; aspect-ratio: ${aspectRatio} !important;">
+              <img src="${prompt.image}" alt="${escapeHtml(prompt.title)}" style="width: 100%; height: 100%; object-fit: cover; display: block;" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=No+Image'">
+            </div>
+            <div class="short-prompt">${escapeHtml(prompt.short_prompt)}</div>
+            <div class="full-prompt" id="full-${prompt.id}">${escapeHtml(prompt.full_prompt)}</div>
+            <div class="card-buttons">
+              <button class="btn-copy" data-prompt="${prompt.full_prompt.replace(/"/g, '&quot;')}">Copy Prompt</button>
+              <button class="btn-show-more" data-id="${prompt.id}">Show More</button>
+            </div>
+          </div>
+        `;
+        
+        // Insert ad after every 2 cards (but not after the last card)
+        if ((index + 1) % 2 === 0 && index + 1 < paginated.length) {
+          cardsHTML += `
+            <div class="ad-container" style="margin: 0; margin-bottom: 20px;">
+              <div class="ad-label">Sponsored</div>
+              <div class="ad-placeholder">
+                <i class="fas fa-ad" style="margin-right: 8px;"></i>
+                Advertisement Space
+              </div>
+            </div>
+          `;
+        }
+      });
+      
+      grid.innerHTML = cardsHTML;
+      
+      document.querySelectorAll('.prompt-card').forEach(card => {
+        const cardId = card.dataset.id;
+        card.addEventListener('click', (e) => {
+          if (e.target.classList.contains('btn-copy') || 
+              e.target.classList.contains('btn-show-more') ||
+              e.target.closest('.btn-copy') ||
+              e.target.closest('.btn-show-more')) {
+            return;
+          }
+          saveScrollPositionAndPage();
+          window.location.href = `prompt.html?id=${cardId}`;
+        });
+      });
+      
+      document.querySelectorAll('.btn-copy').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          copyToClipboard(btn.dataset.prompt, btn);
+        });
+      });
+      
+      document.querySelectorAll('.btn-show-more').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const id = btn.dataset.id;
+          const fullPromptDiv = document.getElementById(`full-${id}`);
+          if (fullPromptDiv.classList.contains('show')) {
+            fullPromptDiv.classList.remove('show');
+            btn.textContent = 'Show More';
+          } else {
+            fullPromptDiv.classList.add('show');
+            btn.textContent = 'Show Less';
+          }
+        });
+      });
+      
+      renderPagination(totalItems);
+    }
+    
+    function performSearch(query) {
+      if (!query || query.trim() === '') {
+        isSearchMode = false;
+        searchResults = [];
+        currentSearchQuery = '';
+        currentPage = 1;
+        renderPrompts();
+        return;
+      }
+      
+      const results = filteredPrompts.filter(p => {
+        const title = p.title.toLowerCase();
+        const shortPrompt = p.short_prompt.toLowerCase();
+        const fullPrompt = p.full_prompt.toLowerCase();
+        const tags = p.tags ? p.tags.map(t => t.toLowerCase()) : [];
+        
+        return title.includes(query) ||
+               shortPrompt.includes(query) ||
+               fullPrompt.includes(query) ||
+               tags.some(tag => tag.includes(query));
+      });
+      
+      searchResults = results;
+      isSearchMode = true;
+      currentSearchQuery = query;
+      currentPage = 1;
+      renderPrompts();
+    }
+    
+    function clearSearch() {
+      isSearchMode = false;
+      searchResults = [];
+      currentSearchQuery = '';
+      currentPage = 1;
+      renderPrompts();
+    }
+    
+    // ========== ENHANCED SEARCH WITH SCROLLABLE SUGGESTIONS ==========
+    function setupSearch() {
+      const searchInput = document.getElementById('liveSearchInput');
+      const suggestionsDiv = document.getElementById('searchSuggestions');
+      let debounceTimer;
+      
+      if (!searchInput) return;
+      
+      function renderSuggestions(query) {
+        if (query.length < 1) {
+          suggestionsDiv.classList.remove('active');
+          return;
+        }
+        
+        const suggestions = getSearchSuggestions(query);
+        
+        if (suggestions.length === 0) {
+          suggestionsDiv.innerHTML = `
+            <div class="suggestion-no-results">
+              <i class="fas fa-search"></i> No results found for "${escapeHtml(query)}"
+            </div>
+          `;
+          suggestionsDiv.classList.add('active');
+          return;
+        }
+        
+        // Create scrollable container for suggestions
+        suggestionsDiv.innerHTML = `
+          <div class="suggestions-scroll-container">
+            ${suggestions.map(prompt => `
+              <div class="suggestion-item" data-id="${prompt.id}" data-title="${escapeHtml(prompt.title)}">
+                <img class="suggestion-thumbnail" src="${prompt.image}" alt="${escapeHtml(prompt.title)}" loading="lazy" onerror="this.src='https://via.placeholder.com/48x48?text=No+Image'">
+                <div class="suggestion-info">
+                  <div class="suggestion-title">${highlightMatch(prompt.title, query)}</div>
+                  <span class="suggestion-category">${escapeHtml(prompt.category)}</span>
+                  <div class="suggestion-match">${highlightMatch(prompt.short_prompt.substring(0, 60), query)}...</div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        
+        suggestionsDiv.classList.add('active');
+        
+        // Add click handlers to suggestion items
+        document.querySelectorAll('.suggestion-item').forEach(item => {
+          item.addEventListener('click', () => {
+            const promptTitle = item.dataset.title;
+            searchInput.value = promptTitle;
+            performSearch(promptTitle);
+            suggestionsDiv.classList.remove('active');
+          });
+        });
+      }
+      
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.trim();
+        
+        clearTimeout(debounceTimer);
+        
+        if (query.length === 0) {
+          suggestionsDiv.classList.remove('active');
+          if (isSearchMode) {
+            performSearch('');
+          }
+          return;
+        }
+        
+        debounceTimer = setTimeout(() => {
+          renderSuggestions(query);
+        }, 150);
+      });
+      
+      searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          const query = searchInput.value.trim();
+          if (query) {
+            performSearch(query);
+            suggestionsDiv.classList.remove('active');
+          }
+        }
+      });
+      
+      // Close suggestions when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!searchInput.contains(e.target) && !suggestionsDiv.contains(e.target)) {
+          suggestionsDiv.classList.remove('active');
+        }
+      });
+    }
+    
+    function setupEventListeners() {
+      const searchToggle = document.getElementById('searchToggleBtn');
+      const searchExpand = document.getElementById('searchExpand');
+      if (searchToggle) {
+        searchToggle.addEventListener('click', () => {
+          searchExpand.classList.toggle('active');
+        });
+      }
+      
+      const clearSearchBtn = document.getElementById('clearSearchBtn');
+      const searchInput = document.getElementById('liveSearchInput');
+      if (clearSearchBtn) {
+        clearSearchBtn.addEventListener('click', () => {
+          searchInput.value = '';
+          clearSearch();
+          document.getElementById('searchSuggestions').classList.remove('active');
+        });
+      }
+      
+      setupSearch();
+    }
+    
+    loadCategoryData();
+  </script>
+</body>
+</html>

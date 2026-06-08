@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "J-Style Hub",
+    "thumbnail": "assets/prompts/j-style/j-30.jpg",
+    "collection": "jstyle"
+  },
+  {
+    "id": 2,
+    "title": "Aura Farm",
+    "thumbnail": "assets/prompts/aura/aura-4.jpg",
+    "collection": "aura"
+  },
+  {
+    "id": 3,
+    "title": "Boy",
+    "thumbnail": "assets/prompts/men/men-1.jpg",
+    "collection": "boy"
+  },
+  {
+    "id": 4,
+    "title": "Girl",
+    "thumbnail": "assets/prompts/girl/girl-51.jpg",
+    "collection": "girl"
+  }
+]

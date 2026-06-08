@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Disclaimer for PromptAura - Read our legal disclaimer about AI prompts, generated content, and limitations of liability.">
+  <meta name="keywords" content="disclaimer, PromptAura disclaimer, legal disclaimer, AI prompts disclaimer">
+  <meta name="author" content="PromptAura">
+  <meta name="theme-color" content="#7b5cff">
+  <title>Disclaimer - PromptAura | AI Prompt Library</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Disclaimer Page Additional Styles */
+    .disclaimer-hero {
+      background: linear-gradient(135deg, #7b5cff20, #a855f720);
+      padding: 60px 20px;
+      text-align: center;
+      margin-bottom: 40px;
+      border-radius: 20px;
+    }
+    
+    .disclaimer-hero h1 {
+      font-size: 48px;
+      color: #111111;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+    
+    .disclaimer-hero p {
+      font-size: 18px;
+      color: #555555;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    .disclaimer-content {
+      max-width: 1000px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+    }
+    
+    .disclaimer-card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    
+    .disclaimer-section {
+      margin-bottom: 40px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid #f0f2f5;
+    }
+    
+    .disclaimer-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    .disclaimer-section h2 {
+      font-size: 24px;
+      color: #111111;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .disclaimer-section h2 i {
+      color: #7b5cff;
+      font-size: 22px;
+    }
+    
+    .disclaimer-section h3 {
+      font-size: 18px;
+      color: #111111;
+      margin: 20px 0 10px;
+    }
+    
+    .disclaimer-section p {
+      font-size: 16px;
+      color: #555555;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+    
+    .disclaimer-section ul {
+      margin: 15px 0;
+      padding-left: 25px;
+    }
+    
+    .disclaimer-section li {
+      font-size: 16px;
+      color: #555555;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    
+    .warning-box {
+      background: #fff3e0;
+      border-left: 4px solid #ff9800;
+      padding: 20px;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+    
+    .warning-box i {
+      color: #ff9800;
+      margin-right: 10px;
+    }
+    
+    .info-box {
+      background: #e8f4fd;
+      border-left: 4px solid #2196f3;
+      padding: 20px;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+    
+    .info-box i {
+      color: #2196f3;
+      margin-right: 10px;
+    }
+    
+    .last-updated {
+      background: #f5f6f8;
+      padding: 15px 20px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      text-align: center;
+      font-size: 14px;
+      color: #888888;
+    }
+    
+    @media (max-width: 768px) {
+      .disclaimer-hero h1 {
+        font-size: 32px;
+      }
+      
+      .disclaimer-hero p {
+        font-size: 16px;
+      }
+      
+      .disclaimer-card {
+        padding: 25px;
+      }
+      
+      .disclaimer-section h2 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-container">
+      <div class="logo">
+        <img src="assets/prompts/logo.png" alt="PromptAura Logo">
+        <span>PromptAura</span>
+      </div>
+      <div class="header-actions">
+        <a href="../index.html" class="icon-btn" aria-label="Home">
+          <i class="fas fa-home"></i>
+        </a>
+        
+        </button>
+        <button class="icon-btn menu-toggle-btn" id="menuToggleBtn" aria-label="Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+    
+  </header>
+
+  <!-- Sliding Menu -->
+  <div class="menu-overlay" id="menuOverlay"></div>
+  <div class="sliding-menu" id="slidingMenu">
+    <div class="menu-header">
+      <div class="menu-logo">
+        <img src="assets/prompts/logo.png" alt="PromptAura Logo">
+        <span>PromptAura</span>
+      </div>
+      <button class="menu-close" id="menuCloseBtn">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="menu-content">
+      <div class="menu-section">
+        <a href="../index.html" class="menu-item">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </a>
+        <a href="../category.html?category=all" class="menu-item">
+          <i class="fas fa-tags"></i>
+          <span>Categories</span>
+        </a>
+        <a href="../index.html#trending" class="menu-item">
+          <i class="fas fa-chart-line"></i>
+          <span>Trending</span>
+        </a>
+        <a href="../index.html#jstylehub" class="menu-item">
+          <i class="fas fa-layer-group"></i>
+          <span>Collections</span>
+        </a>
+      </div>
+      <div class="menu-divider"></div>
+      <div class="menu-section">
+        <a href="about.html" class="menu-item">
+          <i class="fas fa-info-circle"></i>
+          <span>About Us</span>
+        </a>
+        <a href="contact.html" class="menu-item">
+          <i class="fas fa-envelope"></i>
+          <span>Contact Us</span>
+        </a>
+        <a href="privacy.html" class="menu-item">
+          <i class="fas fa-lock"></i>
+          <span>Privacy Policy</span>
+        </a>
+        <a href="terms.html" class="menu-item">
+          <i class="fas fa-file-contract"></i>
+          <span>Terms & Conditions</span>
+        </a>
+        <a href="disclaimer.html" class="menu-item active">
+          <i class="fas fa-exclamation-triangle"></i>
+          <span>Disclaimer</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main class="main-container">
+    <div class="disclaimer-hero">
+      <h1>Disclaimer</h1>
+      <p>Please read this disclaimer carefully. By using PromptAura, you acknowledge and agree to the terms outlined below.</p>
+    </div>
+
+    <div class="disclaimer-content">
+      <div class="last-updated">
+        <i class="fas fa-calendar-alt"></i> Last Updated: January 1, 2026
+      </div>
+
+      <div class="disclaimer-card">
+        <div class="disclaimer-section">
+          <h2><i class="fas fa-exclamation-triangle"></i> General Disclaimer</h2>
+          <p>The information provided on PromptAura is for general informational purposes only. All prompts, content, and materials on this website are provided "as is" without any warranties, express or implied.</p>
+          <p>PromptAura makes no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability, or completeness of any information on the website.</p>
+        </div>
+
+        <div class="disclaimer-section">
+          <h2><i class="fas fa-robot"></i> AI Prompts Disclaimer</h2>
+          <p>The prompts provided on PromptAura are designed to work with various AI image generation tools. However, we cannot guarantee that:</p>
+          <ul>
+            <li>Prompts will produce the exact results you expect</li>
+            <li>All AI generators will interpret prompts similarly</li>
+            <li>Generated images will be free from errors or artifacts</li>
+            <li>Prompts will work with future versions of AI tools</li>
+          </ul>
+          
+          <div class="warning-box">
+            <i class="fas fa-exclamation-triangle"></i>
+            <strong>Important:</strong> Results may vary significantly depending on the AI tool, version, settings, and other factors. Always test prompts before using them for important projects.
+          </div>
+        </div>
+
+        <div class="disclaimer-section">
+          <h2><i class="fas fa-copyright"></i> Generated Content Disclaimer</h2>
+          <p>PromptAura does not claim ownership over any images, art, or content generated using our prompts. However, please be aware that:</p>
+          <ul>
+            <li>Different AI platforms have different terms of service regarding generated content</li>
+            <li>You are responsible for ensuring your use of generated content complies with applicable laws</li>
+            <li>Some AI tools may have restrictions on commercial use of generated images</li>
+          </ul>
+          
+          <div class="info-box">
+            <i class="fas fa-info-circle"></i>
+            <strong>Recommendation:</strong> Always review the terms of service of your AI image generator before using generated content commercially.
+          </div>
+        </div>
+
+        <div class="disclaimer-section">
+          <h2><i class="fas fa-link"></i> External Links Disclaimer</h2>
+          <p>Our website may contain links to external websites that are not provided or maintained by PromptAura. We do not guarantee the accuracy, relevance, timeliness, or completeness of any information on these external websites.</p>
+          <p>The inclusion of any links does not necessarily imply a recommendation or endorse the views expressed within them.</p>
+        </div>
+
+        <div class="disclaimer-section">
+          <h2><i class="fas fa-ad"></i> Advertising Disclaimer</h2>
+          <p>PromptAura uses Google AdSense to display advertisements. These ads are provided by third-party vendors and may use cookies to serve ads based on your prior visits to our website or other websites.</p>
+          <p>We do not endorse or guarantee the products, services, or content advertised on our website. Any transactions or interactions you have with advertisers are solely between you and the advertiser.</p>
+        </div>
+
+        <div class="disclaimer-section">
+          <h2><i class="fas fa-user-md"></i> Professional Advice Disclaimer</h2>
+          <p>The prompts and information on PromptAura are not intended to constitute professional advice. You should not rely on any information on this website as a substitute for professional consultation.</p>
+          <p>If you require specific advice (e.g., legal, financial, medical), please consult a qualified professional.</p>
+        </div>
+
+        <div class="disclaimer-section">
+          <h2><i class="fas fa-shield-alt"></i> Limitation of Liability</h2>
+          <p>To the fullest extent permitted by applicable law, PromptAura shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from:</p>
+          <ul>
+            <li>Your use or inability to use the website</li>
+            <li>Any conduct or content of any third party on the website</li>
+            <li>Any content obtained from the website</li>
+            <li>Unauthorized access, use, or alteration of your transmissions or content</li>
+          </ul>
+        </div>
+
+        <div class="disclaimer-section">
+          <h2><i class="fas fa-sync-alt"></i> Accuracy of Information</h2>
+          <p>While we strive to keep the information on PromptAura up to date and accurate, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability of the information contained on the website.</p>
+          <p>Any reliance you place on such information is strictly at your own risk.</p>
+        </div>
+
+        <div class="disclaimer-section">
+          <h2><i class="fas fa-child"></i> User Responsibility</h2>
+          <p>As a user of PromptAura, you are solely responsible for:</p>
+          <ul>
+            <li>How you use the prompts provided on our website</li>
+            <li>Ensuring your use complies with all applicable laws and regulations</li>
+            <li>Any consequences arising from the use of generated content</li>
+            <li>Reviewing and understanding the terms of service of AI tools you use</li>
+          </ul>
+        </div>
+
+        <div class="disclaimer-section">
+          <h2><i class="fas fa-envelope"></i> Contact Us</h2>
+          <p>If you have any questions about this Disclaimer, please contact us:</p>
+          <ul>
+            <li>Email: <a href="mailto:legal@promptaura.com" style="color: #7b5cff;">legal@promptaura.com</a></li>
+            <li>Through our <a href="contact.html" style="color: #7b5cff;">Contact Page</a></li>
+          </ul>
+        </div>
+
+        <div class="disclaimer-section">
+          <h2><i class="fas fa-sync-alt"></i> Changes to This Disclaimer</h2>
+          <p>We reserve the right to update or change this Disclaimer at any time. Any changes will be effective immediately upon posting on this page. Your continued use of the website after any changes constitutes acceptance of the new disclaimer.</p>
+          <p>You are advised to review this Disclaimer periodically for any changes.</p>
+        </div>
+
+        <div class="disclaimer-section">
+          <h2><i class="fas fa-check-circle"></i> Acknowledgment</h2>
+          <p>By using PromptAura, you acknowledge that you have read this Disclaimer, understood it, and agree to be bound by its terms and conditions.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo">
+            <img src="assets/prompts/logo.png" alt="PromptAura Logo">
+            <span>PromptAura</span>
+          </div>
+          <p class="footer-description">Your ultimate destination for high-quality AI prompts. Generate stunning images with our carefully curated prompts.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../category.html?category=all">Categories</a></li>
+            <li><a href="../index.html#trending">Trending</a></li>
+            <li><a href="../index.html#jstylehub">Collections</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms & Conditions</a></li>
+            <li><a href="disclaimer.html">Disclaimer</a></li>
+          </ul>
+        </div>
+        
+      </div>
+      <div class="footer-bottom">
+  <p>&copy; 2026 PromptAura. All Rights Reserved.</p>
+  <p class="developer-credit">
+    Developed with <i class="fas fa-heart" style="color: #ff4d4d;"></i> by <span class="developer-name">Subhankar Bairagi</span>
+  </p>
+  <p class="footer-tagline">PromptAura is a free AI prompt library where users can find prompts for AI image generation, cinematic prompts, wedding prompts, birthday prompts, anime prompts and more.</p>
+</div>
+    </div>
+  </footer>
+
+  <script src="../menu.js"></script>
+  <script>
+    // Search functionality
+    const searchToggle = document.getElementById('searchToggleBtn');
+    const searchExpand = document.getElementById('searchExpand');
+    if (searchToggle) {
+      searchToggle.addEventListener('click', () => {
+        searchExpand.classList.toggle('active');
+      });
+    }
+    
+    const clearSearchBtn = document.getElementById('clearSearchBtn');
+    const searchInput = document.getElementById('liveSearchInput');
+    if (clearSearchBtn) {
+      clearSearchBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        const suggestionsDiv = document.getElementById('searchSuggestions');
+        if (suggestionsDiv) suggestionsDiv.classList.remove('active');
+      });
+    }
+  </script>
+</body>
+</html>

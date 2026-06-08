@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Learn about PromptAura - Your ultimate destination for AI prompts. Discover our mission, vision, and what makes us the best prompt library for AI image generation.">
+  <meta name="keywords" content="about PromptAura, AI prompts library, about us, AI image prompts">
+  <meta name="author" content="PromptAura">
+  <meta name="theme-color" content="#7b5cff">
+  <title>About Us - PromptAura | AI Prompt Library</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* About Page Additional Styles */
+    .about-hero {
+      background: linear-gradient(135deg, #7b5cff20, #a855f720);
+      padding: 60px 20px;
+      text-align: center;
+      margin-bottom: 40px;
+      border-radius: 20px;
+    }
+    
+    .about-hero h1 {
+      font-size: 48px;
+      color: #111111;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+    
+    .about-hero p {
+      font-size: 18px;
+      color: #555555;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    .about-section {
+      max-width: 1200px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+    }
+    
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+    
+    .about-card {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .about-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    }
+    
+    .about-card-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #7b5cff20, #a855f720);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    
+    .about-card-icon i {
+      font-size: 32px;
+      background: linear-gradient(135deg, #7b5cff, #a855f7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .about-card h3 {
+      font-size: 24px;
+      color: #111111;
+      margin-bottom: 15px;
+    }
+    
+    .about-card p {
+      font-size: 16px;
+      color: #555555;
+      line-height: 1.6;
+    }
+    
+    .mission-section {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 40px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    
+    .mission-section h2 {
+      font-size: 32px;
+      color: #111111;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .mission-section p {
+      font-size: 18px;
+      color: #555555;
+      line-height: 1.8;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .stat-item {
+      text-align: center;
+      padding: 30px;
+      background: linear-gradient(135deg, #7b5cff10, #a855f710);
+      border-radius: 16px;
+    }
+    
+    .stat-number {
+      font-size: 36px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #7b5cff, #a855f7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 10px;
+    }
+    
+    .stat-label {
+      font-size: 14px;
+      color: #555555;
+    }
+    
+    .team-section {
+      text-align: center;
+      margin-top: 40px;
+    }
+    
+    .team-section h2 {
+      font-size: 32px;
+      color: #111111;
+      margin-bottom: 20px;
+    }
+    
+    .team-section p {
+      font-size: 16px;
+      color: #555555;
+      margin-bottom: 40px;
+    }
+    
+    @media (min-width: 768px) {
+      .about-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .about-hero h1 {
+        font-size: 32px;
+      }
+      
+      .about-hero p {
+        font-size: 16px;
+      }
+      
+      .mission-section h2 {
+        font-size: 24px;
+      }
+      
+      .mission-section p {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-container">
+      <div class="logo">
+        <img src="assets/prompts/logo.png" alt="PromptAura Logo">
+        <span>PromptAura</span>
+      </div>
+      <div class="header-actions">
+        <a href="../index.html" class="icon-btn" aria-label="Home">
+          <i class="fas fa-home"></i>
+        </a>
+        
+        </button>
+        <button class="icon-btn menu-toggle-btn" id="menuToggleBtn" aria-label="Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+    
+  </header>
+
+  <!-- Sliding Menu -->
+  <div class="menu-overlay" id="menuOverlay"></div>
+  <div class="sliding-menu" id="slidingMenu">
+    <div class="menu-header">
+      <div class="menu-logo">
+        <img src="assets/prompts/logo.png" alt="PromptAura Logo">
+        <span>PromptAura</span>
+      </div>
+      <button class="menu-close" id="menuCloseBtn">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="menu-content">
+      <div class="menu-section">
+        <a href="../index.html" class="menu-item">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </a>
+        <a href="../category.html?category=all" class="menu-item">
+          <i class="fas fa-tags"></i>
+          <span>Categories</span>
+        </a>
+        <a href="../index.html#trending" class="menu-item">
+          <i class="fas fa-chart-line"></i>
+          <span>Trending</span>
+        </a>
+        <a href="../index.html#jstylehub" class="menu-item">
+          <i class="fas fa-layer-group"></i>
+          <span>Collections</span>
+        </a>
+      </div>
+      <div class="menu-divider"></div>
+      <div class="menu-section">
+        <a href="about.html" class="menu-item active">
+          <i class="fas fa-info-circle"></i>
+          <span>About Us</span>
+        </a>
+        <a href="contact.html" class="menu-item">
+          <i class="fas fa-envelope"></i>
+          <span>Contact Us</span>
+        </a>
+        <a href="privacy.html" class="menu-item">
+          <i class="fas fa-lock"></i>
+          <span>Privacy Policy</span>
+        </a>
+        <a href="terms.html" class="menu-item">
+          <i class="fas fa-file-contract"></i>
+          <span>Terms & Conditions</span>
+        </a>
+        <a href="disclaimer.html" class="menu-item">
+          <i class="fas fa-exclamation-triangle"></i>
+          <span>Disclaimer</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main class="main-container">
+    <div class="about-hero">
+      <h1>About PromptAura</h1>
+      <p>Your ultimate destination for high-quality AI prompts. We help creators, artists, and innovators bring their ideas to life.</p>
+    </div>
+
+    <div class="about-section">
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="about-card-icon">
+            <i class="fas fa-bullseye"></i>
+          </div>
+          <h3>Our Mission</h3>
+          <p>To empower creators worldwide with the most comprehensive and high-quality AI prompts library, making AI art accessible to everyone.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-card-icon">
+            <i class="fas fa-eye"></i>
+          </div>
+          <h3>Our Vision</h3>
+          <p>To become the world's leading platform for AI prompts, fostering creativity and innovation in the AI art community.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-card-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <h3>Our Values</h3>
+          <p>Quality, accessibility, community-driven, and continuous innovation in everything we do.</p>
+        </div>
+      </div>
+
+      <div class="mission-section">
+        <h2>What Makes PromptAura Special?</h2>
+        <p>PromptAura is more than just a prompt library. We're a community of creators dedicated to pushing the boundaries of AI-generated art. Our prompts are carefully curated, tested, and optimized to help you get the best results from your favorite AI image generators like Midjourney, DALL-E, Stable Diffusion, and more.</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">1000+</div>
+          <div class="stat-label">AI Prompts</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Categories</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">10K+</div>
+          <div class="stat-label">Happy Users</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">24/7</div>
+          <div class="stat-label">Free Access</div>
+        </div>
+      </div>
+
+      <div class="team-section">
+        <h2>What You Can Do at PromptAura?</h2>
+        <p>✨ Browse thousands of AI prompts across multiple categories<br>
+        📋 Copy prompts with one click<br>
+        🔍 Search and filter prompts by category, tags, or keywords<br>
+        💡 Get inspired by trending and featured collections<br>
+        🚀 Generate stunning AI images instantly</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo">
+            <img src="assets/prompts/logo.png" alt="PromptAura Logo">
+            <span>PromptAura</span>
+          </div>
+          <p class="footer-description">Your ultimate destination for high-quality AI prompts. Generate stunning images with our carefully curated prompts.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../category.html?category=all">Categories</a></li>
+            <li><a href="../index.html#trending">Trending</a></li>
+            <li><a href="../index.html#jstylehub">Collections</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms & Conditions</a></li>
+            <li><a href="disclaimer.html">Disclaimer</a></li>
+          </ul>
+        </div>
+        
+      </div>
+      <div class="footer-bottom">
+  <p>&copy; 2026 PromptAura. All Rights Reserved.</p>
+  <p class="developer-credit">
+    Developed with <i class="fas fa-heart" style="color: #ff4d4d;"></i> by <span class="developer-name">Subhankar Bairagi</span>
+  </p>
+  <p class="footer-tagline">PromptAura is a free AI prompt library where users can find prompts for AI image generation, cinematic prompts, wedding prompts, birthday prompts, anime prompts and more.</p>
+</div>
+    </div>
+  </footer>
+
+  <script src="../menu.js"></script>
+  <script>
+    // Search functionality
+    const searchToggle = document.getElementById('searchToggleBtn');
+    const searchExpand = document.getElementById('searchExpand');
+    if (searchToggle) {
+      searchToggle.addEventListener('click', () => {
+        searchExpand.classList.toggle('active');
+      });
+    }
+    
+    const clearSearchBtn = document.getElementById('clearSearchBtn');
+    const searchInput = document.getElementById('liveSearchInput');
+    if (clearSearchBtn) {
+      clearSearchBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        const suggestionsDiv = document.getElementById('searchSuggestions');
+        if (suggestionsDiv) suggestionsDiv.classList.remove('active');
+      });
+    }
+  </script>
+</body>
+</html>
