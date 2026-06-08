@@ -691,10 +691,6 @@
           <i class="fas fa-home"></i>
           <span>Home</span>
         </a>
-        <a href="../category.html?category=all" class="menu-item">
-          <i class="fas fa-tags"></i>
-          <span>Categories</span>
-        </a>
         <a href="../index.html#trending" class="menu-item">
           <i class="fas fa-chart-line"></i>
           <span>Trending</span>
@@ -766,7 +762,6 @@
           <h4>Quick Links</h4>
           <ul class="footer-links">
             <li><a href="../index.html">Home</a></li>
-            <li><a href="../category.html?category=all">Categories</a></li>
             <li><a href="../index.html#trending">Trending</a></li>
             <li><a href="../index.html#jstylehub">Collections</a></li>
           </ul>
@@ -1472,7 +1467,7 @@
       }
     }
     
-    // ========== ENHANCED SEARCH WITH DIRECT SUGGESTION CLICK ==========
+    // ========== ✅ FIXED: ENHANCED SEARCH WITH DIRECT PROMPT NAVIGATION ==========
     function setupSearch() {
       const searchToggle = document.getElementById('searchToggleBtn');
       const searchExpand = document.getElementById('searchExpand');
@@ -1532,11 +1527,20 @@
         
         suggestionsDiv.classList.add('active');
         
+        // ✅ FIXED: Direct navigation to prompt page on suggestion click
         document.querySelectorAll('.suggestion-item').forEach(item => {
           item.addEventListener('click', () => {
-            const promptTitle = item.dataset.title;
-            searchInput.value = promptTitle;
-            performSearch(promptTitle);
+            const promptId = item.dataset.id;
+            
+            if (promptId) {
+              // Save current state before navigating
+              saveRelatedScrollPosition();
+              saveRelatedPageNumber();
+              
+              // Navigate directly to prompt page
+              window.location.href = `prompt.html?id=${promptId}`;
+            }
+            
             suggestionsDiv.classList.remove('active');
             searchExpand.classList.remove('active');
           });
@@ -1551,7 +1555,7 @@
         if (query.length === 0) {
           suggestionsDiv.classList.remove('active');
           if (isSearchMode) {
-            performSearch('');
+            clearSearch();
           }
           return;
         }
@@ -1565,6 +1569,7 @@
         if (e.key === 'Enter') {
           const query = searchInput.value.trim();
           if (query) {
+            // For Enter key, search in related prompts
             performSearch(query);
             suggestionsDiv.classList.remove('active');
             searchExpand.classList.remove('active');

@@ -366,10 +366,6 @@
           <i class="fas fa-home"></i>
           <span>Home</span>
         </a>
-        <a href="../category.html?category=all" class="menu-item">
-          <i class="fas fa-tags"></i>
-          <span>Categories</span>
-        </a>
         <a href="../index.html#trending" class="menu-item">
           <i class="fas fa-chart-line"></i>
           <span>Trending</span>
@@ -452,7 +448,6 @@
           <h4>Quick Links</h4>
           <ul class="footer-links">
             <li><a href="../index.html">Home</a></li>
-            <li><a href="../category.html?category=all">Categories</a></li>
             <li><a href="../index.html#trending">Trending</a></li>
             <li><a href="../index.html#jstylehub">Collections</a></li>
           </ul>
@@ -824,7 +819,7 @@
       });
     }
     
-    // ========== UPDATED: RENDER PROMPTS WITH ADS AFTER EVERY 3 CARDS ==========
+    // ========== UPDATED: RENDER PROMPTS WITH DYNAMIC IMAGE RATIO ==========
     function renderPrompts() {
       let promptsList = getCurrentPrompts();
       const totalItems = promptsList.length;
@@ -847,15 +842,15 @@
         return;
       }
       
-      // Generate cards HTML with inline ads after every 3 cards
+      // Generate cards HTML with inline ads
       let cardsHTML = '';
       paginated.forEach((prompt, index) => {
-        const aspectRatio =prompt.ratio === '4:5'? '4 / 5': getAspectRatio(prompt.ratio);
+        const aspectRatio = getAspectRatio(prompt.ratio);
         
         cardsHTML += `
           <div class="prompt-card" data-id="${prompt.id}" style="cursor: pointer;">
             <h3>${escapeHtml(prompt.title)}</h3>
-            <div style="width: 100%; overflow: hidden; border-radius: 14px; margin-bottom: 12px; background: #f0f2f5; aspect-ratio: ${aspectRatio} !important;">
+            <div style="width: 100%; overflow: hidden; border-radius: 14px; margin-bottom: 12px; background: #f0f2f5; aspect-ratio: ${aspectRatio}; display: flex; align-items: center; justify-content: center;">
               <img src="${prompt.image}" alt="${escapeHtml(prompt.title)}" style="width: 100%; height: 100%; object-fit: contain; display: block;" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=No+Image'">
             </div>
             <div class="short-prompt">${escapeHtml(prompt.short_prompt)}</div>
@@ -867,7 +862,7 @@
           </div>
         `;
         
-        // Insert ad after every 3 cards (but not after the last card)
+        // Insert ad after every 2 cards
         if ((index + 1) % 2 === 0 && index + 1 < paginated.length) {
           cardsHTML += `
             <div class="ad-container" style="margin: 0; margin-bottom: 20px;">
@@ -921,7 +916,7 @@
       renderPagination(totalItems);
     }
     
-    // ========== ENHANCED SEARCH WITH SCROLLABLE SUGGESTIONS ==========
+    // ========== FIXED: ENHANCED SEARCH WITH DIRECT PROMPT NAVIGATION ==========
     function setupSearch() {
       const searchInput = document.getElementById('liveSearchInput');
       const suggestionsDiv = document.getElementById('searchSuggestions');
@@ -947,7 +942,6 @@
           return;
         }
         
-        // Create scrollable container for suggestions
         suggestionsDiv.innerHTML = `
           <div class="suggestions-scroll-container">
             ${suggestions.map(prompt => `
@@ -965,12 +959,16 @@
         
         suggestionsDiv.classList.add('active');
         
-        // Add click handlers to suggestion items
+        // ✅ FIXED: Direct navigation to prompt page on suggestion click
         document.querySelectorAll('.suggestion-item').forEach(item => {
           item.addEventListener('click', () => {
-            const promptTitle = item.dataset.title;
-            searchInput.value = promptTitle;
-            performSearch(promptTitle);
+            const promptId = item.dataset.id;
+            
+            if (promptId) {
+              // Navigate directly to prompt page
+              window.location.href = `prompt.html?id=${promptId}`;
+            }
+            
             suggestionsDiv.classList.remove('active');
           });
         });
@@ -1004,7 +1002,6 @@
         }
       });
       
-      // Close suggestions when clicking outside
       document.addEventListener('click', (e) => {
         if (!searchInput.contains(e.target) && !suggestionsDiv.contains(e.target)) {
           suggestionsDiv.classList.remove('active');
