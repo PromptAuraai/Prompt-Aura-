@@ -611,10 +611,9 @@ h3 {
   overflow-x: auto;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: #7b5cff #e0e0e0;
+  scrollbar-width: none;
   cursor: grab;
-  touch-action: pan-y pinch-zoom;
+  touch-action: pan-x;
   padding: 5px 0 15px 0;
 }
 
@@ -624,7 +623,7 @@ h3 {
 
 /* Custom Scrollbar */
 .trending-slider-container::-webkit-scrollbar {
-  height: 6px;
+  display: none;
 }
 
 .trending-slider-container::-webkit-scrollbar-track {
@@ -641,6 +640,7 @@ h3 {
   display: flex;
   gap: 24px;
   padding-bottom: 10px;
+  width: max-content;
 }
 
 /* Professional Trending Card */
