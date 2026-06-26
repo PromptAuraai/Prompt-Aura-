@@ -1,14 +1,18 @@
 [
   {
-    "url": "assets/prompts/girl/girl-108.jpg",
-    "category": "girl"
+    "url": "assets/prompts/aura/aura-32.jpg",
+    "category": "aura"
   },
   {
-    "url": "assets/prompts/girl/girl-128.jpg",
-    "category": "girl"
+    "url": "assets/prompts/men/men-127.jpg",
+    "category": "boy"
   },
   {
-    "url": "assets/prompts/girl/girl-130.jpg",
+    "url": "assets/prompts/weeding/weeding-80.jpg",
+    "category": "wedding"
+  },
+  {
+    "url": "assets/prompts/girl/girl-158.jpg",
     "category": "girl"
   }
 ]

@@ -3,12 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="PromptAura - Browse AI prompts by category">
+  
+  <!-- ========== PRIMARY META TAGS ========== -->
+  <title>Categories - PromptAura | Free AI Prompts by Category</title>
+  <meta name="description" content="Browse AI prompts by category - Wedding, Cinematic, Birthday, Anime, Fashion, and more. Find the perfect prompt for your AI art projects. Free to use.">
+  <meta name="keywords" content="AI prompts by category, Midjourney categories, DALL-E prompts, wedding prompts, cinematic prompts, birthday prompts, AI art categories">
+  <meta name="author" content="PromptAura">
   <meta name="theme-color" content="#7b5cff">
-  <title>Categories - PromptAura | AI Prompt Library</title>
-  <link rel="stylesheet" href="../style.css">
+  
+  <!-- ========== FAVICON ========== -->
+  <link rel="icon" type="image/x-icon" href="../assets/icons/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="../assets/icons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
+  
+  <!-- ========== OPEN GRAPH / FACEBOOK ========== -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://promptauraai.com/pages/category.html">
+  <meta property="og:title" content="Categories - PromptAura | Free AI Prompts by Category">
+  <meta property="og:description" content="Browse AI prompts by category - Wedding, Cinematic, Birthday, Anime, Fashion, and more. Find the perfect prompt for your AI art projects.">
+  <meta property="og:image" content="https://promptauraai.com/assets/icons/og-image.jpg">
+  
+  <!-- ========== TWITTER CARD ========== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://promptauraai.com/pages/category.html">
+  <meta name="twitter:title" content="Categories - PromptAura | Free AI Prompts by Category">
+  <meta name="twitter:description" content="Browse AI prompts by category - Wedding, Cinematic, Birthday, Anime, Fashion, and more. Find the perfect prompt for your AI art projects.">
+  <meta name="twitter:image" content="https://promptauraai.com/assets/icons/og-image.jpg">
+  
+  <!-- ========== CANONICAL URL ========== -->
+  <link rel="canonical" href="https://promptauraai.com/pages/category.html">
+  
+  <!-- ========== MANIFEST ========== -->
   <link rel="manifest" href="../manifest.json">
+  
+  <!-- ========== CSS ========== -->
+  <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
   <style>
     /* Additional styles specific to category page */
     .category-hero {
@@ -513,7 +546,10 @@
       <div class="footer-bottom">
   <p>&copy; 2026 PromptAura. All Rights Reserved.</p>
   <p class="developer-credit">
-    Developed with <i class="fas fa-heart" style="color: #ff4d4d;"></i> by <span class="developer-name">Subhankar Bairagi</span>
+    Developed with <i class="fas fa-heart" style="color: #ff4d4d;"></i> by 
+    <a href="../pages/developer.html" class="developer-name" style="text-decoration: none; cursor: pointer; font-weight: 700; color: #7b5cff; transition: all 0.3s ease;">
+      Subhankar Bairagi
+    </a>
   </p>
   <p class="footer-tagline">PromptAura is a free AI prompt library where users can find prompts for AI image generation, cinematic prompts, wedding prompts, birthday prompts, anime prompts and more.</p>
 </div>
@@ -1111,21 +1147,21 @@
         suggestionsDiv.classList.add('active');
         
         // Add click handlers to suggestion items
-document.querySelectorAll('.suggestion-item').forEach(item => {
-  item.addEventListener('click', () => {
-    const promptId = item.dataset.id;
-    
-    if (promptId) {
-      // Save current scroll position before leaving
-      saveScrollPositionAndPage();
-      
-      // Navigate directly to prompt page (NOT performSearch)
-      window.location.href = `prompt.html?id=${promptId}`;
-    }
-    
-    suggestionsDiv.classList.remove('active');
-  });
-});
+        document.querySelectorAll('.suggestion-item').forEach(item => {
+          item.addEventListener('click', () => {
+            const promptId = item.dataset.id;
+            
+            if (promptId) {
+              // Save current scroll position before leaving
+              saveScrollPositionAndPage();
+              
+              // Navigate directly to prompt page (NOT performSearch)
+              window.location.href = `prompt.html?id=${promptId}`;
+            }
+            
+            suggestionsDiv.classList.remove('active');
+          });
+        });
       }
       
       searchInput.addEventListener('input', (e) => {

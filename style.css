@@ -1875,3 +1875,114 @@ h3 {
     display: inline-block;
   }
 }
+
+/* ============================================================
+   SIMPLE FADE-IN ANIMATION - SIRF FADE (KOI MOVEMENT NAHI)
+   ============================================================ */
+
+/* Body - Pehle invisible, phir visible */
+body {
+  opacity: 0;
+  animation: simpleFade 0.6s ease-out 0.05s forwards;
+}
+
+/* Har section - Sirf fade hoga, koi movement nahi */
+.gallery-section,
+.jstylehub-section,
+.trending-section,
+.categories-section,
+.prompts-main,
+.sidebar-desktop,
+.site-footer,
+.sticky-bottom-ad {
+  opacity: 0;
+}
+
+/* Staggered fade-in with delays - SIRF OPACITY CHANGE */
+.gallery-section {
+  animation: simpleFade 0.5s ease-out 0.1s forwards;
+}
+
+.jstylehub-section {
+  animation: simpleFade 0.5s ease-out 0.2s forwards;
+}
+
+.trending-section {
+  animation: simpleFade 0.5s ease-out 0.3s forwards;
+}
+
+.categories-section {
+  animation: simpleFade 0.5s ease-out 0.4s forwards;
+}
+
+.prompts-main {
+  animation: simpleFade 0.5s ease-out 0.5s forwards;
+}
+
+.sidebar-desktop {
+  animation: simpleFade 0.5s ease-out 0.6s forwards;
+}
+
+.site-footer {
+  animation: simpleFade 0.5s ease-out 0.7s forwards;
+}
+
+.sticky-bottom-ad {
+  animation: simpleFade 0.5s ease-out 0.8s forwards;
+}
+
+/* EK HI KEYFRAME - SIRF OPACITY CHANGE */
+@keyframes simpleFade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Header ko animation se bahar rakhna (kyunki sticky hai) */
+.site-header {
+  opacity: 1 !important;
+  animation: none !important;
+}
+
+/* GPU Acceleration for Smooth Fade */
+body,
+.gallery-section,
+.jstylehub-section,
+.trending-section,
+.categories-section,
+.prompts-main,
+.sidebar-desktop,
+.site-footer,
+.sticky-bottom-ad {
+  will-change: opacity;
+}
+
+/* Fallback for old browsers */
+.no-animation body,
+body.no-animation,
+.no-animation .gallery-section,
+.no-animation .jstylehub-section,
+.no-animation .trending-section,
+.no-animation .categories-section,
+.no-animation .prompts-main,
+.no-animation .sidebar-desktop,
+.no-animation .site-footer,
+.no-animation .sticky-bottom-ad {
+  opacity: 1 !important;
+  animation: none !important;
+}
+
+/* Mobile - Thoda fast fade */
+@media (max-width: 640px) {
+  .gallery-section { animation-duration: 0.35s; }
+  .jstylehub-section { animation-duration: 0.35s; }
+  .trending-section { animation-duration: 0.35s; }
+  .categories-section { animation-duration: 0.35s; }
+  .prompts-main { animation-duration: 0.35s; }
+  .sidebar-desktop { animation-duration: 0.35s; }
+  .site-footer { animation-duration: 0.35s; }
+  .sticky-bottom-ad { animation-duration: 0.35s; }
+}
