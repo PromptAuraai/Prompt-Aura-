@@ -2,7 +2,7 @@
 // Sirf apni AdSense Publisher ID yahan dalo
 // Example: const ADSENSE_PUBLISHER_ID = 'ca-pub-1234567890123456';
 
-const ADSENSE_PUBLISHER_ID = 'ca-pub-XXXXXXXXXXXXXXXX'; // ← YAHAN APNI ID DALO
+const ADSENSE_PUBLISHER_ID = 'ca-pub-2051096973053893'; // ← YAHAN APNI ID DALO
 
 // ========== AD POSITIONS (DON'T CHANGE) ==========
 // Ye positions pe ads automatically insert honge
