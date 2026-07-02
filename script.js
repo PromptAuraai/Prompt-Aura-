@@ -11,6 +11,10 @@ let currentSearchQuery = '';
 let isSearchMode = false;
 let searchResults = [];
 
+// ========== FEATURED COLLECTIONS VARIABLES ==========
+let collectionsData = [];
+let collectionPromptsData = {};
+
 // ========== SCROLL POSITION & PAGE FUNCTIONS ==========
 // Save scroll position AND current page
 function saveScrollPositionAndPage() {
@@ -207,6 +211,65 @@ function escapeRegex(string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+// ========== FEATURED COLLECTIONS FUNCTIONS ==========
+// Load collections
+async function loadCollections() {
+  try {
+    const response = await fetch('data/collections.json');
+    if (response.ok) {
+      collectionsData = await response.json();
+      await loadCollectionPromptCounts();
+      renderCollections();
+    } else {
+      console.log('Collections file not found, skipping...');
+    }
+  } catch (error) {
+    console.error('Error loading collections:', error);
+  }
+}
+
+// Load prompt count for each collection
+async function loadCollectionPromptCounts() {
+  for (const collection of collectionsData) {
+    try {
+      const response = await fetch(collection.file);
+      if (response.ok) {
+        const prompts = await response.json();
+        collection.promptCount = prompts.length;
+        collectionPromptsData[collection.id] = prompts;
+      } else {
+        collection.promptCount = 0;
+      }
+    } catch (e) {
+      console.warn('Could not load prompt count for:', collection.id);
+      collection.promptCount = 0;
+    }
+  }
+}
+
+// ========== ✅ FIXED: Render Featured Collections (opens featured.html) ==========
+function renderCollections() {
+  const grid = document.getElementById('collectionsGrid');
+  if (!grid) return;
+  
+  if (!collectionsData || collectionsData.length === 0) {
+    grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #888888; padding: 40px 0;">No collections available</p>';
+    return;
+  }
+  
+  grid.innerHTML = collectionsData.map(collection => `
+    <div class="collection-cover-card" data-collection="${collection.id}" onclick="window.location.href='pages/featured.html?id=${collection.id}'">
+      <img src="${collection.cover}" alt="${escapeHtml(collection.title)}" loading="lazy" onerror="this.src='https://via.placeholder.com/800x450?text=${escapeHtml(collection.title)}'">
+      <div class="collection-cover-overlay">
+        <h3>${escapeHtml(collection.title)}</h3>
+        <p>${escapeHtml(collection.description)}</p>
+        <span class="collection-cover-badge"><i class="fas fa-arrow-right"></i> Explore</span>
+        <span class="collection-cover-count"><i class="fas fa-file-alt"></i> ${collection.promptCount || 0} prompts</span>
+      </div>
+    </div>
+  `).join('');
+}
+
 // Load data and initialize
 async function loadData() {
   try {
@@ -250,6 +313,7 @@ async function loadData() {
     renderPrompts();
     setupEventListeners();
     
+    // Load J-Style Hub (J-Style Collections - opens collection.html)
     try {
       const jstyleRes = await fetch('data/jstylehub.json');
       if (jstyleRes.ok) {
@@ -259,6 +323,9 @@ async function loadData() {
     } catch (jstyleError) {
       console.log('J-Style Hub file not found, skipping...');
     }
+    
+    // ========== LOAD FEATURED COLLECTIONS (opens featured.html) ==========
+    await loadCollections();
     
   } catch (error) {
     console.error('Error loading data:', error);
@@ -274,6 +341,7 @@ function shuffleArray(array) {
   return shuffled;
 }
 
+// ========== J-STYLE HUB (opens collection.html) ==========
 function initializeJStyleHub(jstyleCollections) {
   const container = document.getElementById('jstylehubGrid');
   if (!container) return;
@@ -296,6 +364,7 @@ function initializeJStyleHub(jstyleCollections) {
     card.addEventListener('click', () => {
       const collectionId = card.dataset.collection;
       saveScrollPosition();
+      // ✅ J-Style opens collection.html
       window.location.href = `pages/collection.html?collection=${collectionId}`;
     });
   });
@@ -653,7 +722,6 @@ function renderPrompts() {
     });
   });
   
-  // ========== UPDATED: INSERT ADS AFTER EVERY 3 CARDS ==========
   insertInlineAds();
   
   document.querySelectorAll('.btn-copy').forEach(btn => {
@@ -697,7 +765,6 @@ function renderPrompts() {
   if (loadMoreBtn) loadMoreBtn.style.display = 'none';
 }
 
-// ========== UPDATED: INSERT ADS AFTER EVERY 3 CARDS (DYNAMIC) ==========
 function insertInlineAds() {
   const grid = document.getElementById('promptsGrid');
   if (!grid) return;
@@ -705,16 +772,13 @@ function insertInlineAds() {
   const cards = grid.children;
   const cardsArray = Array.from(cards);
   
-  // Clear existing ad containers
   const existingAds = grid.querySelectorAll('.ad-container');
   existingAds.forEach(ad => ad.remove());
   
-  // Re-insert cards
   cardsArray.forEach(card => {
     grid.appendChild(card);
   });
   
-  // Calculate where to insert ads (after every 3 cards)
   const adPositions = [];
   for (let i = 2; i <= cardsArray.length; i += 2) {
     adPositions.push(i);
@@ -725,7 +789,6 @@ function insertInlineAds() {
     const card = cardsArray[i];
     const cardIndex = i;
     
-    // Check if we need to insert an ad after this card
     if (adPositions.includes(cardIndex + 1)) {
       const adDiv = document.createElement('div');
       adDiv.className = 'ad-container';
@@ -740,7 +803,6 @@ function insertInlineAds() {
         </div>
       `;
       
-      // Insert ad after current card
       if (card.nextSibling) {
         grid.insertBefore(adDiv, card.nextSibling);
       } else {
@@ -750,7 +812,6 @@ function insertInlineAds() {
   }
 }
 
-// ========== ENHANCED SEARCH WITH SCROLLABLE SUGGESTIONS ==========
 function setupSearch() {
   const searchInput = document.getElementById('liveSearchInput');
   const suggestionsDiv = document.getElementById('searchSuggestions');

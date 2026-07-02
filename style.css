@@ -1891,6 +1891,7 @@ body {
 .jstylehub-section,
 .trending-section,
 .categories-section,
+.featured-collections,
 .prompts-main,
 .sidebar-desktop,
 .site-footer,
@@ -1913,6 +1914,10 @@ body {
 
 .categories-section {
   animation: simpleFade 0.5s ease-out 0.4s forwards;
+}
+
+.featured-collections {
+  animation: simpleFade 0.5s ease-out 0.45s forwards;
 }
 
 .prompts-main {
@@ -1953,6 +1958,7 @@ body,
 .jstylehub-section,
 .trending-section,
 .categories-section,
+.featured-collections,
 .prompts-main,
 .sidebar-desktop,
 .site-footer,
@@ -1967,6 +1973,7 @@ body.no-animation,
 .no-animation .jstylehub-section,
 .no-animation .trending-section,
 .no-animation .categories-section,
+.no-animation .featured-collections,
 .no-animation .prompts-main,
 .no-animation .sidebar-desktop,
 .no-animation .site-footer,
@@ -1981,8 +1988,135 @@ body.no-animation,
   .jstylehub-section { animation-duration: 0.35s; }
   .trending-section { animation-duration: 0.35s; }
   .categories-section { animation-duration: 0.35s; }
+  .featured-collections { animation-duration: 0.35s; }
   .prompts-main { animation-duration: 0.35s; }
   .sidebar-desktop { animation-duration: 0.35s; }
   .site-footer { animation-duration: 0.35s; }
   .sticky-bottom-ad { animation-duration: 0.35s; }
+}
+
+/* ============================================================
+   FEATURED COLLECTIONS SECTION (NEW)
+   ============================================================ */
+.featured-collections {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.featured-collections .section-header {
+  margin-bottom: 20px;
+}
+
+.collections-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.collection-cover-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 16 / 9;
+  background: #1a1a2e;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.collection-cover-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.collection-cover-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.collection-cover-card:hover img {
+  transform: scale(1.05);
+}
+
+.collection-cover-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 30px 25px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.3) 60%, transparent 100%);
+}
+
+.collection-cover-overlay h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 6px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  font-family: 'Inter', sans-serif;
+}
+
+.collection-cover-overlay p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 10px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  font-family: 'Inter', sans-serif;
+}
+
+.collection-cover-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #7b5cff, #a855f7);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+}
+
+.collection-cover-count {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-left: 8px;
+  font-family: 'Inter', sans-serif;
+}
+
+@media (min-width: 768px) {
+  .collections-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+  
+  .collection-cover-overlay h3 {
+    font-size: 26px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .collections-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+}
+
+@media (max-width: 640px) {
+  .collection-cover-overlay {
+    padding: 20px 18px;
+  }
+  
+  .collection-cover-overlay h3 {
+    font-size: 18px;
+  }
+  
+  .collection-cover-overlay p {
+    font-size: 12px;
+  }
 }

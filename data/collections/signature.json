@@ -1,0 +1,13 @@
+[
+  {
+    "id": 501,
+    "title": "Signature Style Portrait",
+    "image": "assets/prompts/name/signature-style.jpg",
+    "short_prompt": "Signature style portrait photography...",
+    "full_prompt": "A signature style portrait photography with unique composition, artistic lighting, dramatic shadows, professional model, high contrast, modern aesthetic, editorial style.",
+    "category": "signature",
+    "collection": "signature",
+    "ratio": "16:9",
+    "tags": ["signature", "style", "portrait"]
+  }
+]

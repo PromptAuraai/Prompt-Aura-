@@ -1,0 +1,9 @@
+[
+  {
+    "id": "girl",
+    "title": "Girl Portrait Collection",
+    "description": "5 Beautiful Girl Prompts",
+    "cover": "assets/collections/girl-cover.jpg",
+    "file": "data/collections/girl.json"
+  }
+]

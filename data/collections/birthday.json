@@ -1,0 +1,13 @@
+[
+  {
+    "id": 601,
+    "title": "Happy Birthday Celebration",
+    "image": "assets/prompts/name/birthday-celebration.jpg",
+    "short_prompt": "Joyful birthday celebration scene...",
+    "full_prompt": "A joyful birthday celebration scene with colorful decorations, balloons, birthday cake with candles, happy people, festive atmosphere, confetti, professional event photography.",
+    "category": "birthday",
+    "collection": "birthday",
+    "ratio": "16:9",
+    "tags": ["birthday", "celebration", "festive"]
+  }
+]

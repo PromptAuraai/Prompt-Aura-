@@ -1,0 +1,57 @@
+[
+  {
+    "id": 101,
+    "title": "Royal Wedding Portrait",
+    "image": "assets/prompts/weeding/royal-wedding.jpg",
+    "short_prompt": "A royal wedding portrait with golden details...",
+    "full_prompt": "A royal wedding portrait photograph featuring a bride and groom in traditional attire with golden jewelry, ornate background, warm golden lighting, professional photography style, 8k resolution, highly detailed.",
+    "category": "wedding",
+    "collection": "wedding",
+    "ratio": "16:9",
+    "tags": ["wedding", "royal", "portrait"]
+  },
+  {
+    "id": 102,
+    "title": "Romantic Sunset Wedding",
+    "image": "assets/prompts/weeding/sunset-wedding.jpg",
+    "short_prompt": "Romantic wedding at golden sunset...",
+    "full_prompt": "A romantic wedding ceremony at sunset with golden hour lighting, warm orange and pink skies, silhouette of couple, dreamy atmosphere, cinematic photography style.",
+    "category": "wedding",
+    "collection": "wedding",
+    "ratio": "16:9",
+    "tags": ["wedding", "sunset", "romantic"]
+  },
+  {
+    "id": 103,
+    "title": "Traditional Indian Wedding",
+    "image": "assets/prompts/weeding/indian-wedding.jpg",
+    "short_prompt": "Traditional Indian wedding scene...",
+    "full_prompt": "A vibrant traditional Indian wedding ceremony with colorful attire, floral decorations, intricate mehndi designs, joyful family moments, cultural richness, high detail.",
+    "category": "wedding",
+    "collection": "wedding",
+    "ratio": "16:9",
+    "tags": ["wedding", "indian", "traditional"]
+  },
+  {
+    "id": 104,
+    "title": "Beach Wedding Vows",
+    "image": "assets/prompts/weeding/beach-wedding.jpg",
+    "short_prompt": "Intimate beach wedding vows...",
+    "full_prompt": "An intimate beach wedding ceremony with turquoise water, white sand, palm trees, elegant arch decorated with flowers, couple exchanging vows, peaceful atmosphere.",
+    "category": "wedding",
+    "collection": "wedding",
+    "ratio": "16:9",
+    "tags": ["wedding", "beach", "vows"]
+  },
+  {
+    "id": 105,
+    "title": "Vintage Wedding Theme",
+    "image": "assets/prompts/weeding/vintage-wedding.jpg",
+    "short_prompt": "Vintage themed wedding photography...",
+    "full_prompt": "A vintage themed wedding photograph with old-style aesthetic, sepia tones, classic cars, retro bridal gown, antique decorations, timeless elegance, film grain effect.",
+    "category": "wedding",
+    "collection": "wedding",
+    "ratio": "16:9",
+    "tags": ["wedding", "vintage", "theme"]
+  }
+]

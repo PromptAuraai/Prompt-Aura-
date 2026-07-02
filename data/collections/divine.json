@@ -1,0 +1,24 @@
+[
+  {
+    "id": 301,
+    "title": "Divine Light",
+    "image": "assets/prompts/lord/divine-light.jpg",
+    "short_prompt": "Divine light illuminating the scene...",
+    "full_prompt": "Divine light illuminating a sacred scene, golden rays descending from heaven, peaceful atmosphere, spiritual energy, ethereal glow, religious art style, majestic.",
+    "category": "divine",
+    "collection": "divine",
+    "ratio": "16:9",
+    "tags": ["divine", "light", "spiritual"]
+  },
+  {
+    "id": 302,
+    "title": "Sacred Blessings",
+    "image": "assets/prompts/lord/sacred-blessings.jpg",
+    "short_prompt": "Blessings from the divine...",
+    "full_prompt": "A divine scene depicting blessings from the gods, vibrant colors, intricate details, spiritual symbolism, traditional art style, cultural richness, ornate temple background.",
+    "category": "divine",
+    "collection": "divine",
+    "ratio": "16:9",
+    "tags": ["divine", "blessings", "sacred"]
+  }
+]

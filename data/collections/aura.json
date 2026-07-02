@@ -1,0 +1,24 @@
+[
+  {
+    "id": 401,
+    "title": "Golden Aura",
+    "image": "assets/prompts/aura/golden-aura.jpg",
+    "short_prompt": "Radiant golden aura around subject...",
+    "full_prompt": "A stunning portrait with a radiant golden aura surrounding the subject, mystical energy, warm golden tones, ethereal glow, spiritual photography style, magical atmosphere.",
+    "category": "aura",
+    "collection": "aura",
+    "ratio": "16:9",
+    "tags": ["aura", "golden", "mystical"]
+  },
+  {
+    "id": 402,
+    "title": "Cosmic Aura",
+    "image": "assets/prompts/aura/cosmic-aura.jpg",
+    "short_prompt": "Cosmic energy and aura...",
+    "full_prompt": "Cosmic energy and aura radiating around the subject, galaxy colors, purple and blue hues, spiritual photography, mystical energy, outer space vibe, ethereal.",
+    "category": "aura",
+    "collection": "aura",
+    "ratio": "16:9",
+    "tags": ["aura", "cosmic", "energy"]
+  }
+]

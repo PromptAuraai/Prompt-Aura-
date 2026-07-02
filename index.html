@@ -8,7 +8,7 @@
      crossorigin="anonymous"></script>
   
   <!-- ========== PRIMARY META TAGS ========== -->
-  <title>PromptAura - Free AI Prompts Library for Midjourney, DALL-E & Stable Diffusion</title>
+  <title>PromptAura - Free AI Prompts Library for Gemini, ChatGPT, Midjourney, DALL-E & Stable Diffusion</title>
   <meta name="description" content="Discover and copy 1000+ free AI prompts for Midjourney, DALL-E, and Stable Diffusion. Wedding, cinematic, birthday, anime, and more categories. Updated daily.">
   <meta name="keywords" content="AI prompts, Midjourney prompts, DALL-E prompts, Stable Diffusion prompts, AI art, free prompts, wedding prompts, cinematic prompts, anime prompts, image generation">
   <meta name="author" content="PromptAura">
@@ -111,7 +111,7 @@
   <div class="sliding-menu" id="slidingMenu">
     <div class="menu-header">
       <div class="menu-logo">
-        <img src="assets/prompts/logo.png" alt="PromptAura Logo">
+       <img src="assets/prompts/logo.png" alt="PromptAura Logo">
         <span>PromptAura</span>
       </div>
       <button class="menu-close" id="menuCloseBtn">
@@ -130,7 +130,11 @@
         </a>
         <a href="#jstylehub" class="menu-item">
           <i class="fas fa-layer-group"></i>
-          <span>Collections</span>
+          <span>J-Style</span>
+        </a>
+        <a href="#featuredCollections" class="menu-item">
+          <i class="fas fa-star"></i>
+          <span>Featured</span>
         </a>
       </div>
       <div class="menu-divider"></div>
@@ -169,10 +173,10 @@
       <div class="gallery-slider" id="gallerySlider"></div>
     </section>
 
-    <!-- J-STYLE HUB SECTION -->
+    <!-- J-STYLE HUB SECTION (OLD COLLECTIONS) -->
     <section class="jstylehub-section" id="jstylehub">
       <div class="section-header">
-        <h2><i class="fas fa-fire"></i>Collections</h2>
+        <h2><i class="fas fa-fire"></i> J-Style Collections</h2>
       </div>
       <div class="jstylehub-grid" id="jstylehubGrid">
         <!-- Dynamic content from jstylehub.json -->
@@ -203,6 +207,16 @@
 
     <section class="categories-section">
       <div class="categories-scroll" id="categoriesList"></div>
+    </section>
+
+    <!-- ========== NEW: FEATURED COLLECTIONS SECTION ========== -->
+    <section class="featured-collections" id="featuredCollections">
+      <div class="section-header">
+        <h2><i class="fas fa-star"></i> ⭐ Featured Collections</h2>
+      </div>
+      <div class="collections-grid" id="collectionsGrid">
+        <!-- Dynamic content from collections.json -->
+      </div>
     </section>
 
     <div class="content-with-sidebar">
@@ -247,7 +261,8 @@
           <ul class="footer-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="#trending">Trending</a></li>
-            <li><a href="#jstylehub">Collections</a></li>
+            <li><a href="#jstylehub">J-Style</a></li>
+            <li><a href="#featuredCollections">Featured</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -263,13 +278,13 @@
         
       </div>
       <div class="footer-bottom">
-  <p>&copy; 2026 PromptAura. All Rights Reserved.</p>
-  <p class="developer-credit">
-    Developed with <i class="fas fa-heart" style="color: #ff4d4d;"></i> by 
-    <a href="pages/developer.html" class="developer-name" style="text-decoration: none; cursor: pointer; font-weight: 700; color: #7b5cff; transition: all 0.3s ease;">
-      Subhankar Bairagi
-    </a>
-  </p>
+        <p>&copy; 2026 PromptAura. All Rights Reserved.</p>
+        <p class="developer-credit">
+          Developed with <i class="fas fa-heart" style="color: #ff4d4d;"></i> by 
+          <a href="pages/developer.html" class="developer-name" style="text-decoration: none; cursor: pointer; font-weight: 700; color: #7b5cff; transition: all 0.3s ease;">
+            Subhankar Bairagi
+          </a>
+        </p>
         <p class="footer-tagline">PromptAura is a free AI prompt library where users can find prompts for AI image generation, cinematic prompts, wedding prompts, birthday prompts, anime prompts and more.</p>
       </div>
     </div>
