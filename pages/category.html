@@ -7,12 +7,12 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2051096973053893"
      crossorigin="anonymous"></script>
   
-  <!-- ========== PRIMARY META TAGS ========== -->
-  <title>Categories - PromptAura | Free AI Prompts by Category</title>
-  <meta name="description" content="Browse AI prompts by category - Wedding, Cinematic, Birthday, Anime, Fashion, and more. Find the perfect prompt for your AI art projects. Free to use.">
+  <!-- ========== PRIMARY META TAGS (Dynamic) ========== -->
+  <title id="dynamicTitle">Categories - PromptAura | Free AI Prompts by Category</title>
+  <meta id="dynamicDescription" name="description" content="Browse AI prompts by category - Wedding, Cinematic, Birthday, Anime, Fashion, and more. Find the perfect prompt for your AI art projects. Free to use.">
   <meta name="keywords" content="AI prompts by category, Midjourney categories, DALL-E prompts, wedding prompts, cinematic prompts, birthday prompts, AI art categories">
   <meta name="author" content="PromptAura">
-  <meta name="theme-color" content="#7b5cff">
+  <meta name="theme-color" content="#7C3AED">
   
   <!-- ========== FAVICON ========== -->
   <link rel="icon" type="image/x-icon" href="../assets/icons/favicon.ico">
@@ -24,16 +24,16 @@
   <!-- ========== OPEN GRAPH / FACEBOOK ========== -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://promptauraai.com/pages/category.html">
-  <meta property="og:title" content="Categories - PromptAura | Free AI Prompts by Category">
-  <meta property="og:description" content="Browse AI prompts by category - Wedding, Cinematic, Birthday, Anime, Fashion, and more. Find the perfect prompt for your AI art projects.">
-  <meta property="og:image" content="https://promptauraai.com/assets/icons/og-image.jpg">
+  <meta property="og:title" id="ogTitle" content="Categories - PromptAura | Free AI Prompts by Category">
+  <meta property="og:description" id="ogDescription" content="Browse AI prompts by category - Wedding, Cinematic, Birthday, Anime, Fashion, and more. Find the perfect prompt for your AI art projects.">
+  <meta property="og:image" id="ogImage" content="https://promptauraai.com/assets/icons/og-image.jpg">
   
   <!-- ========== TWITTER CARD ========== -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://promptauraai.com/pages/category.html">
-  <meta name="twitter:title" content="Categories - PromptAura | Free AI Prompts by Category">
-  <meta name="twitter:description" content="Browse AI prompts by category - Wedding, Cinematic, Birthday, Anime, Fashion, and more. Find the perfect prompt for your AI art projects.">
-  <meta name="twitter:image" content="https://promptauraai.com/assets/icons/og-image.jpg">
+  <meta name="twitter:title" id="twitterTitle" content="Categories - PromptAura | Free AI Prompts by Category">
+  <meta name="twitter:description" id="twitterDescription" content="Browse AI prompts by category - Wedding, Cinematic, Birthday, Anime, Fashion, and more. Find the perfect prompt for your AI art projects.">
+  <meta name="twitter:image" id="twitterImage" content="https://promptauraai.com/assets/icons/og-image.jpg">
   
   <!-- ========== CANONICAL URL ========== -->
   <link rel="canonical" href="https://promptauraai.com/pages/category.html">
@@ -46,250 +46,574 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   
   <style>
-    /* Additional styles specific to category page */
+    /* ============================================================
+       CATEGORY PAGE - PREMIUM STYLES + CONTENT SECTIONS
+       ============================================================ */
+
+    /* Hero Section */
     .category-hero {
-      background: linear-gradient(135deg, #7b5cff20, #a855f720);
-      padding: 40px 20px;
+      position: relative;
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(168, 85, 247, 0.08));
+      padding: 50px 20px;
       text-align: center;
       margin-bottom: 30px;
-      border-radius: 20px;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(124, 58, 237, 0.06);
     }
-    
+
+    .category-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 60%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.04) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: floatBg 20s ease-in-out infinite;
+    }
+
+    .category-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 40%;
+      height: 150%;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.03) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: floatBg 15s ease-in-out infinite reverse;
+    }
+
+    @keyframes floatBg {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.1) rotate(5deg); }
+    }
+
     .category-hero h1 {
-      font-size: 32px;
-      color: #111111;
-      margin-bottom: 10px;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
     }
-    
+
+    .category-hero h1 .gradient-text {
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
     .category-hero p {
-      color: #666666;
-      font-size: 16px;
+      font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
     }
-    
+
+    .category-hero .hero-badge {
+      display: inline-block;
+      background: var(--primary-glow-soft);
+      color: var(--primary);
+      padding: 4px 18px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Category Info */
     .category-info {
-      background: white;
-      padding: 20px;
-      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 16px 24px;
+      border-radius: var(--radius-md);
       margin-bottom: 30px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
     }
-    
+
     .category-stats {
       display: flex;
       gap: 20px;
+      align-items: center;
     }
-    
+
     .stat {
       display: flex;
       align-items: center;
       gap: 8px;
-      color: #7b5cff;
+      color: var(--primary);
+      font-size: 0.95rem;
+      font-weight: 500;
     }
-    
+
+    .stat i {
+      font-size: 18px;
+    }
+
+    .stat .stat-count {
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .breadcrumb a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .breadcrumb a:hover {
+      color: var(--primary-light);
+      text-decoration: underline;
+    }
+    .breadcrumb span {
+      color: var(--text-light);
+    }
+    .breadcrumb .separator {
+      color: var(--border-light);
+    }
+
+    /* Back Button */
     .back-button {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: white;
-      border: 1px solid #e0e0e0;
-      padding: 10px 20px;
-      border-radius: 50px;
-      color: #555555;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 10px 22px;
+      border-radius: var(--radius-full);
+      color: var(--text-secondary);
       text-decoration: none;
       margin-bottom: 20px;
-      transition: all 0.2s;
+      transition: all 0.3s ease;
+      font-weight: 500;
     }
-    
+
     .back-button:hover {
-      background: #f5f6f8;
-      transform: translateX(-3px);
+      background: var(--bg-white);
+      transform: translateX(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary);
+      color: var(--primary);
     }
-    
+
+    /* Category Tags */
+    .category-tags-section {
+      margin-bottom: 30px;
+    }
+
+    .category-tags-scroll {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      row-gap: 10px;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .category-tag-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 22px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: var(--radius-full);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .category-tag-pill:hover {
+      background: var(--bg-white);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .category-tag-pill.active {
+      background: var(--primary-gradient);
+      color: white;
+      border: none;
+      box-shadow: 0 4px 16px rgba(124, 58, 237, 0.3);
+    }
+
+    /* ============================================================
+       CATEGORY CONTENT SECTIONS - NEW FOR ADSENSE VALUE
+       ============================================================ */
+
+    .category-content-section {
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(8px);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .category-content-section:hover {
+      border-color: rgba(124, 58, 237, 0.1);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .category-content-section h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .category-content-section h3 i {
+      color: var(--primary);
+      font-size: 18px;
+    }
+
+    .category-content-section p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 8px;
+    }
+
+    .category-content-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0;
+    }
+
+    .category-content-section ul li {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      padding: 4px 0 4px 24px;
+      position: relative;
+    }
+
+    .category-content-section ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .category-content-section .highlight-box {
+      background: var(--primary-glow-soft);
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--primary);
+      margin-top: 10px;
+    }
+
+    .category-content-section .highlight-box p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    .category-content-section .highlight-box strong {
+      color: var(--text-primary);
+    }
+
+    /* Tips Grid */
+    .category-tips-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .category-tip-item {
+      background: rgba(255, 255, 255, 0.5);
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .category-tip-item strong {
+      color: var(--text-primary);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .category-tip-item i {
+      color: var(--primary);
+      margin-right: 6px;
+    }
+
+    /* Related Category Tags */
+    .related-category-tags {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .related-category-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .related-category-tag:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-2px);
+      background: var(--primary-glow-soft);
+    }
+
+    .related-category-tag i {
+      color: var(--primary);
+    }
+
+    /* Category Header */
     .category-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 15px;
-      margin-bottom: 25px;
+      margin-bottom: 24px;
     }
-    
-    .sort-options {
+
+    .category-header h2 {
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      font-weight: 700;
+      color: var(--text-primary);
       display: flex;
+      align-items: center;
       gap: 10px;
     }
-    
-    .sort-btn {
-      background: white;
-      border: 1px solid #e0e0e0;
-      padding: 8px 16px;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.2s;
+
+    .category-header h2 i {
+      color: var(--primary);
     }
-    
-    .sort-btn.active {
-      background: linear-gradient(135deg, #7b5cff, #a855f7);
-      color: white;
-      border: none;
-    }
-    
-    /* Category Tags Section */
-    .category-tags-section {
-      margin-bottom: 30px;
-    }
-    
-    .category-tags-scroll {
+
+    .sort-options {
       display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: flex-start;
-      align-items: center;
+      gap: 8px;
     }
-    
-    .category-tag-pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 8px 20px;
-      background: #ffffff;
-      border: 1px solid #e5e7eb;
-      border-radius: 100px;
-      font-size: 14px;
-      font-weight: 500;
-      color: #555555;
+
+    .sort-btn {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 8px 18px;
+      border-radius: var(--radius-full);
       cursor: pointer;
-      transition: all 0.2s ease;
-      white-space: nowrap;
-      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
     }
-    
-    .category-tag-pill:hover {
-      background: #f9fafb;
-      border-color: #7b5cff;
-      transform: translateY(-1px);
+
+    .sort-btn:hover {
+      background: var(--bg-white);
+      border-color: var(--primary);
+      transform: translateY(-2px);
     }
-    
-    .category-tag-pill.active {
-      background: linear-gradient(135deg, #7b5cff, #a855f7);
+
+    .sort-btn.active {
+      background: var(--primary-gradient);
       color: white;
       border: none;
-      box-shadow: 0 4px 12px rgba(123, 92, 255, 0.25);
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
     }
-    
+
+    /* No Results */
     .no-results {
       text-align: center;
       padding: 60px 20px;
-      background: white;
-      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.3);
     }
-    
+
     .no-results i {
       font-size: 64px;
-      color: #cccccc;
-      margin-bottom: 20px;
+      color: var(--text-light);
+      margin-bottom: 16px;
+      opacity: 0.5;
     }
-    
-    /* ========== ENHANCED SEARCH SUGGESTIONS STYLES ========== */
+
+    .no-results h3 {
+      font-size: 1.3rem;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .no-results p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .no-results a {
+      display: inline-block;
+      margin-top: 16px;
+      background: var(--primary-gradient);
+      color: white;
+      padding: 10px 28px;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .no-results a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 24px rgba(124, 58, 237, 0.3);
+    }
+
+    /* ========== ENHANCED SEARCH SUGGESTIONS ========== */
     .search-suggestions {
       max-width: 600px;
       margin: 10px auto 0;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-xl);
       display: none;
       overflow: hidden;
       z-index: 1001;
     }
-    
+
     .search-suggestions.active {
       display: block;
+      animation: slideDown 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    
-    /* Scrollable suggestions container */
+
+    @keyframes slideDown {
+      0% { opacity: 0; transform: translateY(-8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
     .suggestions-scroll-container {
       max-height: 400px;
       overflow-y: auto;
       overflow-x: hidden;
     }
-    
-    /* Custom scrollbar for suggestions */
+
     .suggestions-scroll-container::-webkit-scrollbar {
       width: 6px;
     }
-    
+
     .suggestions-scroll-container::-webkit-scrollbar-track {
-      background: #f0f2f5;
+      background: var(--bg-light);
       border-radius: 10px;
     }
-    
+
     .suggestions-scroll-container::-webkit-scrollbar-thumb {
-      background: linear-gradient(135deg, #7b5cff, #a855f7);
+      background: var(--primary-gradient);
       border-radius: 10px;
     }
-    
-    /* Enhanced Suggestion Item with Thumbnail */
+
     .suggestion-item {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 12px 15px;
+      padding: 12px 16px;
       cursor: pointer;
-      border-bottom: 1px solid #f0f2f5;
+      border-bottom: 1px solid var(--border-light);
       transition: background 0.2s ease;
     }
-    
+
     .suggestion-item:last-child {
       border-bottom: none;
     }
-    
+
     .suggestion-item:hover {
-      background: #f5f6f8;
+      background: var(--primary-glow-soft);
     }
-    
+
     .suggestion-thumbnail {
       width: 48px;
       height: 48px;
-      border-radius: 8px;
+      border-radius: var(--radius-sm);
       object-fit: cover;
       flex-shrink: 0;
-      background: #f0f2f5;
+      background: var(--bg-light);
     }
-    
+
     .suggestion-info {
       flex: 1;
       min-width: 0;
     }
-    
+
     .suggestion-title {
       font-size: 15px;
       font-weight: 600;
-      color: #111111;
-      margin-bottom: 4px;
+      color: var(--text-primary);
       line-height: 1.3;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    
+
     .suggestion-title strong {
-      color: #7b5cff;
+      color: var(--primary);
     }
-    
+
     .suggestion-category {
       display: inline-block;
       font-size: 11px;
       font-weight: 500;
-      color: #7b5cff;
-      background: #f0f2f5;
-      padding: 2px 8px;
-      border-radius: 20px;
+      color: var(--primary);
+      background: var(--primary-glow-soft);
+      padding: 2px 10px;
+      border-radius: var(--radius-full);
       margin-top: 4px;
     }
-    
+
     .suggestion-match {
       font-size: 12px;
-      color: #888888;
+      color: var(--text-light);
       margin-top: 4px;
       display: -webkit-box;
       -webkit-line-clamp: 1;
@@ -297,103 +621,124 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
-    
+
     .suggestion-match strong {
-      color: #7b5cff;
+      color: var(--primary);
       font-weight: 600;
     }
-    
-    /* No Results in Suggestions */
+
     .suggestion-no-results {
-      padding: 20px;
+      padding: 24px;
       text-align: center;
-      color: #888888;
+      color: var(--text-light);
       font-size: 14px;
     }
-    
-    @media (max-width: 640px) {
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+
+    @media (max-width: 768px) {
+      .category-hero {
+        padding: 32px 16px;
+        border-radius: 16px;
+      }
+      .category-info {
+        padding: 14px 18px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .category-stats {
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .stat {
+        font-size: 0.85rem;
+      }
+      .category-tag-pill {
+        padding: 6px 16px;
+        font-size: 13px;
+      }
+      .category-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .sort-options {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
       .suggestion-thumbnail {
         width: 40px;
         height: 40px;
       }
-      
       .suggestion-title {
         font-size: 13px;
       }
-      
       .suggestions-scroll-container {
         max-height: 300px;
       }
+      .back-button {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+      .category-content-section {
+        padding: 18px 16px;
+      }
+      .category-tips-grid {
+        grid-template-columns: 1fr;
+      }
+      .breadcrumb {
+        font-size: 12px;
+      }
     }
 
-    /* Developer Credit Styles */
-.developer-credit {
-  font-size: 13px;
-  color: #888888;
-  margin-top: 15px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  flex-wrap: wrap;
-}
+    @media (max-width: 480px) {
+      .category-hero {
+        padding: 24px 12px;
+      }
+      .category-hero h1 {
+        font-size: 1.5rem;
+      }
+      .category-info {
+        padding: 12px 14px;
+      }
+      .stat {
+        font-size: 0.8rem;
+        gap: 4px;
+      }
+      .stat i {
+        font-size: 14px;
+      }
+      .category-tag-pill {
+        padding: 5px 12px;
+        font-size: 12px;
+      }
+      .category-content-section {
+        padding: 14px 12px;
+      }
+    }
 
-.developer-credit i {
-  animation: heartbeat 1.5s ease infinite;
-  margin: 0 2px;
-}
-
-.developer-name {
-  font-weight: 600;
-  background: linear-gradient(135deg, #7b5cff, #a855f7);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  transition: all 0.3s ease;
-  cursor: default;
-}
-
-.developer-name:hover {
-  background: linear-gradient(135deg, #a855f7, #7b5cff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  transform: scale(1.02);
-}
-
-@keyframes heartbeat {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.15);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-/* Mobile Responsive */
-@media (max-width: 640px) {
-  .developer-credit {
-    font-size: 11px;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-  
-  .developer-name {
-    display: inline-block;
-  }
-}
+    /* ============================================================
+       REDUCED MOTION
+       ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      .category-hero::before,
+      .category-hero::after {
+        animation: none !important;
+      }
+    }
   </style>
 </head>
 <body>
 
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
   <header class="site-header">
     <div class="header-container">
-      <div class="logo">
-        <img src="../assets/prompts/logo.png" alt="PromptAura Logo">
+      <div class="logo" onclick="window.location.href='../index.html'">
+        <img src="../assets/prompts/logo.png" alt="PromptAura Logo" width="42" height="42">
         <span>PromptAura</span>
       </div>
       <div class="header-actions">
@@ -418,12 +763,14 @@
     </div>
   </header>
 
-  <!-- Sliding Menu -->
+  <!-- ============================================================
+       SLIDING MENU
+       ============================================================ -->
   <div class="menu-overlay" id="menuOverlay"></div>
   <div class="sliding-menu" id="slidingMenu">
     <div class="menu-header">
       <div class="menu-logo">
-        <img src="../assets/prompts/logo.png" alt="PromptAura Logo">
+        <img src="../assets/prompts/logo.png" alt="PromptAura Logo" width="42" height="42">
         <span>PromptAura</span>
       </div>
       <button class="menu-close" id="menuCloseBtn">
@@ -461,7 +808,7 @@
         </a>
         <a href="../terms.html" class="menu-item">
           <i class="fas fa-file-contract"></i>
-          <span>Terms & Conditions</span>
+          <span>Terms &amp; Conditions</span>
         </a>
         <a href="../disclaimer.html" class="menu-item">
           <i class="fas fa-exclamation-triangle"></i>
@@ -471,51 +818,85 @@
     </div>
   </div>
 
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
   <main class="main-container">
     <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb" id="breadcrumbNav">
+        <a href="../index.html">Home</a>
+        <span class="separator">›</span>
+        <a href="../index.html#categories">Categories</a>
+        <span class="separator">›</span>
+        <span id="breadcrumbTitle">Loading...</span>
+      </nav>
+
+      <!-- Back Button -->
       <a href="javascript:history.back()" class="back-button">
         <i class="fas fa-arrow-left"></i> Back
       </a>
-      
-      <div class="category-hero" id="categoryHero">
+
+      <!-- Category Hero -->
+      <div class="category-hero reveal">
+        <span class="hero-badge"><i class="fas fa-tags"></i> Category</span>
         <h1 id="categoryTitle">Loading...</h1>
         <p id="categoryDescription">Browse and discover amazing AI prompts in this category</p>
       </div>
-      
-      <div class="category-info" id="categoryInfo">
+
+      <!-- Category Info -->
+      <div class="category-info reveal">
         <div class="category-stats" id="categoryStats">
           <div class="stat">
             <i class="fas fa-file-alt"></i>
-            <span id="promptCount">0 prompts</span>
+            <span class="stat-count" id="promptCount">0 prompts</span>
           </div>
         </div>
       </div>
-      
-      <!-- Category Tags Section -->
-      <div class="category-tags-section" id="categoryTagsSection">
-        <div class="category-tags-scroll" id="categoryTagsList"></div>
+
+      <!-- ==========================================================
+           CATEGORY CONTENT SECTIONS - ADSENSE VALUE
+           ========================================================== -->
+      <div id="categoryContentSections">
+        <!-- Dynamic content inserted by JavaScript -->
       </div>
-      
-      <div class="category-header">
-        <h2><i class="fas fa-list"></i> All Prompts</h2>
-        <div class="sort-options">
-          
+
+      <!-- Category Tags -->
+      <div class="category-tags-section reveal">
+        <div class="category-tags-scroll" id="categoryTagsList">
+          <!-- Dynamic content -->
         </div>
       </div>
-      
-      <div class="prompts-grid" id="promptsGrid"></div>
-      
+
+      <!-- Category Header -->
+      <div class="category-header reveal">
+        <h2><i class="fas fa-list"></i> All Prompts</h2>
+        <div class="sort-options">
+          <!-- Sort options can be added here -->
+        </div>
+      </div>
+
+      <!-- Prompts Grid -->
+      <div class="prompts-grid" id="promptsGrid">
+        <!-- Dynamic content -->
+      </div>
+
+      <!-- Pagination -->
       <div class="pagination-container" id="paginationContainer"></div>
+
     </div>
   </main>
 
-  <!-- New Professional Footer -->
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-grid">
         <div class="footer-col">
           <div class="footer-logo">
-            <img src="../assets/prompts/logo.png" alt="PromptAura Logo">
+            <img src="../assets/prompts/logo.png" alt="PromptAura Logo" width="42" height="42">
             <span>PromptAura</span>
           </div>
           <p class="footer-description">Your ultimate destination for high-quality AI prompts. Generate stunning images with our carefully curated prompts.</p>
@@ -540,34 +921,52 @@
             <li><a href="../about.html">About Us</a></li>
             <li><a href="../contact.html">Contact Us</a></li>
             <li><a href="../privacy.html">Privacy Policy</a></li>
-            <li><a href="../terms.html">Terms & Conditions</a></li>
+            <li><a href="../terms.html">Terms &amp; Conditions</a></li>
             <li><a href="../disclaimer.html">Disclaimer</a></li>
           </ul>
         </div>
-        
+        <div class="footer-col">
+          <h4>Stay Updated</h4>
+          <p class="footer-description" style="font-size: 13px;">
+            Get the latest prompts delivered to your inbox.
+          </p>
+          <div class="newsletter-form">
+            <input type="email" placeholder="Your email" aria-label="Email for newsletter">
+            <button><i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
       </div>
       <div class="footer-bottom">
-  <p>&copy; 2026 PromptAura. All Rights Reserved.</p>
-  <p class="developer-credit">
-    Developed with <i class="fas fa-heart" style="color: #ff4d4d;"></i> by 
-    <a href="../pages/developer.html" class="developer-name" style="text-decoration: none; cursor: pointer; font-weight: 700; color: #7b5cff; transition: all 0.3s ease;">
-      Subhankar Bairagi
-    </a>
-  </p>
-  <p class="footer-tagline">PromptAura is a free AI prompt library where users can find prompts for AI image generation, cinematic prompts, wedding prompts, birthday prompts, anime prompts and more.</p>
-</div>
+        <p>&copy; 2026 PromptAura. All Rights Reserved.</p>
+        <p class="developer-credit">
+          Developed with <i class="fas fa-heart" style="color: #ff4d4d;"></i> by 
+          <a href="developer.html" class="developer-name">
+            Subhankar Bairagi
+          </a>
+        </p>
+        <p class="footer-tagline">PromptAura is a free AI prompt library where users can find prompts for AI image generation, cinematic prompts, wedding prompts, birthday prompts, anime prompts and more.</p>
+      </div>
     </div>
   </footer>
 
+  <!-- ============================================================
+       STICKY BOTTOM AD
+       ============================================================ -->
   <div class="sticky-bottom-ad mobile-only" id="stickyBottomAd">
     <div class="ad-label">Advertisement</div>
     <div class="ad-placeholder">Mobile Sticky Ad</div>
     <button id="closeStickyAd" class="close-sticky"><i class="fas fa-times"></i></button>
   </div>
 
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
   <script src="../menu.js"></script>
   <script>
-    // Get category from URL parameter
+    // ============================================================
+    // CATEGORY PAGE - FULL FUNCTIONALITY + CONTENT
+    // ============================================================
+
     const urlParams = new URLSearchParams(window.location.search);
     let currentCategory = urlParams.get('category') || 'all';
     let allPrompts = [];
@@ -580,7 +979,10 @@
     let searchResults = [];
     let currentSearchQuery = '';
 
-    // ========== SHUFFLE FUNCTION ==========
+    // ============================================================
+    // UTILITY FUNCTIONS
+    // ============================================================
+
     function shuffleArray(array) {
       const shuffled = [...array];
       for (let i = shuffled.length - 1; i > 0; i--) {
@@ -590,23 +992,23 @@
       return shuffled;
     }
 
-    // ========== SAVE & RESTORE RANDOM ORDER FOR BACK BUTTON ==========
-    function saveRandomOrderKey() {
-      return `category_random_order_${currentCategory}`;
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
     }
 
-    function getSavedRandomOrder() {
-      const key = saveRandomOrderKey();
-      const saved = sessionStorage.getItem(key);
-      return saved ? JSON.parse(saved) : null;
+    function escapeRegex(string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
 
-    function saveRandomOrder(order) {
-      const key = saveRandomOrderKey();
-      sessionStorage.setItem(key, JSON.stringify(order));
+    function highlightMatch(text, query) {
+      if (!query) return escapeHtml(text);
+      const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
+      return escapeHtml(text).replace(regex, '<strong>$1</strong>');
     }
 
-    // Function to get aspect ratio based on ratio string
     function getAspectRatio(ratio) {
       if (!ratio) return '16 / 9';
       switch(ratio) {
@@ -618,7 +1020,213 @@
       }
     }
 
-    // ========== SCROLL POSITION & PAGE FUNCTIONS ==========
+    function getCategoryDisplayName(categoryId) {
+      const displayNames = {
+        'wedding': 'Wedding Photography',
+        'cinematic': 'Cinematic Photography',
+        'birthday': 'Birthday Photography',
+        'anime': 'Anime Style',
+        'fashion': 'Fashion Photography',
+        'portrait': 'Portrait Photography',
+        'landscape': 'Landscape Photography',
+        'nature': 'Nature Photography',
+        'travel': 'Travel Photography',
+        'food': 'Food Photography',
+        'product': 'Product Photography',
+        'architectural': 'Architectural Photography',
+        'street': 'Street Photography',
+        'sports': 'Sports Photography',
+        'wildlife': 'Wildlife Photography'
+      };
+      return displayNames[categoryId] || categoryId.charAt(0).toUpperCase() + categoryId.slice(1);
+    }
+
+    // ============================================================
+    // UPDATE META TAGS
+    // ============================================================
+
+    function updateCategoryMetaTags(categoryName, count) {
+      const displayName = getCategoryDisplayName(categoryName);
+      const fullTitle = `${displayName} Prompts - AI Prompt Category | PromptAura`;
+      const fullDescription = `Browse ${count || 0} curated ${displayName.toLowerCase()} AI prompts. Perfect for Midjourney, DALL-E, and Stable Diffusion. Free to use.`;
+      
+      document.title = fullTitle;
+      document.querySelector('meta[name="description"]').content = fullDescription;
+      document.querySelector('meta[property="og:title"]').content = fullTitle;
+      document.querySelector('meta[property="og:description"]').content = fullDescription;
+      document.querySelector('meta[name="twitter:title"]').content = fullTitle;
+      document.querySelector('meta[name="twitter:description"]').content = fullDescription;
+      
+      document.getElementById('breadcrumbTitle').textContent = displayName;
+    }
+
+    // ============================================================
+    // GENERATE CATEGORY CONTENT SECTIONS
+    // ============================================================
+
+    function generateCategoryContent(categoryId, count) {
+      const displayName = getCategoryDisplayName(categoryId);
+      
+      // Category-specific content
+      const categoryContent = {
+        'wedding': {
+          about: 'Wedding photography captures one of the most important days in a couple\'s life. This category features AI prompts for creating stunning wedding images, from candid moments to posed portraits, with romantic lighting and dreamy atmospheres.',
+          images: 'Wedding ceremonies, bridal portraits, couple photography, reception moments',
+          tips: 'Use warm, golden tones for romantic feel, focus on emotions and candid moments',
+          ratios: '16:9 for wide ceremony shots, 4:5 for portrait shots, 1:1 for social media'
+        },
+        'cinematic': {
+          about: 'Cinematic photography aims to create images that look like they belong in a movie. This category features AI prompts for creating dramatic, film-like images with cinematic lighting, composition, and color grading.',
+          images: 'Movie-style scenes, dramatic lighting, film grain aesthetics, cinematic compositions',
+          tips: 'Use dramatic lighting, consider film grain, think about composition like a movie frame',
+          ratios: '16:9 for cinematic widescreen, 21:9 for ultra-widescreen'
+        },
+        'portrait': {
+          about: 'Portrait photography focuses on capturing the personality and expression of individuals. This category features AI prompts for creating stunning portraits with various styles, from studio lighting to natural light photography.',
+          images: 'Studio portraits, outdoor portraits, headshots, creative portraits',
+          tips: 'Focus on eyes and expression, use appropriate lighting, consider background',
+          ratios: '4:5 for classic portraits, 1:1 for social media, 3:2 for traditional photography'
+        },
+        'anime': {
+          about: 'Anime style photography and art features vibrant colors, distinctive character designs, and imaginative worlds. This category features AI prompts for creating anime-style images with the characteristic aesthetic of Japanese animation.',
+          images: 'Anime characters, vibrant scenes, fantasy worlds, anime-style portraits',
+          tips: 'Use bold colors, focus on character design, consider anime art style',
+          ratios: '16:9 for wide scenes, 1:1 for character portraits, 9:16 for vertical character art'
+        },
+        'fashion': {
+          about: 'Fashion photography showcases clothing, accessories, and style in artistic and commercial ways. This category features AI prompts for creating high-fashion images with professional styling and composition.',
+          images: 'Model shoots, fashion editorials, studio fashion, outdoor fashion',
+          tips: 'Focus on clothing details, use dramatic poses, consider lighting and background',
+          ratios: '4:5 for fashion editorials, 16:9 for wide fashion scenes'
+        },
+        'nature': {
+          about: 'Nature photography captures the beauty of the natural world, from landscapes to close-up details. This category features AI prompts for creating stunning nature images with attention to lighting and composition.',
+          images: 'Landscapes, forests, waterfalls, flowers, wildlife',
+          tips: 'Use golden hour lighting, focus on details, consider composition',
+          ratios: '16:9 for landscapes, 4:5 for detailed nature shots'
+        }
+      };
+      
+      const content = categoryContent[categoryId] || {
+        about: `This category features ${displayName}-themed AI prompts designed to help you create stunning images with AI image generators. Each prompt is carefully crafted to produce specific visual results.`,
+        images: `${displayName} themed images, creative compositions`,
+        tips: 'Experiment with different styles, use descriptive language, consider aspect ratio',
+        ratios: '16:9 for wide shots, 4:5 for portraits, 1:1 for social media'
+      };
+      
+      // Get related categories (exclude current)
+      const related = allCategories.filter(c => c.id !== categoryId && c.id !== 'all').slice(0, 4);
+      
+      let relatedHTML = '';
+      if (related.length > 0) {
+        relatedHTML = `
+          <div class="related-category-tags">
+            ${related.map(cat => `
+              <a href="category.html?category=${cat.id}" class="related-category-tag">
+                <i class="fas fa-tag"></i> ${cat.name}
+              </a>
+            `).join('')}
+          </div>
+        `;
+      }
+      
+      return `
+        <!-- What This Category Is About -->
+        <div class="category-content-section reveal">
+          <h3><i class="fas fa-info-circle"></i> What This Category Is About</h3>
+          <p>${content.about}</p>
+          <div class="highlight-box">
+            <p><strong>📸 ${count} Prompts Available</strong> — Browse all prompts below to find the perfect match for your project.</p>
+          </div>
+        </div>
+
+        <!-- What Type of Images You Can Create -->
+        <div class="category-content-section reveal">
+          <h3><i class="fas fa-image"></i> What Type of Images You Can Create</h3>
+          <p>With this category, you can create:</p>
+          <ul>
+            <li><strong>${content.images}</strong></li>
+            <li>High-quality, professional-grade images</li>
+            <li>Consistent visual styles across multiple prompts</li>
+            <li>Images suitable for portfolios, social media, and creative projects</li>
+          </ul>
+        </div>
+
+        <!-- Prompting Tips -->
+        <div class="category-content-section reveal">
+          <h3><i class="fas fa-lightbulb"></i> Prompting Tips for ${displayName}</h3>
+          <p>Follow these tips to get the best results with ${displayName.toLowerCase()} prompts:</p>
+          <div class="category-tips-grid">
+            <div class="category-tip-item">
+              <strong><i class="fas fa-pen"></i> Be Descriptive</strong>
+              Use specific details about the subject, setting, and style
+            </div>
+            <div class="category-tip-item">
+              <strong><i class="fas fa-palette"></i> Choose Your Style</strong>
+              ${displayName} works best with certain artistic styles
+            </div>
+            <div class="category-tip-item">
+              <strong><i class="fas fa-sun"></i> Consider Lighting</strong>
+              ${content.tips.split(',')[0] || 'Use appropriate lighting for the mood'}
+            </div>
+            <div class="category-tip-item">
+              <strong><i class="fas fa-arrows-alt"></i> Aspect Ratio Matters</strong>
+              Choose the right ratio for your composition
+            </div>
+          </div>
+          <div class="highlight-box">
+            <p><strong>💡 Pro Tip:</strong> ${content.tips.split(',')[1] || 'Always think about the final output before generating.'}</p>
+          </div>
+        </div>
+
+        <!-- Recommended Aspect Ratios -->
+        <div class="category-content-section reveal">
+          <h3><i class="fas fa-arrows-alt"></i> Recommended Aspect Ratios</h3>
+          <p>For ${displayName.toLowerCase()} prompts, these aspect ratios work best:</p>
+          <ul>
+            ${content.ratios.split(',').map(r => `<li><strong>${r.trim()}</strong></li>`).join('')}
+          </ul>
+        </div>
+
+        <!-- Customization Ideas -->
+        <div class="category-content-section reveal">
+          <h3><i class="fas fa-sliders-h"></i> Customization Ideas</h3>
+          <p>Make these prompts your own by customizing:</p>
+          <ul>
+            <li><strong>Subject:</strong> Change the main subject or character</li>
+            <li><strong>Environment:</strong> Modify the background or setting</li>
+            <li><strong>Color Palette:</strong> Adjust colors and tones</li>
+            <li><strong>Lighting:</strong> Change the mood with different lighting</li>
+            <li><strong>Style:</strong> Adapt to your preferred artistic style</li>
+          </ul>
+        </div>
+
+        <!-- Common Mistakes -->
+        <div class="category-content-section reveal">
+          <h3><i class="fas fa-exclamation-triangle"></i> Common Mistakes to Avoid</h3>
+          <ul>
+            <li><strong>Being too vague:</strong> Specific prompts generate better results</li>
+            <li><strong>Ignoring aspect ratio:</strong> Choose the right ratio for your composition</li>
+            <li><strong>Overcomplicating:</strong> Start simple and add details gradually</li>
+            <li><strong>Forgetting style:</strong> Always specify the desired visual style</li>
+          </ul>
+        </div>
+
+        <!-- Related Categories -->
+        ${relatedHTML ? `
+        <div class="category-content-section reveal">
+          <h3><i class="fas fa-tags"></i> Explore More Categories</h3>
+          <p>Discover similar or related categories:</p>
+          ${relatedHTML}
+        </div>
+        ` : ''}
+      `;
+    }
+
+    // ============================================================
+    // SCROLL POSITION
+    // ============================================================
+
     function saveScrollPositionAndPage() {
       const key = `category_scroll_${currentCategory}_page_${currentPage}`;
       sessionStorage.setItem(key, window.scrollY);
@@ -650,32 +1258,68 @@
       }
     }
 
-    // Escape HTML
-    function escapeHtml(text) {
-      if (!text) return '';
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
+    // ============================================================
+    // SAVE & RESTORE RANDOM ORDER
+    // ============================================================
+
+    function saveRandomOrderKey() {
+      return `category_random_order_${currentCategory}`;
     }
 
-    // Highlight matching text
-    function highlightMatch(text, query) {
-      if (!query) return escapeHtml(text);
-      const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
-      return escapeHtml(text).replace(regex, '<strong>$1</strong>');
+    function getSavedRandomOrder() {
+      const key = saveRandomOrderKey();
+      const saved = sessionStorage.getItem(key);
+      return saved ? JSON.parse(saved) : null;
     }
 
-    function escapeRegex(string) {
-      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    function saveRandomOrder(order) {
+      const key = saveRandomOrderKey();
+      sessionStorage.setItem(key, JSON.stringify(order));
     }
 
-    // ========== FUZZY MATCH FUNCTION ==========
+    // ============================================================
+    // COPY TO CLIPBOARD
+    // ============================================================
+
+    function copyToClipboard(text, buttonElement = null) {
+      navigator.clipboard.writeText(text).then(() => {
+        let btn = buttonElement;
+        if (!btn && window.event && window.event.target) {
+          btn = window.event.target;
+        }
+        if (btn && btn.classList && btn.classList.contains('btn-copy')) {
+          const originalText = btn.textContent;
+          btn.textContent = 'Copied! ✓';
+          setTimeout(() => {
+            btn.textContent = originalText;
+          }, 1500);
+        }
+      }).catch(() => {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.top = '-9999px';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          alert('Prompt copied to clipboard!');
+        } catch (e) {
+          alert('Failed to copy prompt. Please copy manually.');
+        }
+        document.body.removeChild(textarea);
+      });
+    }
+
+    // ============================================================
+    // FUZZY SEARCH
+    // ============================================================
+
     function fuzzyMatch(str, pattern) {
       str = str.toLowerCase();
       pattern = pattern.toLowerCase();
-      
       if (str.includes(pattern)) return true;
-      
       if (pattern.length <= 10) {
         let distance = 0;
         let i = 0, j = 0;
@@ -696,7 +1340,6 @@
       return false;
     }
 
-    // ========== CALCULATE SEARCH SCORE ==========
     function calculateSearchScore(prompt, query) {
       let score = 0;
       const title = prompt.title.toLowerCase();
@@ -707,12 +1350,9 @@
       
       if (title.includes(query)) score += 10;
       else if (fuzzyMatch(title, query)) score += 5;
-      
       if (title === query) score += 15;
-      
       if (category.includes(query)) score += 8;
       else if (fuzzyMatch(category, query)) score += 4;
-      
       if (category === query) score += 10;
       
       tags.forEach(tag => {
@@ -723,132 +1363,44 @@
       
       if (shortPrompt.includes(query)) score += 3;
       else if (fuzzyMatch(shortPrompt.substring(0, 50), query)) score += 1;
-      
       if (fullPrompt.includes(query)) score += 1;
       
       return score;
     }
 
-    // ========== GET SEARCH SUGGESTIONS (ALL MATCHING - SCROLLABLE) ==========
     function getSearchSuggestions(query) {
       if (!query || query.trim().length === 0) return [];
-      
       const searchTerm = query.toLowerCase().trim();
-      
       const scoredResults = filteredPrompts.map(prompt => {
         const score = calculateSearchScore(prompt, searchTerm);
         return { prompt, score };
       });
-      
-      // Return ALL results with score > 0 (no limit)
-      const results = scoredResults
+      return scoredResults
         .filter(item => item.score > 0)
         .sort((a, b) => b.score - a.score)
         .map(item => item.prompt);
-      
-      return results;
     }
 
-    // ========== COPY TO CLIPBOARD ==========
-    function copyToClipboard(text, buttonElement = null) {
-      navigator.clipboard.writeText(text).then(() => {
-        let btn = buttonElement;
-        if (!btn && window.event && window.event.target) {
-          btn = window.event.target;
-        }
-        
-        if (btn && btn.classList && btn.classList.contains('btn-copy')) {
-          const originalText = btn.textContent;
-          btn.textContent = 'Copied! ✓';
-          setTimeout(() => {
-            btn.textContent = originalText;
-          }, 1500);
-        }
-      }).catch((err) => {
-        console.error('Clipboard write failed:', err);
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        textarea.style.position = 'fixed';
-        textarea.style.top = '-9999px';
-        textarea.style.left = '-9999px';
-        document.body.appendChild(textarea);
-        textarea.select();
-        try {
-          document.execCommand('copy');
-          alert('Prompt copied to clipboard!');
-        } catch (e) {
-          alert('Failed to copy prompt. Please copy manually.');
-        }
-        document.body.removeChild(textarea);
-      });
-    }
+    // ============================================================
+    // SCROLL REVEAL
+    // ============================================================
 
-    // Load prompts data
-    async function loadCategoryData() {
-      try {
-        const [promptsRes, categoriesRes] = await Promise.all([
-          fetch('../data/prompts.json'),
-          fetch('../data/categories.json')
-        ]);
-        
-        allPrompts = await promptsRes.json();
-        allCategories = await categoriesRes.json();
-        
-        if (currentCategory !== 'all') {
-          const rawPrompts = allPrompts.filter(p => p.category === currentCategory);
-          // Check if we have saved random order for this category (for back button)
-          const savedOrder = getSavedRandomOrder();
-          
-          if (savedOrder && savedOrder.length === rawPrompts.length) {
-            // Restore saved order (back navigation)
-            filteredPrompts = savedOrder;
-          } else {
-            // First time - randomize and save
-            filteredPrompts = shuffleArray([...rawPrompts]);
-            saveRandomOrder(filteredPrompts);
+    function initCategoryScrollReveal() {
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
           }
-        } else {
-          filteredPrompts = [...allPrompts];
-          // For "All" category - no random needed
-        }
-        
-        filteredPrompts = filteredPrompts.map(p => {
-          if (p.image) {
-            if (p.image.startsWith('assets/')) {
-              p.image = '../' + p.image;
-            }
-          }
-          return p;
         });
-        
-        const categoryInfo = allCategories.find(c => c.id === currentCategory);
-        if (categoryInfo) {
-          document.getElementById('categoryTitle').textContent = categoryInfo.name;
-          document.getElementById('categoryDescription').textContent = `Browse ${filteredPrompts.length} amazing ${categoryInfo.name.toLowerCase()} prompts`;
-        } else if (currentCategory === 'all') {
-          document.getElementById('categoryTitle').textContent = 'All Prompts';
-          document.getElementById('categoryDescription').textContent = `Browse all ${filteredPrompts.length} amazing prompts`;
-        } else {
-          document.getElementById('categoryTitle').textContent = currentCategory.charAt(0).toUpperCase() + currentCategory.slice(1);
-        }
-        
-        document.getElementById('promptCount').textContent = `${filteredPrompts.length} prompts`;
-        
-        initializeCategoryTags();
-        
-        restoreScrollPositionAndPage();
-        renderPrompts();
-        setupEventListeners();
-        
-        // Initialize sticky ad close button
-        initStickyAdClose();
-        
-      } catch (error) {
-        console.error('Error loading category data:', error);
-      }
+      }, { threshold: 0.1 });
+      reveals.forEach(el => observer.observe(el));
     }
-    
-    // ========== STICKY AD CLOSE FUNCTION ==========
+
+    // ============================================================
+    // STICKY AD CLOSE
+    // ============================================================
+
     function initStickyAdClose() {
       const closeBtn = document.getElementById('closeStickyAd');
       const stickyAd = document.getElementById('stickyBottomAd');
@@ -858,48 +1410,18 @@
           e.preventDefault();
           e.stopPropagation();
           stickyAd.style.display = 'none';
-          // Save to session storage so it stays closed
           sessionStorage.setItem('stickyAdClosed_category', 'true');
         });
-        
-        // Check if user already closed it before
         if (sessionStorage.getItem('stickyAdClosed_category') === 'true') {
           stickyAd.style.display = 'none';
         }
       }
     }
-    
-    function initializeCategoryTags() {
-      const container = document.getElementById('categoryTagsList');
-      if (!container) return;
-      
-      container.innerHTML = `
-        <button class="category-tag-pill ${currentCategory === 'all' ? 'active' : ''}" data-category="all">All</button>
-        ${allCategories.map(cat => `
-          <button class="category-tag-pill ${currentCategory === cat.id ? 'active' : ''}" data-category="${cat.id}">${escapeHtml(cat.name)}</button>
-        `).join('')}
-      `;
-      
-      container.querySelectorAll('.category-tag-pill').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const category = btn.dataset.category;
-          saveScrollPositionAndPage();
-          if (category === 'all') {
-            window.location.href = `category.html?category=all`;
-          } else {
-            window.location.href = `category.html?category=${category}`;
-          }
-        });
-      });
-    }
-    
-    function getCurrentPrompts() {
-      if (isSearchMode) {
-        return searchResults;
-      }
-      return filteredPrompts;
-    }
-    
+
+    // ============================================================
+    // SCROLL TO SECTION
+    // ============================================================
+
     function scrollToPromptsSection() {
       const promptsSection = document.querySelector('.prompts-grid');
       if (promptsSection) {
@@ -911,7 +1433,11 @@
         });
       }
     }
-    
+
+    // ============================================================
+    // RENDER PAGINATION
+    // ============================================================
+
     function renderPagination(totalItems) {
       const totalPages = Math.ceil(totalItems / promptsPerPage);
       const paginationContainer = document.getElementById('paginationContainer');
@@ -922,14 +1448,12 @@
       }
       
       let paginationHTML = '<div class="pagination">';
-      
       paginationHTML += `<button class="page-btn prev-btn" ${currentPage === 1 ? 'disabled' : ''} data-page="${currentPage - 1}">
         <i class="fas fa-chevron-left"></i>
       </button>`;
       
       let startPage = Math.max(1, currentPage - 2);
       let endPage = Math.min(totalPages, startPage + 4);
-      
       if (endPage - startPage < 4) {
         startPage = Math.max(1, endPage - 4);
       }
@@ -951,7 +1475,6 @@
       paginationHTML += `<button class="page-btn next-btn" ${currentPage === totalPages ? 'disabled' : ''} data-page="${currentPage + 1}">
         <i class="fas fa-chevron-right"></i>
       </button>`;
-      
       paginationHTML += '</div>';
       paginationContainer.innerHTML = paginationHTML;
       
@@ -961,23 +1484,22 @@
             saveScrollPositionAndPage();
             currentPage = parseInt(btn.dataset.page);
             renderPrompts();
-            setTimeout(() => {
-              scrollToPromptsSection();
-            }, 100);
+            setTimeout(scrollToPromptsSection, 100);
           });
         }
       });
     }
-    
-    // ========== RENDER PROMPTS WITH ADS AFTER EVERY 2 CARDS ==========
+
+    // ============================================================
+    // RENDER PROMPTS
+    // ============================================================
+
     function renderPrompts() {
-      let promptsList = getCurrentPrompts();
+      let promptsList = isSearchMode ? searchResults : filteredPrompts;
       const totalItems = promptsList.length;
-      
       const start = (currentPage - 1) * promptsPerPage;
       const end = start + promptsPerPage;
       const paginated = promptsList.slice(start, end);
-      
       const grid = document.getElementById('promptsGrid');
       
       if (paginated.length === 0) {
@@ -986,20 +1508,18 @@
             <i class="fas fa-search"></i>
             <h3>No prompts found</h3>
             <p>Try a different category or check back later for new prompts!</p>
-            <a href="../index.html" style="display: inline-block; margin-top: 20px; background: linear-gradient(135deg, #7b5cff, #a855f7); color: white; padding: 10px 24px; border-radius: 50px; text-decoration: none;">Browse Homepage</a>
+            <a href="../index.html">Browse Homepage</a>
           </div>
         `;
         renderPagination(0);
         return;
       }
       
-      // Generate cards HTML with inline ads after every 2 cards
       let cardsHTML = '';
       paginated.forEach((prompt, index) => {
         const aspectRatio = getAspectRatio(prompt.ratio);
-        
         cardsHTML += `
-          <div class="prompt-card" data-id="${prompt.id}" style="cursor: pointer;">
+          <div class="prompt-card reveal-stagger" data-id="${prompt.id}" style="cursor: pointer;">
             <h3>${escapeHtml(prompt.title)}</h3>
             <div style="width: 100%; overflow: hidden; border-radius: 14px; margin-bottom: 12px; background: #f0f2f5; aspect-ratio: ${aspectRatio} !important;">
               <img src="${prompt.image}" alt="${escapeHtml(prompt.title)}" style="width: 100%; height: 100%; object-fit: cover; display: block;" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=No+Image'">
@@ -1012,8 +1532,6 @@
             </div>
           </div>
         `;
-        
-        // Insert ad after every 2 cards (but not after the last card)
         if ((index + 1) % 2 === 0 && index + 1 < paginated.length) {
           cardsHTML += `
             <div class="ad-container" style="margin: 0; margin-bottom: 20px;">
@@ -1028,6 +1546,23 @@
       });
       
       grid.innerHTML = cardsHTML;
+      
+      // Stagger animation for new cards
+      const staggerContainers = document.querySelectorAll('.reveal-stagger');
+      staggerContainers.forEach(container => {
+        const children = container.children;
+        if (children.length > 0) {
+          const rect = container.getBoundingClientRect();
+          const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+          if (isVisible) {
+            Array.from(children).forEach((child, index) => {
+              setTimeout(() => {
+                child.classList.add('visible');
+              }, index * 60);
+            });
+          }
+        }
+      });
       
       document.querySelectorAll('.prompt-card').forEach(card => {
         const cardId = card.dataset.id;
@@ -1067,7 +1602,11 @@
       
       renderPagination(totalItems);
     }
-    
+
+    // ============================================================
+    // SEARCH FUNCTIONS
+    // ============================================================
+
     function performSearch(query) {
       if (!query || query.trim() === '') {
         isSearchMode = false;
@@ -1083,11 +1622,8 @@
         const shortPrompt = p.short_prompt.toLowerCase();
         const fullPrompt = p.full_prompt.toLowerCase();
         const tags = p.tags ? p.tags.map(t => t.toLowerCase()) : [];
-        
-        return title.includes(query) ||
-               shortPrompt.includes(query) ||
-               fullPrompt.includes(query) ||
-               tags.some(tag => tag.includes(query));
+        return title.includes(query) || shortPrompt.includes(query) || 
+               fullPrompt.includes(query) || tags.some(tag => tag.includes(query));
       });
       
       searchResults = results;
@@ -1096,7 +1632,7 @@
       currentPage = 1;
       renderPrompts();
     }
-    
+
     function clearSearch() {
       isSearchMode = false;
       searchResults = [];
@@ -1104,8 +1640,11 @@
       currentPage = 1;
       renderPrompts();
     }
-    
-    // ========== ENHANCED SEARCH WITH SCROLLABLE SUGGESTIONS ==========
+
+    // ============================================================
+    // SETUP SEARCH
+    // ============================================================
+
     function setupSearch() {
       const searchInput = document.getElementById('liveSearchInput');
       const suggestionsDiv = document.getElementById('searchSuggestions');
@@ -1118,9 +1657,7 @@
           suggestionsDiv.classList.remove('active');
           return;
         }
-        
         const suggestions = getSearchSuggestions(query);
-        
         if (suggestions.length === 0) {
           suggestionsDiv.innerHTML = `
             <div class="suggestion-no-results">
@@ -1130,8 +1667,6 @@
           suggestionsDiv.classList.add('active');
           return;
         }
-        
-        // Create scrollable container for suggestions
         suggestionsDiv.innerHTML = `
           <div class="suggestions-scroll-container">
             ${suggestions.map(prompt => `
@@ -1146,22 +1681,14 @@
             `).join('')}
           </div>
         `;
-        
         suggestionsDiv.classList.add('active');
-        
-        // Add click handlers to suggestion items
         document.querySelectorAll('.suggestion-item').forEach(item => {
           item.addEventListener('click', () => {
             const promptId = item.dataset.id;
-            
             if (promptId) {
-              // Save current scroll position before leaving
               saveScrollPositionAndPage();
-              
-              // Navigate directly to prompt page (NOT performSearch)
               window.location.href = `prompt.html?id=${promptId}`;
             }
-            
             suggestionsDiv.classList.remove('active');
           });
         });
@@ -1169,20 +1696,13 @@
       
       searchInput.addEventListener('input', (e) => {
         const query = e.target.value.trim();
-        
         clearTimeout(debounceTimer);
-        
         if (query.length === 0) {
           suggestionsDiv.classList.remove('active');
-          if (isSearchMode) {
-            performSearch('');
-          }
+          if (isSearchMode) performSearch('');
           return;
         }
-        
-        debounceTimer = setTimeout(() => {
-          renderSuggestions(query);
-        }, 150);
+        debounceTimer = setTimeout(() => renderSuggestions(query), 150);
       });
       
       searchInput.addEventListener('keypress', (e) => {
@@ -1195,14 +1715,41 @@
         }
       });
       
-      // Close suggestions when clicking outside
       document.addEventListener('click', (e) => {
         if (!searchInput.contains(e.target) && !suggestionsDiv.contains(e.target)) {
           suggestionsDiv.classList.remove('active');
         }
       });
     }
-    
+
+    // ============================================================
+    // INITIALIZE CATEGORY TAGS
+    // ============================================================
+
+    function initializeCategoryTags() {
+      const container = document.getElementById('categoryTagsList');
+      if (!container) return;
+      
+      container.innerHTML = `
+        <button class="category-tag-pill ${currentCategory === 'all' ? 'active' : ''}" data-category="all">All</button>
+        ${allCategories.map(cat => `
+          <button class="category-tag-pill ${currentCategory === cat.id ? 'active' : ''}" data-category="${cat.id}">${escapeHtml(cat.name)}</button>
+        `).join('')}
+      `;
+      
+      container.querySelectorAll('.category-tag-pill').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const category = btn.dataset.category;
+          saveScrollPositionAndPage();
+          window.location.href = `category.html?category=${category}`;
+        });
+      });
+    }
+
+    // ============================================================
+    // EVENT LISTENERS
+    // ============================================================
+
     function setupEventListeners() {
       const searchToggle = document.getElementById('searchToggleBtn');
       const searchExpand = document.getElementById('searchExpand');
@@ -1224,7 +1771,82 @@
       
       setupSearch();
     }
-    
+
+    // ============================================================
+    // LOAD CATEGORY DATA
+    // ============================================================
+
+    async function loadCategoryData() {
+      try {
+        const [promptsRes, categoriesRes] = await Promise.all([
+          fetch('../data/prompts.json'),
+          fetch('../data/categories.json')
+        ]);
+        
+        allPrompts = await promptsRes.json();
+        allCategories = await categoriesRes.json();
+        
+        if (currentCategory !== 'all') {
+          const rawPrompts = allPrompts.filter(p => p.category === currentCategory);
+          const savedOrder = getSavedRandomOrder();
+          if (savedOrder && savedOrder.length === rawPrompts.length) {
+            filteredPrompts = savedOrder;
+          } else {
+            filteredPrompts = shuffleArray([...rawPrompts]);
+            saveRandomOrder(filteredPrompts);
+          }
+        } else {
+          filteredPrompts = [...allPrompts];
+        }
+        
+        filteredPrompts = filteredPrompts.map(p => {
+          if (p.image && p.image.startsWith('assets/')) {
+            p.image = '../' + p.image;
+          }
+          return p;
+        });
+        
+        const categoryInfo = allCategories.find(c => c.id === currentCategory);
+        let displayName = currentCategory === 'all' ? 'All Prompts' : (categoryInfo ? categoryInfo.name : currentCategory.charAt(0).toUpperCase() + currentCategory.slice(1));
+        
+        if (categoryInfo) {
+          document.getElementById('categoryTitle').textContent = categoryInfo.name;
+          document.getElementById('categoryDescription').textContent = `Browse ${filteredPrompts.length} amazing ${categoryInfo.name.toLowerCase()} prompts`;
+        } else if (currentCategory === 'all') {
+          document.getElementById('categoryTitle').textContent = 'All Prompts';
+          document.getElementById('categoryDescription').textContent = `Browse all ${filteredPrompts.length} amazing prompts`;
+        } else {
+          document.getElementById('categoryTitle').textContent = currentCategory.charAt(0).toUpperCase() + currentCategory.slice(1);
+        }
+        
+        document.getElementById('promptCount').textContent = `${filteredPrompts.length} prompts`;
+        
+        // Update meta tags
+        updateCategoryMetaTags(currentCategory, filteredPrompts.length);
+        
+        // Generate category content sections
+        const contentContainer = document.getElementById('categoryContentSections');
+        contentContainer.innerHTML = generateCategoryContent(
+          currentCategory, 
+          filteredPrompts.length
+        );
+        
+        initializeCategoryTags();
+        restoreScrollPositionAndPage();
+        renderPrompts();
+        setupEventListeners();
+        initStickyAdClose();
+        
+        setTimeout(initCategoryScrollReveal, 300);
+        
+      } catch (error) {
+        console.error('Error loading category data:', error);
+      }
+    }
+
+    // ============================================================
+    // START
+    // ============================================================
     loadCategoryData();
   </script>
 </body>

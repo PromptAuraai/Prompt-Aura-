@@ -8,11 +8,11 @@
      crossorigin="anonymous"></script>
   
   <!-- ========== PRIMARY META TAGS ========== -->
-  <title>About PromptAura - Free AI Prompts Library for Gemini</title>
+  <title>About PromptAura - Free AI Prompts Library for Gemini, Midjourney &amp; DALL-E</title>
   <meta name="description" content="Learn about PromptAura - Your ultimate destination for high-quality AI prompts. Discover our mission, vision, and what makes us the best AI prompt library for Midjourney, DALL-E, and Stable Diffusion.">
   <meta name="keywords" content="about PromptAura, AI prompts library, about us, AI image prompts, Midjourney prompts, DALL-E prompts">
   <meta name="author" content="PromptAura">
-  <meta name="theme-color" content="#7b5cff">
+  <meta name="theme-color" content="#7C3AED">
   
   <!-- ========== FAVICON ========== -->
   <link rel="icon" type="image/x-icon" href="../assets/icons/favicon.ico">
@@ -85,212 +85,549 @@
   </script>
   
   <style>
-    /* About Page Additional Styles */
+    /* ============================================================
+       ABOUT PAGE - PREMIUM STYLES + CONTENT SECTIONS
+       ============================================================ */
+
+    /* Hero Section */
     .about-hero {
-      background: linear-gradient(135deg, #7b5cff20, #a855f720);
+      position: relative;
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(168, 85, 247, 0.08));
       padding: 60px 20px;
       text-align: center;
       margin-bottom: 40px;
-      border-radius: 20px;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(124, 58, 237, 0.06);
     }
-    
+
+    .about-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 60%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.04) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: floatBg 20s ease-in-out infinite;
+    }
+
+    .about-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 40%;
+      height: 150%;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.03) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: floatBg 15s ease-in-out infinite reverse;
+    }
+
+    @keyframes floatBg {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.1) rotate(5deg); }
+    }
+
     .about-hero h1 {
-      font-size: 48px;
-      color: #111111;
-      margin-bottom: 20px;
-      font-weight: 700;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
     }
-    
+
+    .about-hero h1 .gradient-text {
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
     .about-hero p {
-      font-size: 18px;
-      color: #555555;
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      color: var(--text-secondary);
       max-width: 700px;
       margin: 0 auto;
-      line-height: 1.6;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
     }
-    
+
+    .about-hero .hero-badge {
+      display: inline-block;
+      background: var(--primary-glow-soft);
+      color: var(--primary);
+      padding: 6px 20px;
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* About Section Container */
     .about-section {
       max-width: 1200px;
       margin: 0 auto 60px;
       padding: 0 20px;
     }
-    
+
+    /* Breadcrumb */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .breadcrumb a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .breadcrumb a:hover {
+      color: var(--primary-light);
+      text-decoration: underline;
+    }
+    .breadcrumb span {
+      color: var(--text-light);
+    }
+    .breadcrumb .separator {
+      color: var(--border-light);
+    }
+
+    /* About Cards Grid - Premium Glassmorphism */
     .about-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 40px;
-      margin-bottom: 60px;
+      gap: 24px;
+      margin-bottom: 50px;
     }
-    
+
     .about-card {
-      background: white;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      transition: transform 0.3s, box-shadow 0.3s;
+      padding: 32px 28px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
     }
-    
+
+    .about-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--primary-gradient);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .about-card:hover::before {
+      opacity: 1;
+    }
+
     .about-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 48px rgba(124, 58, 237, 0.08);
+      border-color: rgba(124, 58, 237, 0.1);
     }
-    
+
     .about-card-icon {
-      width: 70px;
-      height: 70px;
-      background: linear-gradient(135deg, #7b5cff20, #a855f720);
+      width: 64px;
+      height: 64px;
+      background: var(--primary-glow-soft);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
+      transition: all 0.4s ease;
     }
-    
+
+    .about-card:hover .about-card-icon {
+      background: var(--primary-gradient);
+      transform: scale(1.05) rotate(-5deg);
+    }
+
     .about-card-icon i {
-      font-size: 32px;
-      background: linear-gradient(135deg, #7b5cff, #a855f7);
+      font-size: 28px;
+      background: var(--primary-gradient);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      transition: color 0.4s ease;
     }
-    
+
+    .about-card:hover .about-card-icon i {
+      color: white;
+      background: none;
+      -webkit-background-clip: unset;
+      background-clip: unset;
+    }
+
     .about-card h3 {
-      font-size: 24px;
-      color: #111111;
-      margin-bottom: 15px;
+      font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
     }
-    
+
     .about-card p {
-      font-size: 16px;
-      color: #555555;
-      line-height: 1.6;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
     }
-    
+
+    /* ============================================================
+       CONTENT SECTIONS - NEW FOR ADSENSE VALUE
+       ============================================================ */
+
+    .about-content-section {
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(8px);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .about-content-section:hover {
+      border-color: rgba(124, 58, 237, 0.1);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .about-content-section h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .about-content-section h3 i {
+      color: var(--primary);
+      font-size: 18px;
+    }
+
+    .about-content-section p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 8px;
+    }
+
+    .about-content-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0;
+    }
+
+    .about-content-section ul li {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      padding: 4px 0 4px 24px;
+      position: relative;
+    }
+
+    .about-content-section ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .about-content-section .highlight-box {
+      background: var(--primary-glow-soft);
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--primary);
+      margin-top: 10px;
+    }
+
+    .about-content-section .highlight-box p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    .about-content-section .highlight-box strong {
+      color: var(--text-primary);
+    }
+
+    /* Mission Section */
     .mission-section {
-      background: white;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-radius: 20px;
       padding: 40px;
-      margin-bottom: 40px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      margin-bottom: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+      position: relative;
+      overflow: hidden;
     }
-    
+
+    .mission-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.04) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
     .mission-section h2 {
-      font-size: 32px;
-      color: #111111;
-      margin-bottom: 20px;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 16px;
       text-align: center;
     }
-    
+
+    .mission-section h2 i {
+      color: var(--primary);
+      margin-right: 8px;
+    }
+
     .mission-section p {
-      font-size: 18px;
-      color: #555555;
+      font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+      color: var(--text-secondary);
       line-height: 1.8;
       text-align: center;
       max-width: 800px;
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
-    
+
+    /* Stats Grid */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 30px;
+      gap: 20px;
       margin-top: 40px;
     }
-    
+
     .stat-item {
       text-align: center;
-      padding: 30px;
-      background: linear-gradient(135deg, #7b5cff10, #a855f710);
+      padding: 28px 20px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    
+
+    .stat-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(124, 58, 237, 0.08);
+      border-color: rgba(124, 58, 237, 0.1);
+    }
+
     .stat-number {
-      font-size: 36px;
-      font-weight: 700;
-      background: linear-gradient(135deg, #7b5cff, #a855f7);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 800;
+      background: var(--primary-gradient);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      margin-bottom: 10px;
+      margin-bottom: 6px;
+      display: inline-block;
     }
-    
+
     .stat-label {
-      font-size: 14px;
-      color: #555555;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+      display: block;
     }
-    
+
+    .stat-item .stat-icon {
+      font-size: 24px;
+      color: var(--primary);
+      margin-bottom: 8px;
+      display: block;
+      opacity: 0.6;
+    }
+
+    /* Features Section */
     .team-section {
       text-align: center;
-      margin-top: 40px;
+      margin-top: 50px;
+      padding: 40px 20px;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
     }
-    
+
     .team-section h2 {
-      font-size: 32px;
-      color: #111111;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: var(--text-primary);
       margin-bottom: 20px;
     }
-    
-    .team-section p {
-      font-size: 16px;
-      color: #555555;
-      margin-bottom: 40px;
+
+    .team-section .features-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      max-width: 800px;
+      margin: 0 auto;
     }
-    
+
+    .team-section .feature-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 10px 20px;
+      border-radius: var(--radius-full);
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      border: 1px solid rgba(124, 58, 237, 0.06);
+      transition: all 0.3s ease;
+    }
+
+    .team-section .feature-tag:hover {
+      background: var(--primary-glow-soft);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .team-section .feature-tag i {
+      color: var(--primary);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+
     @media (min-width: 768px) {
       .about-grid {
         grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
       }
-      
       .stats-grid {
         grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+      }
+      .mission-section {
+        padding: 50px 60px;
       }
     }
-    
-    @media (max-width: 768px) {
-      .about-hero h1 {
-        font-size: 32px;
+
+    @media (max-width: 640px) {
+      .about-hero {
+        padding: 40px 16px;
+        border-radius: 16px;
       }
-      
-      .about-hero p {
-        font-size: 16px;
+      .about-card {
+        padding: 24px 20px;
       }
-      
-      .mission-section h2 {
-        font-size: 24px;
+      .mission-section {
+        padding: 28px 20px;
       }
-      
-      .mission-section p {
-        font-size: 16px;
+      .stat-item {
+        padding: 20px 14px;
+      }
+      .team-section {
+        padding: 28px 16px;
+      }
+      .team-section .feature-tag {
+        padding: 8px 14px;
+        font-size: 0.8rem;
+      }
+      .about-content-section {
+        padding: 18px 16px;
+      }
+      .breadcrumb {
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .about-content-section {
+        padding: 14px 12px;
+      }
+    }
+
+    /* ============================================================
+       REDUCED MOTION
+       ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      .about-hero::before,
+      .about-hero::after {
+        animation: none !important;
       }
     }
   </style>
 </head>
 <body>
 
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
   <header class="site-header">
     <div class="header-container">
-      <div class="logo">
-        <img src="assets/prompts/logo.png" alt="PromptAura Logo">
+      <div class="logo" onclick="window.location.href='../index.html'">
+        <img src="../assets/prompts/logo.png" alt="PromptAura Logo" width="42" height="42">
         <span>PromptAura</span>
       </div>
       <div class="header-actions">
         <a href="../index.html" class="icon-btn" aria-label="Home">
           <i class="fas fa-home"></i>
         </a>
+        <button class="icon-btn search-toggle-btn" id="searchToggleBtn" aria-label="Search">
+          <i class="fas fa-search"></i>
+        </button>
         <button class="icon-btn menu-toggle-btn" id="menuToggleBtn" aria-label="Menu">
           <i class="fas fa-bars"></i>
         </button>
       </div>
     </div>
-    
+    <div class="search-expand" id="searchExpand">
+      <div class="search-wrapper">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" id="liveSearchInput" placeholder="Search prompts..." autocomplete="off">
+        <button id="clearSearchBtn" class="clear-search"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="searchSuggestions" class="search-suggestions"></div>
+    </div>
   </header>
 
-  <!-- Sliding Menu -->
+  <!-- ============================================================
+       SLIDING MENU
+       ============================================================ -->
   <div class="menu-overlay" id="menuOverlay"></div>
   <div class="sliding-menu" id="slidingMenu">
     <div class="menu-header">
       <div class="menu-logo">
-        <img src="assets/prompts/logo.png" alt="PromptAura Logo">
+        <img src="../assets/prompts/logo.png" alt="PromptAura Logo" width="42" height="42">
         <span>PromptAura</span>
       </div>
       <button class="menu-close" id="menuCloseBtn">
@@ -328,7 +665,7 @@
         </a>
         <a href="terms.html" class="menu-item">
           <i class="fas fa-file-contract"></i>
-          <span>Terms & Conditions</span>
+          <span>Terms &amp; Conditions</span>
         </a>
         <a href="disclaimer.html" class="menu-item">
           <i class="fas fa-exclamation-triangle"></i>
@@ -338,14 +675,187 @@
     </div>
   </div>
 
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
   <main class="main-container">
-    <div class="about-hero">
-      <h1>About PromptAura</h1>
-      <p>Your ultimate destination for high-quality AI prompts. We help creators, artists, and innovators bring their ideas to life.</p>
+
+    <!-- Breadcrumb -->
+    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="separator">›</span>
+        <span>About Us</span>
+      </nav>
     </div>
 
+    <!-- ==========================================================
+         ABOUT HERO
+         ========================================================== -->
+    <div class="about-hero reveal">
+      <span class="hero-badge"><i class="fas fa-info-circle"></i> About Us</span>
+      <h1>
+        Welcome to <span class="gradient-text">PromptAura</span>
+      </h1>
+      <p>
+        Your ultimate destination for high-quality AI prompts. We help creators, 
+        artists, and innovators bring their ideas to life with the power of AI.
+      </p>
+    </div>
+
+    <!-- ==========================================================
+         ABOUT SECTION
+         ========================================================== -->
     <div class="about-section">
-      <div class="about-grid">
+
+      <!-- ==========================================================
+           NEW: WHAT IS PROMPTAURA - VALUABLE CONTENT
+           ========================================================== -->
+      <div class="about-content-section reveal">
+        <h3><i class="fas fa-question-circle"></i> What is PromptAura?</h3>
+        <p>
+          <strong>PromptAura</strong> is a free AI prompt library designed to help creators, 
+          artists, and innovators generate stunning images using AI image generators like 
+          <strong>Midjourney, DALL-E, Stable Diffusion,</strong> and more.
+        </p>
+        <p>
+          We believe that great AI art starts with great prompts. That's why we've curated 
+          a collection of <strong>1000+ high-quality, tested prompts</strong> across multiple 
+          categories and styles to help you achieve the results you envision.
+        </p>
+        <div class="highlight-box">
+          <p><strong>💡 Our Goal:</strong> To make AI art accessible to everyone by providing 
+          free, high-quality prompts that actually work.</p>
+        </div>
+      </div>
+
+      <!-- ==========================================================
+           NEW: WHY PROMPTAURA WAS CREATED
+           ========================================================== -->
+      <div class="about-content-section reveal">
+        <h3><i class="fas fa-rocket"></i> Why We Created PromptAura</h3>
+        <p>
+          PromptAura was created to solve a simple problem: <strong>finding good AI prompts 
+          is hard</strong>. Many prompt libraries are either low-quality, confusing, or 
+          require paid subscriptions.
+        </p>
+        <p>
+          We wanted to build a free, easy-to-use resource where anyone could discover, 
+          learn, and use high-quality AI prompts. Whether you're a professional artist, 
+          a beginner, or someone just exploring AI art, PromptAura is designed to help you 
+          create better images faster.
+        </p>
+        <ul>
+          <li><strong>Free Access:</strong> No credit card required, no hidden fees</li>
+          <li><strong>Curated Quality:</strong> Every prompt is tested and optimized</li>
+          <li><strong>Easy to Use:</strong> Copy prompts with one click</li>
+          <li><strong>Organized:</strong> Browse by categories, collections, and themes</li>
+        </ul>
+      </div>
+
+      <!-- ==========================================================
+           NEW: WHAT PROBLEM IT SOLVES
+           ========================================================== -->
+      <div class="about-content-section reveal">
+        <h3><i class="fas fa-lightbulb"></i> What Problem Does PromptAura Solve?</h3>
+        <p>
+          Creating effective AI prompts requires understanding of photography, art direction, 
+          cinematography, and technical specifications. Most people don't have time to learn 
+          all of that.
+        </p>
+        <p>
+          <strong>PromptAura solves this by providing:</strong>
+        </p>
+        <ul>
+          <li><strong>Ready-to-use prompts</strong> — Just copy and paste into your AI tool</li>
+          <li><strong>Proven quality</strong> — Prompts that actually generate impressive results</li>
+          <li><strong>Learning resources</strong> — Guides and tips to help you improve your prompting skills</li>
+          <li><strong>Organized discovery</strong> — Find the right prompt for your project quickly</li>
+        </ul>
+        <div class="highlight-box">
+          <p><strong>🎯 The Outcome:</strong> Better AI images, faster, with less frustration.</p>
+        </div>
+      </div>
+
+      <!-- ==========================================================
+           NEW: WHO IS PROMPTAURA FOR
+           ========================================================== -->
+      <div class="about-content-section reveal">
+        <h3><i class="fas fa-users"></i> Who Is PromptAura For?</h3>
+        <p>
+          <strong>PromptAura is for anyone who creates or wants to create AI-generated images.</strong>
+        </p>
+        <ul>
+          <li><strong>Digital Artists:</strong> Use prompts as inspiration or starting points for your work</li>
+          <li><strong>Photographers:</strong> Explore new styles and concepts through AI</li>
+          <li><strong>Designers:</strong> Generate visuals for projects quickly</li>
+          <li><strong>Content Creators:</strong> Create unique images for social media and content</li>
+          <li><strong>Beginners:</strong> Learn prompting by using proven examples</li>
+          <li><strong>Curious Users:</strong> Explore the capabilities of AI image generation</li>
+        </ul>
+      </div>
+
+      <!-- ==========================================================
+           NEW: HOW PROMPTS ARE ORGANIZED
+           ========================================================== -->
+      <div class="about-content-section reveal">
+        <h3><i class="fas fa-sitemap"></i> How Prompts Are Organized</h3>
+        <p>
+          PromptAura is organized to make discovery easy and intuitive:
+        </p>
+        <ul>
+          <li><strong>Categories:</strong> Browse prompts by topic (Wedding, Portrait, Cinematic, Anime, etc.)</li>
+          <li><strong>Collections:</strong> Themed groups of prompts (Double Exposure, Girl Portrait, Wedding Collection)</li>
+          <li><strong>Trending:</strong> See what prompts are currently popular</li>
+          <li><strong>Featured Collections:</strong> Curated selections of high-quality prompts</li>
+          <li><strong>Search:</strong> Find specific prompts by title, category, or keywords</li>
+        </ul>
+        <div class="highlight-box">
+          <p><strong>📂 Each prompt includes:</strong> Title, short description, full prompt text, category, and recommended aspect ratio.</p>
+        </div>
+      </div>
+
+      <!-- ==========================================================
+           NEW: WHAT MAKES PROMPTAURA DIFFERENT
+           ========================================================== -->
+      <div class="about-content-section reveal">
+        <h3><i class="fas fa-star"></i> What Makes PromptAura Different?</h3>
+        <p>
+          There are many AI prompt websites. Here's what makes PromptAura stand out:
+        </p>
+        <ul>
+          <li><strong>Completely Free:</strong> No subscriptions, no credits, no hidden costs</li>
+          <li><strong>Curated Quality:</strong> Every prompt is tested before being added</li>
+          <li><strong>Educational Value:</strong> Guides and tips to help you improve</li>
+          <li><strong>Organized Discovery:</strong> Categories, collections, and search make finding prompts easy</li>
+          <li><strong>Clean, Premium Design:</strong> A professional user experience</li>
+          <li><strong>Regular Updates:</strong> New prompts added frequently</li>
+        </ul>
+      </div>
+
+      <!-- ==========================================================
+           NEW: OUR COMMITMENT
+           ========================================================== -->
+      <div class="about-content-section reveal">
+        <h3><i class="fas fa-shield-alt"></i> Our Commitment</h3>
+        <p>
+          We are committed to providing <strong>high-quality, useful, and original prompt resources</strong> 
+          to the AI art community. We believe in:
+        </p>
+        <ul>
+          <li><strong>Quality over Quantity:</strong> Every prompt is tested and optimized</li>
+          <li><strong>Accessibility:</strong> Free access for everyone</li>
+          <li><strong>Transparency:</strong> No fake claims or misleading information</li>
+          <li><strong>Community:</strong> Building a resource that helps creators</li>
+          <li><strong>Continuous Improvement:</strong> Always adding new prompts and improving the experience</li>
+        </ul>
+        <div class="highlight-box">
+          <p><strong>🤝 We're Here to Help:</strong> If you have questions or feedback, reach out through our <a href="contact.html" style="color: var(--primary); font-weight: 600;">Contact Page</a>.</p>
+        </div>
+      </div>
+
+      <!-- Mission, Vision, Values (Existing - Preserved) -->
+      <div class="about-grid reveal-stagger">
         <div class="about-card">
           <div class="about-card-icon">
             <i class="fas fa-bullseye"></i>
@@ -353,6 +863,7 @@
           <h3>Our Mission</h3>
           <p>To empower creators worldwide with the most comprehensive and high-quality AI prompts library, making AI art accessible to everyone.</p>
         </div>
+
         <div class="about-card">
           <div class="about-card-icon">
             <i class="fas fa-eye"></i>
@@ -360,6 +871,7 @@
           <h3>Our Vision</h3>
           <p>To become the world's leading platform for AI prompts, fostering creativity and innovation in the AI art community.</p>
         </div>
+
         <div class="about-card">
           <div class="about-card-icon">
             <i class="fas fa-heart"></i>
@@ -369,48 +881,78 @@
         </div>
       </div>
 
-      <div class="mission-section">
-        <h2>What Makes PromptAura Special?</h2>
-        <p>PromptAura is more than just a prompt library. We're a community of creators dedicated to pushing the boundaries of AI-generated art. Our prompts are carefully curated, tested, and optimized to help you get the best results from your favorite AI image generators like Midjourney, DALL-E, Stable Diffusion, and more.</p>
+      <!-- Mission Section (Existing - Enhanced) -->
+      <div class="mission-section reveal">
+        <h2><i class="fas fa-sparkles"></i> What Makes PromptAura Special?</h2>
+        <p>
+          PromptAura is more than just a prompt library. We're a community of creators 
+          dedicated to pushing the boundaries of AI-generated art. Our prompts are carefully 
+          curated, tested, and optimized to help you get the best results from your favorite 
+          AI image generators like Midjourney, DALL-E, Stable Diffusion, and more.
+        </p>
+        <p style="margin-top: 12px;">
+          We believe that <strong>great AI art starts with great prompts</strong>. That's why 
+          we spend time testing and refining each prompt before adding it to our library. 
+          Whether you're creating wedding portraits, cinematic scenes, or anime characters, 
+          PromptAura helps you achieve the results you envision.
+        </p>
       </div>
 
-      <div class="stats-grid">
+      <!-- Stats (Existing - Preserved) -->
+      <div class="stats-grid reveal-stagger">
         <div class="stat-item">
-          <div class="stat-number">1000+</div>
-          <div class="stat-label">AI Prompts</div>
+          <span class="stat-icon"><i class="fas fa-file-alt"></i></span>
+          <span class="stat-number" id="statPromptsAbout">1000+</span>
+          <span class="stat-label">AI Prompts</span>
         </div>
         <div class="stat-item">
-          <div class="stat-number">50+</div>
-          <div class="stat-label">Categories</div>
+          <span class="stat-icon"><i class="fas fa-tags"></i></span>
+          <span class="stat-number" id="statCategoriesAbout">50+</span>
+          <span class="stat-label">Categories</span>
         </div>
         <div class="stat-item">
-          <div class="stat-number">10K+</div>
-          <div class="stat-label">Happy Users</div>
+          <span class="stat-icon"><i class="fas fa-users"></i></span>
+          <span class="stat-number" id="statUsersAbout">10K+</span>
+          <span class="stat-label">Happy Users</span>
         </div>
         <div class="stat-item">
-          <div class="stat-number">24/7</div>
-          <div class="stat-label">Free Access</div>
+          <span class="stat-icon"><i class="fas fa-clock"></i></span>
+          <span class="stat-number">24/7</span>
+          <span class="stat-label">Free Access</span>
         </div>
       </div>
 
-      <div class="team-section">
-        <h2>What You Can Do at PromptAura?</h2>
-        <p>✨ Browse thousands of AI prompts across multiple categories<br>
-        📋 Copy prompts with one click<br>
-        🔍 Search and filter prompts by category, tags, or keywords<br>
-        💡 Get inspired by trending and featured collections<br>
-        🚀 Generate stunning AI images instantly</p>
+      <!-- Features / What You Can Do (Existing - Enhanced) -->
+      <div class="team-section reveal">
+        <h2><i class="fas fa-rocket"></i> What You Can Do at PromptAura?</h2>
+        <div class="features-list">
+          <span class="feature-tag"><i class="fas fa-search"></i> Browse 1000+ Prompts</span>
+          <span class="feature-tag"><i class="fas fa-copy"></i> Copy with One Click</span>
+          <span class="feature-tag"><i class="fas fa-filter"></i> Search &amp; Filter</span>
+          <span class="feature-tag"><i class="fas fa-fire"></i> Trending Collections</span>
+          <span class="feature-tag"><i class="fas fa-star"></i> Featured Collections</span>
+          <span class="feature-tag"><i class="fas fa-image"></i> Generate AI Images</span>
+          <span class="feature-tag"><i class="fas fa-book"></i> Learn Prompting Guides</span>
+          <span class="feature-tag"><i class="fas fa-share-alt"></i> Share Prompts</span>
+        </div>
+        <p style="margin-top: 20px; color: var(--text-secondary); font-size: 0.95rem;">
+          Explore, learn, and create — all for free. <a href="../index.html" style="color: var(--primary); font-weight: 600;">Start exploring today →</a>
+        </p>
       </div>
+
     </div>
+
   </main>
 
-  <!-- Footer -->
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-grid">
         <div class="footer-col">
           <div class="footer-logo">
-            <img src="assets/prompts/logo.png" alt="PromptAura Logo">
+            <img src="../assets/prompts/logo.png" alt="PromptAura Logo" width="42" height="42">
             <span>PromptAura</span>
           </div>
           <p class="footer-description">Your ultimate destination for high-quality AI prompts. Generate stunning images with our carefully curated prompts.</p>
@@ -435,27 +977,43 @@
             <li><a href="about.html">About Us</a></li>
             <li><a href="contact.html">Contact Us</a></li>
             <li><a href="privacy.html">Privacy Policy</a></li>
-            <li><a href="terms.html">Terms & Conditions</a></li>
+            <li><a href="terms.html">Terms &amp; Conditions</a></li>
             <li><a href="disclaimer.html">Disclaimer</a></li>
           </ul>
         </div>
-        
+        <div class="footer-col">
+          <h4>Stay Updated</h4>
+          <p class="footer-description" style="font-size: 13px;">
+            Get the latest prompts delivered to your inbox.
+          </p>
+          <div class="newsletter-form">
+            <input type="email" placeholder="Your email" aria-label="Email for newsletter">
+            <button><i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
       </div>
       <div class="footer-bottom">
-  <p>&copy; 2026 PromptAura. All Rights Reserved.</p>
-  <p class="developer-credit">
-    Developed with <i class="fas fa-heart" style="color: #ff4d4d;"></i> by 
-    <a href="pages/developer.html" class="developer-name" style="text-decoration: none; cursor: pointer; font-weight: 700; color: #7b5cff; transition: all 0.3s ease;">
-      Subhankar Bairagi
-    </a>
-  </p>
-  <p class="footer-tagline">PromptAura is a free AI prompt library where users can find prompts for AI image generation, cinematic prompts, wedding prompts, birthday prompts, anime prompts and more.</p>
-</div>
+        <p>&copy; 2026 PromptAura. All Rights Reserved.</p>
+        <p class="developer-credit">
+          Developed with <i class="fas fa-heart" style="color: #ff4d4d;"></i> by 
+          <a href="developer.html" class="developer-name">
+            Subhankar Bairagi
+          </a>
+        </p>
+        <p class="footer-tagline">PromptAura is a free AI prompt library where users can find prompts for AI image generation, cinematic prompts, wedding prompts, birthday prompts, anime prompts and more.</p>
+      </div>
     </div>
   </footer>
 
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
   <script src="../menu.js"></script>
   <script>
+    // ============================================================
+    // ABOUT PAGE - ENHANCED FUNCTIONALITY
+    // ============================================================
+
     // Search functionality
     const searchToggle = document.getElementById('searchToggleBtn');
     const searchExpand = document.getElementById('searchExpand');
@@ -464,7 +1022,7 @@
         searchExpand.classList.toggle('active');
       });
     }
-    
+
     const clearSearchBtn = document.getElementById('clearSearchBtn');
     const searchInput = document.getElementById('liveSearchInput');
     if (clearSearchBtn) {
@@ -474,6 +1032,92 @@
         if (suggestionsDiv) suggestionsDiv.classList.remove('active');
       });
     }
+
+    // ============================================================
+    // SCROLL REVEAL - ABOUT PAGE
+    // ============================================================
+    function initAboutScrollReveal() {
+      const reveals = document.querySelectorAll('.reveal');
+      const staggerContainers = document.querySelectorAll('.reveal-stagger');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      reveals.forEach(el => observer.observe(el));
+
+      staggerContainers.forEach(container => {
+        const children = container.children;
+        if (children.length > 0) {
+          const observerStagger = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                Array.from(children).forEach((child, index) => {
+                  setTimeout(() => {
+                    child.classList.add('visible');
+                  }, index * 80);
+                });
+              }
+            });
+          }, { threshold: 0.1 });
+          observerStagger.observe(container);
+        }
+      });
+    }
+
+    // ============================================================
+    // COUNT-UP FOR ABOUT PAGE STATS
+    // ============================================================
+    function animateAboutCountUps() {
+      const statPrompts = document.getElementById('statPromptsAbout');
+      const statCategories = document.getElementById('statCategoriesAbout');
+      const statUsers = document.getElementById('statUsersAbout');
+
+      function countUp(el, target, suffix = '+', duration = 2000) {
+        if (!el) return;
+        let start = 0;
+        const step = Math.ceil(target / (duration / 16));
+        let current = 0;
+        const timer = setInterval(() => {
+          current += step;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          el.textContent = current + suffix;
+        }, 16);
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const target = entry.target;
+            if (target.id === 'statPromptsAbout') countUp(target, 1000, '+', 2000);
+            if (target.id === 'statCategoriesAbout') countUp(target, 50, '+', 1500);
+            if (target.id === 'statUsersAbout') countUp(target, 10000, '+', 2500);
+            observer.unobserve(target);
+          }
+        });
+      }, { threshold: 0.5 });
+
+      if (statPrompts) observer.observe(statPrompts);
+      if (statCategories) observer.observe(statCategories);
+      if (statUsers) observer.observe(statUsers);
+    }
+
+    // ============================================================
+    // INITIALIZE
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(() => {
+        initAboutScrollReveal();
+        animateAboutCountUps();
+      }, 300);
+    });
   </script>
 </body>
 </html>

@@ -7,12 +7,12 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2051096973053893"
      crossorigin="anonymous"></script>
   
-  <!-- ========== PRIMARY META TAGS ========== -->
-  <title>Featured Collection - PromptAura | Free AI Prompt Collections</title>
-  <meta name="description" content="Browse featured AI prompt collections for Midjourney, DALL-E, and Stable Diffusion. Find the best prompts organized by themes and styles.">
+  <!-- ========== PRIMARY META TAGS (Dynamic) ========== -->
+  <title id="dynamicTitle">Featured Collection - PromptAura | Free AI Prompt Collections</title>
+  <meta id="dynamicDescription" name="description" content="Browse featured AI prompt collections for Midjourney, DALL-E, and Stable Diffusion. Find the best prompts organized by themes and styles.">
   <meta name="keywords" content="AI prompt collection, Midjourney collection, DALL-E collection, prompt themes, curated prompts, AI art collection">
   <meta name="author" content="PromptAura">
-  <meta name="theme-color" content="#7b5cff">
+  <meta name="theme-color" content="#7C3AED">
   
   <!-- ========== FAVICON ========== -->
   <link rel="icon" type="image/x-icon" href="../assets/icons/favicon.ico">
@@ -24,16 +24,16 @@
   <!-- ========== OPEN GRAPH / FACEBOOK ========== -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://promptauraai.com/pages/featured.html">
-  <meta property="og:title" content="Featured Collection - PromptAura | Free AI Prompt Collections">
-  <meta property="og:description" content="Browse featured AI prompt collections for Midjourney, DALL-E, and Stable Diffusion.">
-  <meta property="og:image" content="https://promptauraai.com/assets/icons/og-image.jpg">
+  <meta property="og:title" id="ogTitle" content="Featured Collection - PromptAura | Free AI Prompt Collections">
+  <meta property="og:description" id="ogDescription" content="Browse featured AI prompt collections for Midjourney, DALL-E, and Stable Diffusion.">
+  <meta property="og:image" id="ogImage" content="https://promptauraai.com/assets/icons/og-image.jpg">
   
   <!-- ========== TWITTER CARD ========== -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://promptauraai.com/pages/featured.html">
-  <meta name="twitter:title" content="Featured Collection - PromptAura | Free AI Prompt Collections">
-  <meta name="twitter:description" content="Browse featured AI prompt collections for Midjourney, DALL-E, and Stable Diffusion.">
-  <meta name="twitter:image" content="https://promptauraai.com/assets/icons/og-image.jpg">
+  <meta name="twitter:title" id="twitterTitle" content="Featured Collection - PromptAura | Free AI Prompt Collections">
+  <meta name="twitter:description" id="twitterDescription" content="Browse featured AI prompt collections for Midjourney, DALL-E, and Stable Diffusion.">
+  <meta name="twitter:image" id="twitterImage" content="https://promptauraai.com/assets/icons/og-image.jpg">
   
   <!-- ========== CANONICAL URL ========== -->
   <link rel="canonical" href="https://promptauraai.com/pages/featured.html">
@@ -46,173 +46,449 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   
   <style>
-    .collection-header {
-      background: linear-gradient(135deg, #7b5cff20, #a855f720);
-      padding: 40px 20px;
+    /* ============================================================
+       FEATURED COLLECTION PAGE - PREMIUM STYLES + CONTENT SECTIONS
+       ============================================================ */
+
+    /* Hero Section */
+    .collection-hero {
+      position: relative;
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(168, 85, 247, 0.08));
+      padding: 50px 20px;
       text-align: center;
       margin-bottom: 30px;
-      border-radius: 20px;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(124, 58, 237, 0.06);
     }
-    
-    .collection-header h1 {
-      font-size: 32px;
-      color: #111111;
-      margin-bottom: 10px;
+
+    .collection-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 60%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.04) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: floatBg 20s ease-in-out infinite;
     }
-    
-    .collection-header p {
-      color: #666666;
-      font-size: 16px;
+
+    .collection-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 40%;
+      height: 150%;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.03) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: floatBg 15s ease-in-out infinite reverse;
     }
-    
+
+    @keyframes floatBg {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.1) rotate(5deg); }
+    }
+
+    .collection-hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .collection-hero h1 .gradient-text {
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .collection-hero p {
+      font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+
+    .collection-hero .hero-badge {
+      display: inline-block;
+      background: var(--primary-glow-soft);
+      color: var(--primary);
+      padding: 4px 18px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .collection-hero .featured-star {
+      display: inline-block;
+      margin-left: 6px;
+      animation: starPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes starPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    /* Collection Info */
     .collection-info {
-      background: white;
-      padding: 20px;
-      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 16px 24px;
+      border-radius: var(--radius-md);
       margin-bottom: 30px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
     }
-    
+
     .collection-stats {
       display: flex;
       gap: 20px;
+      align-items: center;
     }
-    
+
     .stat {
       display: flex;
       align-items: center;
       gap: 8px;
-      color: #7b5cff;
+      color: var(--primary);
+      font-size: 0.95rem;
+      font-weight: 500;
     }
-    
+
+    .stat i {
+      font-size: 18px;
+    }
+
+    .stat .stat-count {
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .breadcrumb a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .breadcrumb a:hover {
+      color: var(--primary-light);
+      text-decoration: underline;
+    }
+    .breadcrumb span {
+      color: var(--text-light);
+    }
+    .breadcrumb .separator {
+      color: var(--border-light);
+    }
+
+    /* Back Button */
     .back-button {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: white;
-      border: 1px solid #e0e0e0;
-      padding: 10px 20px;
-      border-radius: 50px;
-      color: #555555;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 10px 22px;
+      border-radius: var(--radius-full);
+      color: var(--text-secondary);
       text-decoration: none;
       margin-bottom: 20px;
-      transition: all 0.2s;
+      transition: all 0.3s ease;
+      font-weight: 500;
     }
-    
+
     .back-button:hover {
-      background: #f5f6f8;
-      transform: translateX(-3px);
+      background: var(--bg-white);
+      transform: translateX(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary);
+      color: var(--primary);
     }
-    
+
+    /* ============================================================
+       COLLECTION CONTENT SECTIONS - NEW FOR ADSENSE VALUE
+       ============================================================ */
+
+    .collection-content-section {
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(8px);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .collection-content-section:hover {
+      border-color: rgba(124, 58, 237, 0.1);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .collection-content-section h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .collection-content-section h3 i {
+      color: var(--primary);
+      font-size: 18px;
+    }
+
+    .collection-content-section p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 8px;
+    }
+
+    .collection-content-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0;
+    }
+
+    .collection-content-section ul li {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      padding: 4px 0 4px 24px;
+      position: relative;
+    }
+
+    .collection-content-section ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .collection-content-section .highlight-box {
+      background: var(--primary-glow-soft);
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--primary);
+      margin-top: 10px;
+    }
+
+    .collection-content-section .highlight-box p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    .collection-content-section .highlight-box strong {
+      color: var(--text-primary);
+    }
+
+    /* Related Collections Tags */
+    .related-collections-tags {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .related-collection-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .related-collection-tag:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-2px);
+      background: var(--primary-glow-soft);
+    }
+
+    .related-collection-tag i {
+      color: var(--primary);
+    }
+
+    /* No Results */
     .no-results {
       text-align: center;
       padding: 60px 20px;
-      background: white;
-      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.3);
     }
-    
+
     .no-results i {
-      font-size: 48px;
-      color: #cccccc;
-      margin-bottom: 20px;
+      font-size: 64px;
+      color: var(--text-light);
+      margin-bottom: 16px;
+      opacity: 0.5;
     }
-    
+
+    .no-results h3 {
+      font-size: 1.3rem;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .no-results p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .no-results a {
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .no-results a:hover {
+      color: var(--primary-light);
+      text-decoration: underline;
+    }
+
+    /* ========== ENHANCED SEARCH SUGGESTIONS ========== */
     .search-suggestions {
       max-width: 600px;
       margin: 10px auto 0;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-xl);
       display: none;
       overflow: hidden;
       z-index: 1001;
     }
-    
+
     .search-suggestions.active {
       display: block;
+      animation: slideDown 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    
+
+    @keyframes slideDown {
+      0% { opacity: 0; transform: translateY(-8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
     .suggestions-scroll-container {
       max-height: 400px;
       overflow-y: auto;
       overflow-x: hidden;
     }
-    
+
     .suggestions-scroll-container::-webkit-scrollbar {
       width: 6px;
     }
-    
+
     .suggestions-scroll-container::-webkit-scrollbar-track {
-      background: #f0f2f5;
+      background: var(--bg-light);
       border-radius: 10px;
     }
-    
+
     .suggestions-scroll-container::-webkit-scrollbar-thumb {
-      background: linear-gradient(135deg, #7b5cff, #a855f7);
+      background: var(--primary-gradient);
       border-radius: 10px;
     }
-    
+
     .suggestion-item {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 12px 15px;
+      padding: 12px 16px;
       cursor: pointer;
-      border-bottom: 1px solid #f0f2f5;
+      border-bottom: 1px solid var(--border-light);
       transition: background 0.2s ease;
     }
-    
+
     .suggestion-item:last-child {
       border-bottom: none;
     }
-    
+
     .suggestion-item:hover {
-      background: #f5f6f8;
+      background: var(--primary-glow-soft);
     }
-    
+
     .suggestion-thumbnail {
       width: 48px;
       height: 48px;
-      border-radius: 8px;
+      border-radius: var(--radius-sm);
       object-fit: cover;
       flex-shrink: 0;
-      background: #f0f2f5;
+      background: var(--bg-light);
     }
-    
+
     .suggestion-info {
       flex: 1;
       min-width: 0;
     }
-    
+
     .suggestion-title {
       font-size: 15px;
       font-weight: 600;
-      color: #111111;
-      margin-bottom: 4px;
+      color: var(--text-primary);
       line-height: 1.3;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    
+
     .suggestion-title strong {
-      color: #7b5cff;
+      color: var(--primary);
     }
-    
+
     .suggestion-category {
       display: inline-block;
       font-size: 11px;
       font-weight: 500;
-      color: #7b5cff;
-      background: #f0f2f5;
-      padding: 2px 8px;
-      border-radius: 20px;
+      color: var(--primary);
+      background: var(--primary-glow-soft);
+      padding: 2px 10px;
+      border-radius: var(--radius-full);
       margin-top: 4px;
     }
-    
+
     .suggestion-match {
       font-size: 12px;
-      color: #888888;
+      color: var(--text-light);
       margin-top: 4px;
       display: -webkit-box;
       -webkit-line-clamp: 1;
@@ -220,97 +496,146 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
-    
+
     .suggestion-match strong {
-      color: #7b5cff;
+      color: var(--primary);
       font-weight: 600;
     }
-    
+
     .suggestion-no-results {
-      padding: 20px;
+      padding: 24px;
       text-align: center;
-      color: #888888;
+      color: var(--text-light);
       font-size: 14px;
     }
-    
+
+    /* Toast Message */
     .toast-message {
       position: fixed;
       bottom: 30px;
       left: 50%;
       transform: translateX(-50%);
-      background: #111111;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 50px;
+      padding: 14px 28px;
+      border-radius: var(--radius-full);
       z-index: 2000;
-      animation: slideUp 0.3s ease;
-    }
-    
-    @keyframes slideUp {
-      from { transform: translateX(-50%) translateY(100px); opacity: 0; }
-      to { transform: translateX(-50%) translateY(0); opacity: 1; }
-    }
-    
-    @media (max-width: 768px) {
-      .collection-header h1 { font-size: 24px; }
-      .suggestion-thumbnail { width: 40px; height: 40px; }
-      .suggestion-title { font-size: 13px; }
-      .suggestions-scroll-container { max-height: 300px; }
-    }
-
-    .developer-credit {
-      font-size: 13px;
-      color: #888888;
-      margin-top: 15px;
-      margin-bottom: 10px;
+      animation: toastSlide 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow-xl);
+      font-weight: 500;
+      font-size: 0.95rem;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 5px;
-      flex-wrap: wrap;
+      gap: 10px;
     }
 
-    .developer-credit i {
-      animation: heartbeat 1.5s ease infinite;
-      margin: 0 2px;
+    .toast-message.success {
+      background: #10b981;
+      color: white;
     }
 
-    .developer-name {
-      font-weight: 600;
-      background: linear-gradient(135deg, #7b5cff, #a855f7);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      transition: all 0.3s ease;
-      cursor: default;
+    .toast-message.error {
+      background: #ef4444;
+      color: white;
     }
 
-    .developer-name:hover {
-      background: linear-gradient(135deg, #a855f7, #7b5cff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      transform: scale(1.02);
+    @keyframes toastSlide {
+      0% { transform: translateX(-50%) translateY(100px); opacity: 0; }
+      100% { transform: translateX(-50%) translateY(0); opacity: 1; }
     }
 
-    @keyframes heartbeat {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.15); }
-      100% { transform: scale(1); }
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+
+    @media (max-width: 768px) {
+      .collection-hero {
+        padding: 32px 16px;
+        border-radius: 16px;
+      }
+      .collection-info {
+        padding: 14px 18px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .collection-stats {
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .stat {
+        font-size: 0.85rem;
+      }
+      .suggestion-thumbnail {
+        width: 40px;
+        height: 40px;
+      }
+      .suggestion-title {
+        font-size: 13px;
+      }
+      .suggestions-scroll-container {
+        max-height: 300px;
+      }
+      .back-button {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+      .toast-message {
+        padding: 12px 20px;
+        font-size: 0.85rem;
+        max-width: 90%;
+        white-space: normal;
+      }
+      .collection-content-section {
+        padding: 18px 16px;
+      }
+      .breadcrumb {
+        font-size: 12px;
+      }
     }
 
-    @media (max-width: 640px) {
-      .developer-credit { font-size: 11px; flex-direction: row; flex-wrap: wrap; }
-      .developer-name { display: inline-block; }
+    @media (max-width: 480px) {
+      .collection-hero {
+        padding: 24px 12px;
+      }
+      .collection-hero h1 {
+        font-size: 1.5rem;
+      }
+      .collection-info {
+        padding: 12px 14px;
+      }
+      .stat {
+        font-size: 0.8rem;
+        gap: 4px;
+      }
+      .stat i {
+        font-size: 14px;
+      }
+      .collection-content-section {
+        padding: 14px 12px;
+      }
+    }
+
+    /* ============================================================
+       REDUCED MOTION
+       ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      .collection-hero::before,
+      .collection-hero::after {
+        animation: none !important;
+      }
+      .collection-hero .featured-star {
+        animation: none !important;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
   <header class="site-header">
     <div class="header-container">
-      <div class="logo">
-        <img src="../assets/prompts/logo.png" alt="PromptAura Logo">
+      <div class="logo" onclick="window.location.href='../index.html'">
+        <img src="../assets/prompts/logo.png" alt="PromptAura Logo" width="42" height="42">
         <span>PromptAura</span>
       </div>
       <div class="header-actions">
@@ -335,11 +660,14 @@
     </div>
   </header>
 
+  <!-- ============================================================
+       SLIDING MENU
+       ============================================================ -->
   <div class="menu-overlay" id="menuOverlay"></div>
   <div class="sliding-menu" id="slidingMenu">
     <div class="menu-header">
       <div class="menu-logo">
-        <img src="../assets/prompts/logo.png" alt="PromptAura Logo">
+        <img src="../assets/prompts/logo.png" alt="PromptAura Logo" width="42" height="42">
         <span>PromptAura</span>
       </div>
       <button class="menu-close" id="menuCloseBtn">
@@ -381,7 +709,7 @@
         </a>
         <a href="../terms.html" class="menu-item">
           <i class="fas fa-file-contract"></i>
-          <span>Terms & Conditions</span>
+          <span>Terms &amp; Conditions</span>
         </a>
         <a href="../disclaimer.html" class="menu-item">
           <i class="fas fa-exclamation-triangle"></i>
@@ -391,38 +719,73 @@
     </div>
   </div>
 
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
   <main class="main-container">
     <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb" id="breadcrumbNav">
+        <a href="../index.html">Home</a>
+        <span class="separator">›</span>
+        <a href="../index.html#featuredCollections">Featured</a>
+        <span class="separator">›</span>
+        <span id="breadcrumbTitle">Loading...</span>
+      </nav>
+
+      <!-- Back Button -->
       <a href="../index.html" class="back-button">
         <i class="fas fa-arrow-left"></i> Back to Home
       </a>
-      
-      <div class="collection-header" id="collectionHeader">
+
+      <!-- Collection Hero -->
+      <div class="collection-hero reveal">
+        <span class="hero-badge">
+          <i class="fas fa-star" style="color: #f59e0b;"></i> Featured
+          <span class="featured-star">⭐</span>
+        </span>
         <h1 id="collectionTitle">Loading...</h1>
         <p id="collectionDescription">Browse prompts in this featured collection</p>
       </div>
-      
-      <div class="collection-info" id="collectionInfo">
+
+      <!-- Collection Info -->
+      <div class="collection-info reveal">
         <div class="collection-stats" id="collectionStats">
           <div class="stat">
             <i class="fas fa-file-alt"></i>
-            <span id="promptCount">0 prompts</span>
+            <span class="stat-count" id="promptCount">0 prompts</span>
           </div>
         </div>
       </div>
-      
-      <div class="prompts-grid" id="promptsGrid"></div>
-      
+
+      <!-- ==========================================================
+           COLLECTION CONTENT SECTIONS - ADSENSE VALUE
+           ========================================================== -->
+      <div id="collectionContentSections">
+        <!-- Dynamic content inserted by JavaScript -->
+      </div>
+
+      <!-- Prompts Grid -->
+      <div class="prompts-grid" id="promptsGrid">
+        <!-- Dynamic content -->
+      </div>
+
+      <!-- Pagination -->
       <div class="pagination-container" id="paginationContainer"></div>
+
     </div>
   </main>
 
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-grid">
         <div class="footer-col">
           <div class="footer-logo">
-            <img src="../assets/prompts/logo.png" alt="PromptAura Logo">
+            <img src="../assets/prompts/logo.png" alt="PromptAura Logo" width="42" height="42">
             <span>PromptAura</span>
           </div>
           <p class="footer-description">Your ultimate destination for high-quality AI prompts. Generate stunning images with our carefully curated prompts.</p>
@@ -448,16 +811,26 @@
             <li><a href="../about.html">About Us</a></li>
             <li><a href="../contact.html">Contact Us</a></li>
             <li><a href="../privacy.html">Privacy Policy</a></li>
-            <li><a href="../terms.html">Terms & Conditions</a></li>
+            <li><a href="../terms.html">Terms &amp; Conditions</a></li>
             <li><a href="../disclaimer.html">Disclaimer</a></li>
           </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Stay Updated</h4>
+          <p class="footer-description" style="font-size: 13px;">
+            Get the latest prompts delivered to your inbox.
+          </p>
+          <div class="newsletter-form">
+            <input type="email" placeholder="Your email" aria-label="Email for newsletter">
+            <button><i class="fas fa-arrow-right"></i></button>
+          </div>
         </div>
       </div>
       <div class="footer-bottom">
         <p>&copy; 2026 PromptAura. All Rights Reserved.</p>
         <p class="developer-credit">
           Developed with <i class="fas fa-heart" style="color: #ff4d4d;"></i> by 
-          <a href="developer.html" class="developer-name" style="text-decoration: none; cursor: pointer; font-weight: 700; color: #7b5cff; transition: all 0.3s ease;">
+          <a href="developer.html" class="developer-name">
             Subhankar Bairagi
           </a>
         </p>
@@ -466,15 +839,24 @@
     </div>
   </footer>
 
+  <!-- ============================================================
+       STICKY BOTTOM AD
+       ============================================================ -->
   <div class="sticky-bottom-ad mobile-only" id="stickyBottomAd">
     <div class="ad-label">Advertisement</div>
     <div class="ad-placeholder">Mobile Sticky Ad</div>
     <button id="closeStickyAd" class="close-sticky"><i class="fas fa-times"></i></button>
   </div>
 
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
   <script src="../menu.js"></script>
   <script>
-    // ========== FEATURED COLLECTION PAGE ==========
+    // ============================================================
+    // FEATURED COLLECTION PAGE - FULL FUNCTIONALITY + CONTENT
+    // ============================================================
+
     const urlParams = new URLSearchParams(window.location.search);
     const collectionId = urlParams.get('id');
     
@@ -485,9 +867,219 @@
     let searchResults = [];
     let currentSearchQuery = '';
     let collectionInfo = null;
+    let allCollections = [];
 
-    // ========== SCROLL POSITION & PAGE FUNCTIONS (SAME AS script.js) ==========
-    // Save scroll position AND current page
+    // ============================================================
+    // UTILITY FUNCTIONS
+    // ============================================================
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function escapeRegex(string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    function highlightMatch(text, query) {
+      if (!query) return escapeHtml(text);
+      const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
+      return escapeHtml(text).replace(regex, '<strong>$1</strong>');
+    }
+
+    function getAspectRatio(ratio) {
+      if (!ratio) return '16 / 9';
+      switch(ratio) {
+        case '16:9': return '16 / 9';
+        case '9:16': return '9 / 16';
+        case '4:5': return '4 / 5';
+        case '1:1': return '1 / 1';
+        default: return '16 / 9';
+      }
+    }
+
+    function fixImagePath(imageUrl) {
+      if (!imageUrl) return 'https://via.placeholder.com/400x300?text=No+Image';
+      if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) return imageUrl;
+      if (imageUrl.startsWith('../')) return imageUrl;
+      if (imageUrl.startsWith('assets/')) return '../' + imageUrl;
+      return '../' + imageUrl;
+    }
+
+    function getCollectionDisplayName(name) {
+      const displayNames = {
+        'girl': 'Girl Portrait',
+        'double': 'Double Exposure',
+        'aura': 'Aura Collection',
+        'birthday': 'Birthday Collection',
+        'divine': 'Divine Collection',
+        'signature': 'Signature Collection',
+        'wedding': 'Wedding Collection',
+        'men': 'Men Portrait',
+        'lord': 'Lord Collection',
+        'name': 'Name Collection'
+      };
+      return displayNames[name] || name.charAt(0).toUpperCase() + name.slice(1);
+    }
+
+    // ============================================================
+    // UPDATE META TAGS
+    // ============================================================
+
+    function updateCollectionMetaTags(title, description, count) {
+      const displayTitle = title || 'Featured Collection';
+      const fullTitle = `⭐ ${displayTitle} - Featured AI Prompt Collection | PromptAura`;
+      const fullDescription = description || `Browse ${count || 0} curated featured AI prompts in the ${displayTitle} collection. Free to use for Midjourney, DALL-E, and Stable Diffusion.`;
+      
+      document.title = fullTitle;
+      document.querySelector('meta[name="description"]').content = fullDescription;
+      document.querySelector('meta[property="og:title"]').content = fullTitle;
+      document.querySelector('meta[property="og:description"]').content = fullDescription;
+      document.querySelector('meta[name="twitter:title"]').content = fullTitle;
+      document.querySelector('meta[name="twitter:description"]').content = fullDescription;
+      
+      document.getElementById('breadcrumbTitle').textContent = displayTitle;
+    }
+
+    // ============================================================
+    // GENERATE COLLECTION CONTENT SECTIONS
+    // ============================================================
+
+    function generateCollectionContent(title, count, collectionId) {
+      const displayName = getCollectionDisplayName(collectionId);
+      
+      // Get related collections (exclude current)
+      const related = allCollections.filter(c => c.id !== collectionId).slice(0, 4);
+      
+      let relatedHTML = '';
+      if (related.length > 0) {
+        relatedHTML = `
+          <div class="related-collections-tags">
+            ${related.map(c => `
+              <a href="featured.html?id=${c.id}" class="related-collection-tag">
+                <i class="fas fa-star"></i> ${c.title || getCollectionDisplayName(c.id)}
+              </a>
+            `).join('')}
+          </div>
+        `;
+      }
+      
+      // Collection-specific descriptions based on ID
+      const collectionDescriptions = {
+        'girl': {
+          about: 'This featured collection showcases stunning AI-generated portraits of women with diverse styles, expressions, and settings. From elegant studio portraits to artistic conceptual photography, these prompts are hand-picked for their exceptional quality and versatility.',
+          images: 'Beautiful female portraits, fashion photography, artistic portraits, character designs',
+          audience: 'portrait photographers, fashion designers, character artists, digital painters'
+        },
+        'double': {
+          about: 'Double exposure is a photographic technique where two images are combined into one. This featured collection presents the best AI prompts for creating stunning double exposure portraits where human silhouettes blend with natural landscapes, cityscapes, or abstract patterns.',
+          images: 'Double exposure portraits, silhouette overlays, nature blends, artistic composites',
+          audience: 'graphic designers, portrait photographers, digital artists, creative directors'
+        },
+        'wedding': {
+          about: 'This featured collection brings together the most romantic and cinematic AI prompts for wedding photography and portraiture. From candid moments to dramatic posed shots, these prompts capture the beauty and emotion of wedding celebrations.',
+          images: 'Wedding portraits, bridal shots, couple photography, wedding ceremonies',
+          audience: 'wedding photographers, couples, event planners, photography enthusiasts'
+        },
+        'birthday': {
+          about: 'Celebrate special moments with this featured collection of birthday-themed AI prompts. From colorful party scenes to elegant portrait photography, these hand-picked prompts help create memorable birthday images.',
+          images: 'Birthday celebrations, cake smash, party scenes, portrait photography',
+          audience: 'event photographers, parents, party planners, photographers'
+        },
+        'divine': {
+          about: 'This featured collection features ethereal and spiritual AI prompts inspired by divine, celestial, and sacred themes. These premium prompts create images with a transcendent and otherworldly quality.',
+          images: 'Divine portraits, celestial scenes, spiritual imagery, ethereal compositions',
+          audience: 'spiritual artists, fantasy creators, concept artists, photographers'
+        }
+      };
+      
+      const desc = collectionDescriptions[collectionId] || {
+        about: `This featured collection presents the best ${displayName}-themed AI prompts, carefully curated to help you create stunning, high-quality images with AI image generators. Each prompt is hand-picked for its exceptional quality.`,
+        images: `${displayName} themed images, creative compositions, artistic photography`,
+        audience: 'photographers, designers, digital artists, creative professionals'
+      };
+      
+      return `
+        <!-- What This Featured Collection Is About -->
+        <div class="collection-content-section reveal">
+          <h3><i class="fas fa-star" style="color: #f59e0b;"></i> What This Featured Collection Is About</h3>
+          <p>${desc.about}</p>
+          <div class="highlight-box">
+            <p><strong>⭐ ${count} Premium Prompts Available</strong> — Browse all featured prompts below to find the perfect match for your project.</p>
+          </div>
+        </div>
+
+        <!-- What Type of Images You Can Create -->
+        <div class="collection-content-section reveal">
+          <h3><i class="fas fa-image"></i> What Type of Images You Can Create</h3>
+          <p>With this featured collection, you can create:</p>
+          <ul>
+            <li><strong>${desc.images}</strong></li>
+            <li>High-quality, professional-grade AI images</li>
+            <li>Consistent visual styles across multiple prompts</li>
+            <li>Images suitable for portfolios, social media, and creative projects</li>
+          </ul>
+        </div>
+
+        <!-- Who Should Use These Prompts -->
+        <div class="collection-content-section reveal">
+          <h3><i class="fas fa-users"></i> Who Should Use These Featured Prompts</h3>
+          <p>This featured collection is ideal for:</p>
+          <ul>
+            <li><strong>${desc.audience}</strong></li>
+            <li>AI art enthusiasts exploring new creative possibilities</li>
+            <li>Content creators looking for consistent visual themes</li>
+            <li>Anyone interested in ${displayName.toLowerCase()} themed AI imagery</li>
+          </ul>
+        </div>
+
+        <!-- How To Use These Prompts -->
+        <div class="collection-content-section reveal">
+          <h3><i class="fas fa-play-circle"></i> How To Use These Featured Prompts</h3>
+          <p>Follow these steps to get started with this featured collection:</p>
+          <ul>
+            <li><strong>Step 1:</strong> Browse the featured prompts below and select one that matches your vision</li>
+            <li><strong>Step 2:</strong> Click on any prompt to view its full details and copy the prompt text</li>
+            <li><strong>Step 3:</strong> Paste the prompt into your preferred AI image generator</li>
+            <li><strong>Step 4:</strong> Adjust settings like aspect ratio and quality for best results</li>
+            <li><strong>Step 5:</strong> Generate, evaluate, and refine as needed</li>
+          </ul>
+          <div class="highlight-box">
+            <p><strong>💡 Pro Tip:</strong> Featured prompts are selected for their exceptional quality. Experiment with different prompts to discover new creative possibilities.</p>
+          </div>
+        </div>
+
+        <!-- Tips For Better Results -->
+        <div class="collection-content-section reveal">
+          <h3><i class="fas fa-lightbulb"></i> Tips For Better Results</h3>
+          <p>Get the most out of this featured collection with these tips:</p>
+          <ul>
+            <li><strong>Start with the base prompt:</strong> Use the prompt as-is first to see the baseline result</li>
+            <li><strong>Experiment with variations:</strong> Modify details like colors, lighting, or composition</li>
+            <li><strong>Use consistent settings:</strong> Keep the same aspect ratio and quality settings for a cohesive look</li>
+            <li><strong>Combine styles:</strong> Mix elements from different prompts in this collection</li>
+            <li><strong>Iterate and refine:</strong> Generate multiple versions and choose the best</li>
+          </ul>
+        </div>
+
+        <!-- Related Collections -->
+        ${relatedHTML ? `
+        <div class="collection-content-section reveal">
+          <h3><i class="fas fa-folder-open"></i> Explore More Featured Collections</h3>
+          <p>Discover similar or related featured collections:</p>
+          ${relatedHTML}
+        </div>
+        ` : ''}
+      `;
+    }
+
+    // ============================================================
+    // SCROLL POSITION & PAGE FUNCTIONS
+    // ============================================================
+
     function saveScrollPositionAndPage() {
       sessionStorage.setItem('featuredScrollPosition', window.scrollY);
       sessionStorage.setItem('featuredCurrentPage', currentPage);
@@ -496,7 +1088,6 @@
       sessionStorage.setItem('featuredSearchQuery', currentSearchQuery);
     }
 
-    // Restore scroll position AND current page
     function restoreScrollPositionAndPage() {
       const savedPosition = sessionStorage.getItem('featuredScrollPosition');
       const savedPage = sessionStorage.getItem('featuredCurrentPage');
@@ -525,39 +1116,105 @@
       }
     }
 
-    // Save only scroll position (for navigation within same page)
     function saveScrollPosition() {
       sessionStorage.setItem('featuredScrollPosition', window.scrollY);
       sessionStorage.setItem('featuredCollectionId', collectionId);
     }
 
-    function escapeHtml(text) {
-      if (!text) return '';
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
+    // ============================================================
+    // SCROLL REVEAL
+    // ============================================================
+
+    function initFeaturedScrollReveal() {
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+      reveals.forEach(el => observer.observe(el));
     }
 
-    function getAspectRatio(ratio) {
-      if (!ratio) return '16 / 9';
-      switch(ratio) {
-        case '16:9': return '16 / 9';
-        case '9:16': return '9 / 16';
-        case '4:5': return '4 / 5';
-        case '1:1': return '1 / 1';
-        default: return '16 / 9';
+    // ============================================================
+    // STICKY AD CLOSE
+    // ============================================================
+
+    function initStickyAdClose() {
+      const closeBtn = document.getElementById('closeStickyAd');
+      const stickyAd = document.getElementById('stickyBottomAd');
+      
+      if (closeBtn && stickyAd) {
+        closeBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          stickyAd.style.display = 'none';
+          sessionStorage.setItem('stickyAdClosed_featured', 'true');
+        });
+        if (sessionStorage.getItem('stickyAdClosed_featured') === 'true') {
+          stickyAd.style.display = 'none';
+        }
       }
     }
 
-    function highlightMatch(text, query) {
-      if (!query) return escapeHtml(text);
-      const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
-      return escapeHtml(text).replace(regex, '<strong>$1</strong>');
+    // ============================================================
+    // COPY TO CLIPBOARD
+    // ============================================================
+
+    function copyToClipboard(text, buttonElement = null) {
+      navigator.clipboard.writeText(text).then(() => {
+        let btn = buttonElement;
+        if (!btn && window.event && window.event.target) {
+          btn = window.event.target;
+        }
+        if (btn && btn.classList && btn.classList.contains('btn-copy')) {
+          const originalText = btn.textContent;
+          btn.textContent = 'Copied! ✓';
+          setTimeout(() => {
+            btn.textContent = originalText;
+          }, 1500);
+        }
+      }).catch(() => {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.top = '-9999px';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          showToast('Prompt copied to clipboard!', 'success');
+        } catch (e) {
+          showToast('Failed to copy prompt', 'error');
+        }
+        document.body.removeChild(textarea);
+      });
     }
 
-    function escapeRegex(string) {
-      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    // ============================================================
+    // TOAST
+    // ============================================================
+
+    function showToast(message, type = 'success') {
+      const existingToast = document.querySelector('.toast-message');
+      if (existingToast) existingToast.remove();
+      
+      const toast = document.createElement('div');
+      toast.className = `toast-message ${type}`;
+      const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+      toast.innerHTML = `<i class="fas ${icon}"></i> ${message}`;
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.remove();
+      }, 3000);
     }
+
+    // ============================================================
+    // FUZZY SEARCH
+    // ============================================================
 
     function fuzzyMatch(str, pattern) {
       str = str.toLowerCase();
@@ -624,157 +1281,9 @@
         .map(item => item.prompt);
     }
 
-    function initStickyAdClose() {
-      const closeBtn = document.getElementById('closeStickyAd');
-      const stickyAd = document.getElementById('stickyBottomAd');
-      if (closeBtn && stickyAd) {
-        closeBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          stickyAd.style.display = 'none';
-          sessionStorage.setItem('stickyAdClosed_featured', 'true');
-        });
-        if (sessionStorage.getItem('stickyAdClosed_featured') === 'true') {
-          stickyAd.style.display = 'none';
-        }
-      }
-    }
-
-    function copyToClipboard(text, buttonElement = null) {
-      navigator.clipboard.writeText(text).then(() => {
-        let btn = buttonElement;
-        if (!btn && window.event && window.event.target) {
-          btn = window.event.target;
-        }
-        if (btn && btn.classList && btn.classList.contains('btn-copy')) {
-          const originalText = btn.textContent;
-          btn.textContent = 'Copied! ✓';
-          setTimeout(() => { btn.textContent = originalText; }, 1500);
-        }
-      }).catch((err) => {
-        console.error('Clipboard write failed:', err);
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        textarea.style.position = 'fixed';
-        textarea.style.top = '-9999px';
-        textarea.style.left = '-9999px';
-        document.body.appendChild(textarea);
-        textarea.select();
-        try {
-          document.execCommand('copy');
-          alert('Prompt copied to clipboard!');
-        } catch (e) {
-          alert('Failed to copy prompt. Please copy manually.');
-        }
-        document.body.removeChild(textarea);
-      });
-    }
-
-    // ========== LOAD FEATURED COLLECTION ==========
-    async function loadFeaturedCollection() {
-      try {
-        document.getElementById('collectionTitle').textContent = 'Loading...';
-        document.getElementById('promptCount').textContent = 'Loading...';
-        
-        const response = await fetch('../data/collections.json');
-        if (!response.ok) {
-          throw new Error('collections.json not found (HTTP ' + response.status + ')');
-        }
-        
-        const collectionsData = await response.json();
-        
-        collectionInfo = collectionsData.find(c => c.id === collectionId);
-        
-        if (!collectionInfo) {
-          const availableIds = collectionsData.map(c => c.id).join(', ');
-          throw new Error('Collection "' + collectionId + '" not found. Available: ' + availableIds);
-        }
-        
-        const collectionFileRes = await fetch('../' + collectionInfo.file);
-        if (!collectionFileRes.ok) {
-          throw new Error('Collection file not found: ' + collectionInfo.file);
-        }
-        
-        collectionPrompts = await collectionFileRes.json();
-        
-        collectionPrompts = collectionPrompts.map(p => {
-          if (p.image) {
-            if (p.image.startsWith('assets/')) {
-              p.image = '../' + p.image;
-            } else if (p.image.startsWith('../')) {
-              p.image = p.image;
-            } else {
-              p.image = '../' + p.image;
-            }
-          }
-          return p;
-        });
-        
-        document.getElementById('collectionTitle').textContent = collectionInfo.title || 'Featured Collection';
-        document.getElementById('collectionDescription').textContent = `Browse ${collectionPrompts.length} amazing prompts in this featured collection`;
-        document.getElementById('promptCount').textContent = `${collectionPrompts.length} prompts`;
-        
-        // ✅ FIXED: Restore scroll position AND page BEFORE rendering (like script.js)
-        restoreScrollPositionAndPage();
-        
-        renderPrompts();
-        setupSearch();
-        setupEventListeners();
-        initStickyAdClose();
-        
-      } catch (error) {
-        console.error('Error loading featured collection:', error);
-        showError('Failed to load featured collection: ' + error.message);
-      }
-    }
-
-    function getCurrentPrompts() {
-      if (isSearchMode && currentSearchQuery) {
-        return searchResults;
-      }
-      return collectionPrompts;
-    }
-
-    function performSearch(query) {
-      if (!query || query.trim() === '') {
-        isSearchMode = false;
-        currentSearchQuery = '';
-        searchResults = [];
-        currentPage = 1;
-        renderPrompts();
-        return;
-      }
-      
-      const results = collectionPrompts.filter(p => {
-        const title = p.title.toLowerCase();
-        const shortPrompt = p.short_prompt.toLowerCase();
-        const fullPrompt = p.full_prompt.toLowerCase();
-        const category = p.category.toLowerCase();
-        const tags = p.tags ? p.tags.map(t => t.toLowerCase()) : [];
-        
-        return title.includes(query) ||
-               shortPrompt.includes(query) ||
-               fullPrompt.includes(query) ||
-               category.includes(query) ||
-               tags.some(tag => tag.includes(query));
-      });
-      
-      searchResults = results;
-      isSearchMode = true;
-      currentSearchQuery = query;
-      currentPage = 1;
-      renderPrompts();
-    }
-
-    function clearSearch() {
-      isSearchMode = false;
-      currentSearchQuery = '';
-      searchResults = [];
-      currentPage = 1;
-      renderPrompts();
-      const searchInput = document.getElementById('liveSearchInput');
-      if (searchInput) searchInput.value = '';
-    }
+    // ============================================================
+    // RENDER PAGINATION
+    // ============================================================
 
     function renderPagination(totalItems) {
       const totalPages = Math.ceil(totalItems / promptsPerPage);
@@ -786,14 +1295,12 @@
       }
       
       let paginationHTML = '<div class="pagination">';
-      
       paginationHTML += `<button class="page-btn prev-btn" ${currentPage === 1 ? 'disabled' : ''} data-page="${currentPage - 1}">
         <i class="fas fa-chevron-left"></i>
       </button>`;
       
       let startPage = Math.max(1, currentPage - 2);
       let endPage = Math.min(totalPages, startPage + 4);
-      
       if (endPage - startPage < 4) {
         startPage = Math.max(1, endPage - 4);
       }
@@ -815,14 +1322,12 @@
       paginationHTML += `<button class="page-btn next-btn" ${currentPage === totalPages ? 'disabled' : ''} data-page="${currentPage + 1}">
         <i class="fas fa-chevron-right"></i>
       </button>`;
-      
       paginationHTML += '</div>';
       paginationContainer.innerHTML = paginationHTML;
       
       document.querySelectorAll('.page-btn').forEach(btn => {
         if (!btn.disabled && btn.dataset.page) {
           btn.addEventListener('click', () => {
-            // ✅ FIXED: Save scroll position AND page before pagination (like script.js)
             saveScrollPositionAndPage();
             currentPage = parseInt(btn.dataset.page);
             renderPrompts();
@@ -832,14 +1337,16 @@
       });
     }
 
+    // ============================================================
+    // RENDER PROMPTS
+    // ============================================================
+
     function renderPrompts() {
-      let promptsList = getCurrentPrompts();
+      let promptsList = isSearchMode ? searchResults : collectionPrompts;
       const totalItems = promptsList.length;
-      
       const start = (currentPage - 1) * promptsPerPage;
       const end = start + promptsPerPage;
       const paginated = promptsList.slice(start, end);
-      
       const grid = document.getElementById('promptsGrid');
       
       if (paginated.length === 0) {
@@ -857,11 +1364,10 @@
       let cardsHTML = '';
       paginated.forEach((prompt, index) => {
         const aspectRatio = getAspectRatio(prompt.ratio);
-        
         cardsHTML += `
-          <div class="prompt-card" data-id="${prompt.id}" style="cursor: pointer;">
+          <div class="prompt-card reveal-stagger" data-id="${prompt.id}" style="cursor: pointer;">
             <h3>${escapeHtml(prompt.title)}</h3>
-            <div style="width: 100%; overflow: hidden; border-radius: 14px; margin-bottom: 12px; background: #f0f2f5; aspect-ratio: ${aspectRatio}; display: flex; align-items: center; justify-content: center;">
+            <div style="width: 100%; overflow: hidden; border-radius: 14px; margin-bottom: 12px; background: #f0f2f5; aspect-ratio: ${aspectRatio} !important; display: flex; align-items: center; justify-content: center;">
               <img src="${prompt.image}" alt="${escapeHtml(prompt.title)}" style="width: 100%; height: 100%; object-fit: contain; display: block;" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=No+Image'">
             </div>
             <div class="short-prompt">${escapeHtml(prompt.short_prompt)}</div>
@@ -872,7 +1378,6 @@
             </div>
           </div>
         `;
-        
         if ((index + 1) % 2 === 0 && index + 1 < paginated.length) {
           cardsHTML += `
             <div class="ad-container" style="margin: 0; margin-bottom: 20px;">
@@ -888,7 +1393,23 @@
       
       grid.innerHTML = cardsHTML;
       
-      // ✅ FIXED: Card click with saveScrollPositionAndPage() (like script.js)
+      // Stagger animation for new cards
+      const staggerContainers = document.querySelectorAll('.reveal-stagger');
+      staggerContainers.forEach(container => {
+        const children = container.children;
+        if (children.length > 0) {
+          const rect = container.getBoundingClientRect();
+          const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+          if (isVisible) {
+            Array.from(children).forEach((child, index) => {
+              setTimeout(() => {
+                child.classList.add('visible');
+              }, index * 60);
+            });
+          }
+        }
+      });
+      
       document.querySelectorAll('.prompt-card').forEach(card => {
         const cardId = card.dataset.id;
         card.addEventListener('click', (e) => {
@@ -898,7 +1419,6 @@
               e.target.closest('.btn-show-more')) {
             return;
           }
-          // ✅ Same as script.js
           saveScrollPositionAndPage();
           window.location.href = `prompt.html?id=${cardId}`;
         });
@@ -929,6 +1449,52 @@
       renderPagination(totalItems);
     }
 
+    // ============================================================
+    // SEARCH FUNCTIONS
+    // ============================================================
+
+    function performSearch(query) {
+      if (!query || query.trim() === '') {
+        isSearchMode = false;
+        searchResults = [];
+        currentSearchQuery = '';
+        currentPage = 1;
+        renderPrompts();
+        return;
+      }
+      
+      const results = collectionPrompts.filter(p => {
+        const title = p.title.toLowerCase();
+        const shortPrompt = p.short_prompt.toLowerCase();
+        const fullPrompt = p.full_prompt.toLowerCase();
+        const category = p.category.toLowerCase();
+        const tags = p.tags ? p.tags.map(t => t.toLowerCase()) : [];
+        return title.includes(query) || shortPrompt.includes(query) || 
+               fullPrompt.includes(query) || category.includes(query) ||
+               tags.some(tag => tag.includes(query));
+      });
+      
+      searchResults = results;
+      isSearchMode = true;
+      currentSearchQuery = query;
+      currentPage = 1;
+      renderPrompts();
+    }
+
+    function clearSearch() {
+      isSearchMode = false;
+      searchResults = [];
+      currentSearchQuery = '';
+      currentPage = 1;
+      renderPrompts();
+      const searchInput = document.getElementById('liveSearchInput');
+      if (searchInput) searchInput.value = '';
+    }
+
+    // ============================================================
+    // SETUP SEARCH
+    // ============================================================
+
     function setupSearch() {
       const searchInput = document.getElementById('liveSearchInput');
       const suggestionsDiv = document.getElementById('searchSuggestions');
@@ -941,9 +1507,7 @@
           suggestionsDiv.classList.remove('active');
           return;
         }
-        
         const suggestions = getSearchSuggestions(query);
-        
         if (suggestions.length === 0) {
           suggestionsDiv.innerHTML = `
             <div class="suggestion-no-results">
@@ -953,7 +1517,6 @@
           suggestionsDiv.classList.add('active');
           return;
         }
-        
         suggestionsDiv.innerHTML = `
           <div class="suggestions-scroll-container">
             ${suggestions.map(prompt => `
@@ -968,10 +1531,7 @@
             `).join('')}
           </div>
         `;
-        
         suggestionsDiv.classList.add('active');
-        
-        // ✅ FIXED: Suggestion click with saveScrollPositionAndPage()
         document.querySelectorAll('.suggestion-item').forEach(item => {
           item.addEventListener('click', () => {
             const promptId = item.dataset.id;
@@ -987,18 +1547,12 @@
       searchInput.addEventListener('input', (e) => {
         const query = e.target.value.trim();
         clearTimeout(debounceTimer);
-        
         if (query.length === 0) {
           suggestionsDiv.classList.remove('active');
-          if (isSearchMode) {
-            performSearch('');
-          }
+          if (isSearchMode) performSearch('');
           return;
         }
-        
-        debounceTimer = setTimeout(() => {
-          renderSuggestions(query);
-        }, 150);
+        debounceTimer = setTimeout(() => renderSuggestions(query), 150);
       });
       
       searchInput.addEventListener('keypress', (e) => {
@@ -1018,6 +1572,10 @@
       });
     }
 
+    // ============================================================
+    // EVENT LISTENERS
+    // ============================================================
+
     function setupEventListeners() {
       const searchToggle = document.getElementById('searchToggleBtn');
       const searchExpand = document.getElementById('searchExpand');
@@ -1036,7 +1594,13 @@
           document.getElementById('searchSuggestions').classList.remove('active');
         });
       }
+      
+      setupSearch();
     }
+
+    // ============================================================
+    // SHOW ERROR
+    // ============================================================
 
     function showError(message) {
       const grid = document.getElementById('promptsGrid');
@@ -1045,11 +1609,79 @@
           <i class="fas fa-exclamation-triangle" style="color: #ef4444;"></i>
           <h3>${message}</h3>
           <p>Please go back to the <a href="../index.html" style="color: #7b5cff;">homepage</a> to browse other collections.</p>
-          <p style="font-size: 12px; color: #888888; margin-top: 10px;">If you are the developer, check that <strong>data/collections.json</strong> exists and contains the collection ID: <strong>${collectionId || 'N/A'}</strong></p>
+          <p style="font-size: 12px; color: #888888; margin-top: 10px;">Check that <strong>data/collections.json</strong> exists and contains the collection ID: <strong>${collectionId || 'N/A'}</strong></p>
         </div>
       `;
     }
 
+    // ============================================================
+    // LOAD FEATURED COLLECTION
+    // ============================================================
+
+    async function loadFeaturedCollection() {
+      try {
+        document.getElementById('collectionTitle').textContent = 'Loading...';
+        document.getElementById('promptCount').textContent = 'Loading...';
+        
+        const response = await fetch('../data/collections.json');
+        if (!response.ok) {
+          throw new Error('collections.json not found (HTTP ' + response.status + ')');
+        }
+        
+        const collectionsData = await response.json();
+        allCollections = collectionsData;
+        collectionInfo = collectionsData.find(c => c.id === collectionId);
+        
+        if (!collectionInfo) {
+          throw new Error('Collection "' + collectionId + '" not found');
+        }
+        
+        const collectionFileRes = await fetch('../' + collectionInfo.file);
+        if (!collectionFileRes.ok) {
+          throw new Error('Collection file not found: ' + collectionInfo.file);
+        }
+        
+        collectionPrompts = await collectionFileRes.json();
+        collectionPrompts = collectionPrompts.map(p => {
+          if (p.image) p.image = fixImagePath(p.image);
+          return p;
+        });
+        
+        const displayTitle = collectionInfo.title || 'Featured Collection';
+        const displayDesc = collectionInfo.description || `Browse ${collectionPrompts.length} amazing prompts in this featured collection`;
+        
+        document.getElementById('collectionTitle').textContent = displayTitle;
+        document.getElementById('collectionDescription').textContent = `Browse ${collectionPrompts.length} amazing prompts in this featured collection`;
+        document.getElementById('promptCount').textContent = `${collectionPrompts.length} prompts`;
+        
+        // Update meta tags
+        updateCollectionMetaTags(displayTitle, displayDesc, collectionPrompts.length);
+        
+        // Generate collection content sections
+        const contentContainer = document.getElementById('collectionContentSections');
+        contentContainer.innerHTML = generateCollectionContent(
+          displayTitle, 
+          collectionPrompts.length, 
+          collectionId
+        );
+        
+        restoreScrollPositionAndPage();
+        renderPrompts();
+        setupSearch();
+        setupEventListeners();
+        initStickyAdClose();
+        
+        setTimeout(initFeaturedScrollReveal, 300);
+        
+      } catch (error) {
+        console.error('Error loading featured collection:', error);
+        showError('Failed to load featured collection: ' + error.message);
+      }
+    }
+
+    // ============================================================
+    // START
+    // ============================================================
     if (collectionId) {
       loadFeaturedCollection();
     } else {

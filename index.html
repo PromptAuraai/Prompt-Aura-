@@ -12,7 +12,7 @@
   <meta name="description" content="Discover and copy 1000+ free AI prompts for Midjourney, DALL-E, and Stable Diffusion. Wedding, cinematic, birthday, anime, and more categories. Updated daily.">
   <meta name="keywords" content="AI prompts, Midjourney prompts, DALL-E prompts, Stable Diffusion prompts, AI art, free prompts, wedding prompts, cinematic prompts, anime prompts, image generation">
   <meta name="author" content="PromptAura">
-  <meta name="theme-color" content="#7b5cff">
+  <meta name="theme-color" content="#7C3AED">
   
   <!-- ========== FAVICON ========== -->
   <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico">
@@ -75,15 +75,272 @@
     ]
   }
   </script>
+  
+  <style>
+    /* ============================================================
+       HOMEPAGE - ADDITIONAL PREMIUM SECTIONS
+       ============================================================ */
+
+    /* ===== GUIDES SECTION ===== */
+    .guides-section {
+      padding: 40px 20px 50px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .guides-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .guide-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: var(--radius-lg);
+      padding: 24px 22px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .guide-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 48px rgba(124, 58, 237, 0.08);
+      border-color: rgba(124, 58, 237, 0.1);
+    }
+
+    .guide-card .guide-icon {
+      font-size: 28px;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .guide-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .guide-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .guide-card .guide-read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-top: 12px;
+      transition: gap 0.3s ease;
+    }
+
+    .guide-card:hover .guide-read-more {
+      gap: 12px;
+    }
+
+    /* ===== WHY PROMPTAURA SECTION ===== */
+    .why-section {
+      padding: 40px 20px 50px;
+      background: linear-gradient(180deg, rgba(124, 58, 237, 0.03) 0%, transparent 100%);
+    }
+
+    .why-section .why-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      margin-top: 24px;
+    }
+
+    .why-item {
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: var(--radius-lg);
+      padding: 24px 22px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .why-item:hover {
+      transform: translateY(-4px);
+      border-color: rgba(124, 58, 237, 0.1);
+      box-shadow: 0 8px 32px rgba(124, 58, 237, 0.06);
+    }
+
+    .why-item .why-icon {
+      font-size: 32px;
+      color: var(--primary);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .why-item h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .why-item p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ===== HOW IT WORKS SECTION ===== */
+    .how-section {
+      padding: 40px 20px 50px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .how-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .how-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: var(--radius-lg);
+      padding: 20px 22px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .how-step:hover {
+      transform: translateX(4px);
+      border-color: rgba(124, 58, 237, 0.1);
+    }
+
+    .how-step .step-number {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      background: var(--primary-gradient);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .how-step .step-content h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .how-step .step-content p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+
+    @media (min-width: 640px) {
+      .guides-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .how-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .guides-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .why-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .how-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .guides-section {
+        padding: 30px 16px 40px;
+      }
+      .why-section {
+        padding: 30px 16px 40px;
+      }
+      .how-section {
+        padding: 30px 16px 40px;
+      }
+      .guide-card {
+        padding: 18px 16px;
+      }
+      .how-step {
+        padding: 16px 18px;
+      }
+      .why-item {
+        padding: 18px 16px;
+      }
+    }
+
+    /* ============================================================
+       REDUCED MOTION
+       ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      .guide-card:hover {
+        transform: none !important;
+      }
+      .why-item:hover {
+        transform: none !important;
+      }
+      .how-step:hover {
+        transform: none !important;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <header class="site-header">
+  <!-- ============================================================
+       HEADER - ULTRA PREMIUM GLASSMORPHISM
+       ============================================================ -->
+  <header class="site-header" id="siteHeader">
     <div class="header-container">
-      <div class="logo">
-        <img src="assets/prompts/logo.png" alt="PromptAura Logo">
+      <!-- Logo -->
+      <div class="logo" onclick="window.location.href='index.html'">
+        <img src="assets/prompts/logo.png" alt="PromptAura Logo" width="42" height="42">
         <span>PromptAura</span>
       </div>
+      
+      <!-- Header Actions -->
       <div class="header-actions">
         <button class="icon-btn category-menu-btn" id="mobileCategoryBtn" aria-label="Categories">
           <i class="fas fa-th-large"></i>
@@ -96,22 +353,26 @@
         </button>
       </div>
     </div>
+    
+    <!-- Search Expand -->
     <div class="search-expand" id="searchExpand">
       <div class="search-wrapper">
         <i class="fas fa-search search-icon"></i>
-        <input type="text" id="liveSearchInput" placeholder="Search prompts by title, category or keywords..." autocomplete="off">
+        <input type="text" id="liveSearchInput" placeholder="Search 1000+ prompts by title, category or keywords..." autocomplete="off">
         <button id="clearSearchBtn" class="clear-search"><i class="fas fa-times"></i></button>
       </div>
       <div id="searchSuggestions" class="search-suggestions"></div>
     </div>
   </header>
 
-  <!-- Sliding Menu -->
+  <!-- ============================================================
+       SLIDING MENU
+       ============================================================ -->
   <div class="menu-overlay" id="menuOverlay"></div>
   <div class="sliding-menu" id="slidingMenu">
     <div class="menu-header">
       <div class="menu-logo">
-       <img src="assets/prompts/logo.png" alt="PromptAura Logo">
+        <img src="assets/prompts/logo.png" alt="PromptAura Logo" width="42" height="42">
         <span>PromptAura</span>
       </div>
       <button class="menu-close" id="menuCloseBtn">
@@ -120,22 +381,11 @@
     </div>
     <div class="menu-content">
       <div class="menu-section">
-        <a href="index.html" class="menu-item">
+        <a href="index.html" class="menu-item active">
           <i class="fas fa-home"></i>
           <span>Home</span>
         </a>
-        <a href="#trending" class="menu-item">
-          <i class="fas fa-chart-line"></i>
-          <span>Trending</span>
-        </a>
-        <a href="#jstylehub" class="menu-item">
-          <i class="fas fa-layer-group"></i>
-          <span>J-Style</span>
-        </a>
-        <a href="#featuredCollections" class="menu-item">
-          <i class="fas fa-star"></i>
-          <span>Featured</span>
-        </a>
+        
       </div>
       <div class="menu-divider"></div>
       <div class="menu-section">
@@ -153,7 +403,7 @@
         </a>
         <a href="terms.html" class="menu-item">
           <i class="fas fa-file-contract"></i>
-          <span>Terms & Conditions</span>
+          <span>Terms &amp; Conditions</span>
         </a>
         <a href="disclaimer.html" class="menu-item">
           <i class="fas fa-exclamation-triangle"></i>
@@ -163,19 +413,78 @@
     </div>
   </div>
 
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
   <main class="main-container">
 
-    <p class="hero-tagline">
-      Turn Your Imagination into Stunning Visual Masterpieces..✨
-    </p>
+    <!-- ==========================================================
+         HERO SECTION - ULTRA PREMIUM
+         ========================================================== -->
+    <section class="hero-section" id="heroSection">
+      <!-- Floating Particles -->
+      <div class="hero-particles" id="heroParticles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+      </div>
 
-    <section class="gallery-section">
-      <div class="gallery-slider" id="gallerySlider"></div>
+      <div class="hero-content">
+        <!-- Badge -->
+        <div class="hero-badge">
+          <i class="fas fa-sparkles"></i> AI Creative Platform
+        </div>
+
+        <!-- Headline -->
+        <h1 class="hero-title">
+          Turn Your Imagination into<br>
+          <span class="gradient-text-animated">Stunning Visual Masterpieces</span>
+          <span style="display: inline-block;">✨</span>
+        </h1>
+
+        <!-- Description -->
+        <p class="hero-description">
+          Discover 1000+ premium AI prompts for Gemini, ChatGPT, Midjourney, DALL-E, 
+          Stable Diffusion &amp; more. Copy, create, and inspire.
+        </p>
+
+        
+
+        <!-- Stats -->
+        <div class="hero-stats">
+          <span>
+            <strong id="statPrompts">1000+</strong>
+            Prompts
+          </span>
+          <span>
+            <strong id="statCategories">50+</strong>
+            Categories
+          </span>
+          <span>
+            <strong id="statUsers">10K+</strong>
+            Users
+          </span>
+        </div>
+      </div>
     </section>
 
-    <!-- J-STYLE HUB SECTION (OLD COLLECTIONS) -->
+    <!-- ==========================================================
+         GALLERY SLIDER
+         ========================================================== -->
+    <section class="gallery-section reveal">
+      <div class="gallery-slider" id="gallerySlider">
+        <!-- Dynamic content from gallery.json -->
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         J-STYLE HUB SECTION
+         ========================================================== -->
     <section class="jstylehub-section" id="jstylehub">
-      <div class="section-header">
+      <div class="section-header reveal">
         <h2><i class="fas fa-fire"></i> J-Style Collections</h2>
       </div>
       <div class="jstylehub-grid" id="jstylehubGrid">
@@ -183,35 +492,53 @@
       </div>
     </section>
 
+    <!-- ==========================================================
+         AD BANNER - AFTER GALLERY
+         ========================================================== -->
     <div class="ad-banner ad-container" id="adAfterGallery">
       <div class="ad-label">Advertisement</div>
       <div class="ad-placeholder">Your Ad Here</div>
     </div>
 
+    <!-- ==========================================================
+         TRENDING PROMPTS
+         ========================================================== -->
     <section class="trending-section" id="trending">
-      <div class="section-header">
+      <div class="section-header reveal">
         <h2><i class="fas fa-chart-line"></i> Trending Prompts</h2>
         <div class="slider-controls">
-          
+          <!-- Controls added by JS if needed -->
         </div>
       </div>
       <div class="trending-slider-container">
-        <div class="trending-track" id="trendingTrack"></div>
+        <div class="trending-track" id="trendingTrack">
+          <!-- Dynamic content from trending.json -->
+        </div>
       </div>
     </section>
 
+    <!-- ==========================================================
+         AD BANNER - AFTER TRENDING
+         ========================================================== -->
     <div class="ad-banner ad-container" id="adAfterTrending">
       <div class="ad-label">Advertisement</div>
       <div class="ad-placeholder">Your Ad Here</div>
     </div>
 
-    <section class="categories-section">
-      <div class="categories-scroll" id="categoriesList"></div>
+    <!-- ==========================================================
+         CATEGORIES
+         ========================================================== -->
+    <section class="categories-section reveal">
+      <div class="categories-scroll" id="categoriesList">
+        <!-- Dynamic content from categories.json -->
+      </div>
     </section>
 
-    <!-- ========== NEW: FEATURED COLLECTIONS SECTION ========== -->
+    <!-- ==========================================================
+         FEATURED COLLECTIONS
+         ========================================================== -->
     <section class="featured-collections" id="featuredCollections">
-      <div class="section-header">
+      <div class="section-header reveal">
         <h2><i class="fas fa-star"></i> ⭐ Featured Collections</h2>
       </div>
       <div class="collections-grid" id="collectionsGrid">
@@ -219,11 +546,137 @@
       </div>
     </section>
 
+    <!-- ==========================================================
+         🆕 NEW: AI PROMPT GUIDES SECTION
+         ========================================================== -->
+    <section class="guides-section reveal" id="guides">
+      <div class="section-header">
+        <h2><i class="fas fa-book"></i> 📚 AI Prompt Guides</h2>
+      </div>
+      <p style="color: var(--text-secondary); font-size: 0.95rem; max-width: 700px; margin-bottom: 8px;">
+        Learn how to write better AI prompts with our comprehensive guides.
+      </p>
+      <div class="guides-grid">
+        <a href="pages/guide-prompt-writing.html" class="guide-card">
+          <div class="guide-icon"><i class="fas fa-pen-fancy"></i></div>
+          <h3>How to Write Better AI Prompts</h3>
+          <p>Master the art of prompt writing with this complete guide covering structure, style, and techniques.</p>
+          <span class="guide-read-more">Read Guide →</span>
+        </a>
+        <a href="pages/guide-portrait-prompts.html" class="guide-card">
+          <div class="guide-icon"><i class="fas fa-user"></i></div>
+          <h3>Complete Guide to AI Portrait Prompts</h3>
+          <p>Create stunning AI portraits with expert tips on lighting, composition, and expression.</p>
+          <span class="guide-read-more">Read Guide →</span>
+        </a>
+        <a href="pages/guide-cinematic-images.html" class="guide-card">
+          <div class="guide-icon"><i class="fas fa-film"></i></div>
+          <h3>How to Create Cinematic AI Images</h3>
+          <p>Learn how to achieve movie-quality results with cinematic lighting and composition techniques.</p>
+          <span class="guide-read-more">Read Guide →</span>
+        </a>
+        <a href="pages/guide-wedding-prompts.html" class="guide-card">
+          <div class="guide-icon"><i class="fas fa-ring"></i></div>
+          <h3>AI Wedding Image Prompt Guide</h3>
+          <p>Create beautiful wedding imagery with prompts designed for romantic and elegant results.</p>
+          <span class="guide-read-more">Read Guide →</span>
+        </a>
+      </div>
+      <div style="text-align: center; margin-top: 20px;">
+        <a href="pages/guides.html" style="display: inline-flex; align-items: center; gap: 8px; color: var(--primary); font-weight: 600; text-decoration: none; transition: gap 0.3s ease;">
+          View All Guides <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         🆕 NEW: WHY PROMPTAURA SECTION
+         ========================================================== -->
+    <section class="why-section reveal" id="whyPromptAura">
+      <div class="section-header" style="max-width: 1200px; margin: 0 auto 20px; padding: 0 4px;">
+        <h2><i class="fas fa-star"></i> Why PromptAura?</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-item">
+          <span class="why-icon"><i class="fas fa-gem"></i></span>
+          <h3>100% Free</h3>
+          <p>No credit card required. No hidden fees. All prompts are completely free to use.</p>
+        </div>
+        <div class="why-item">
+          <span class="why-icon"><i class="fas fa-check-circle"></i></span>
+          <h3>Curated Quality</h3>
+          <p>Every prompt is tested and optimized to ensure you get the best possible results.</p>
+        </div>
+        <div class="why-item">
+          <span class="why-icon"><i class="fas fa-search"></i></span>
+          <h3>Easy Discovery</h3>
+          <p>Browse by categories, collections, or search to find the perfect prompt quickly.</p>
+        </div>
+        <div class="why-item">
+          <span class="why-icon"><i class="fas fa-sync-alt"></i></span>
+          <h3>Regular Updates</h3>
+          <p>New prompts added regularly to keep your creative options fresh and exciting.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         🆕 NEW: HOW IT WORKS SECTION
+         ========================================================== -->
+    <section class="how-section reveal" id="howItWorks">
+      <div class="section-header">
+        <h2><i class="fas fa-route"></i> How It Works</h2>
+      </div>
+      <p style="color: var(--text-secondary); font-size: 0.95rem; max-width: 700px; margin-bottom: 4px;">
+        Create stunning AI images in just 4 simple steps.
+      </p>
+      <div class="how-grid">
+        <div class="how-step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Browse Prompts</h4>
+            <p>Explore our library of 1000+ curated AI prompts by category or collection.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Copy Prompt</h4>
+            <p>Click the "Copy Prompt" button on any prompt to copy it to your clipboard instantly.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Paste &amp; Generate</h4>
+            <p>Paste the prompt into your favorite AI image generator like Midjourney or DALL-E.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Create &amp; Inspire</h4>
+            <p>Generate stunning images and share your creations with the world.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         PROMPTS GRID + SIDEBAR
+         ========================================================== -->
     <div class="content-with-sidebar">
       <div class="prompts-main">
-        <div class="prompts-grid" id="promptsGrid"></div>
+        <div class="section-header reveal" style="padding: 0 4px;">
+          <h2><i class="fas fa-list"></i> Latest Prompts</h2>
+        </div>
+        <div class="prompts-grid" id="promptsGrid">
+          <!-- Dynamic content from prompts.json -->
+        </div>
         <div class="load-more-container" id="loadMoreBtnWrapper">
-          <button id="loadMoreBtn" class="load-more-btn">Load More Prompts</button>
+          <button id="loadMoreBtn" class="load-more-btn">
+            <i class="fas fa-plus-circle"></i> Load More Prompts
+          </button>
         </div>
       </div>
       <aside class="sidebar-desktop">
@@ -237,25 +690,34 @@
         </div>
       </aside>
     </div>
+
   </main>
 
-  <!-- New Professional Footer -->
-  <footer class="site-footer">
+  <!-- ============================================================
+       FOOTER - PREMIUM DARK
+       ============================================================ -->
+  <footer class="site-footer" id="siteFooter">
     <div class="footer-container">
       <div class="footer-grid">
+        <!-- Brand Column -->
         <div class="footer-col">
           <div class="footer-logo">
-            <img src="assets/prompts/logo.png" alt="PromptAura Logo">
+            <img src="assets/prompts/logo.png" alt="PromptAura Logo" width="42" height="42">
             <span>PromptAura</span>
           </div>
-          <p class="footer-description">Your ultimate destination for high-quality AI prompts. Generate stunning images with our carefully curated prompts.</p>
+          <p class="footer-description">
+            Your ultimate destination for high-quality AI prompts. 
+            Generate stunning images with our carefully curated prompts.
+          </p>
           <div class="social-links">
-            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
+            <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-link" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
           </div>
         </div>
+
+        <!-- Quick Links -->
         <div class="footer-col">
           <h4>Quick Links</h4>
           <ul class="footer-links">
@@ -263,41 +725,124 @@
             <li><a href="#trending">Trending</a></li>
             <li><a href="#jstylehub">J-Style</a></li>
             <li><a href="#featuredCollections">Featured</a></li>
+            <li><a href="#guides">AI Guides</a></li>
           </ul>
         </div>
+
+        <!-- Legal -->
         <div class="footer-col">
           <h4>Legal</h4>
           <ul class="footer-links">
             <li><a href="about.html">About Us</a></li>
             <li><a href="contact.html">Contact Us</a></li>
             <li><a href="privacy.html">Privacy Policy</a></li>
-            <li><a href="terms.html">Terms & Conditions</a></li>
+            <li><a href="terms.html">Terms &amp; Conditions</a></li>
             <li><a href="disclaimer.html">Disclaimer</a></li>
           </ul>
         </div>
-        
+
+        <!-- Newsletter / Extra -->
+        <div class="footer-col">
+          <h4>Stay Updated</h4>
+          <p class="footer-description" style="font-size: 13px;">
+            Get the latest prompts delivered to your inbox.
+          </p>
+          <div class="newsletter-form">
+            <input type="email" placeholder="Your email" aria-label="Email for newsletter">
+            <button><i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
       </div>
+
       <div class="footer-bottom">
         <p>&copy; 2026 PromptAura. All Rights Reserved.</p>
         <p class="developer-credit">
           Developed with <i class="fas fa-heart" style="color: #ff4d4d;"></i> by 
-          <a href="pages/developer.html" class="developer-name" style="text-decoration: none; cursor: pointer; font-weight: 700; color: #7b5cff; transition: all 0.3s ease;">
+          <a href="pages/developer.html" class="developer-name">
             Subhankar Bairagi
           </a>
         </p>
-        <p class="footer-tagline">PromptAura is a free AI prompt library where users can find prompts for AI image generation, cinematic prompts, wedding prompts, birthday prompts, anime prompts and more.</p>
+        <p class="footer-tagline">
+          PromptAura is a free AI prompt library where users can find prompts for 
+          AI image generation, cinematic prompts, wedding prompts, birthday prompts, 
+          anime prompts and more.
+        </p>
       </div>
     </div>
   </footer>
 
+  <!-- ============================================================
+       STICKY BOTTOM AD (Mobile)
+       ============================================================ -->
   <div class="sticky-bottom-ad mobile-only" id="stickyBottomAd">
     <div class="ad-label">Advertisement</div>
     <div class="ad-placeholder">Mobile Sticky Ad</div>
     <button id="closeStickyAd" class="close-sticky"><i class="fas fa-times"></i></button>
   </div>
 
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
   <script src="menu.js"></script>
   <script src="ads.js"></script>
   <script src="script.js"></script>
+
+  <!-- ============================================================
+       HERO SEARCH - CONNECT TO MAIN SEARCH
+       ============================================================ -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Hero search connects to main search
+      const heroSearchInput = document.getElementById('heroSearchInput');
+      const heroSearchBtn = document.getElementById('heroSearchBtn');
+      const mainSearchInput = document.getElementById('liveSearchInput');
+      const searchToggleBtn = document.getElementById('searchToggleBtn');
+      const searchExpand = document.getElementById('searchExpand');
+
+      function triggerSearch(query) {
+        if (mainSearchInput) {
+          mainSearchInput.value = query;
+          // Trigger input event to show suggestions
+          mainSearchInput.dispatchEvent(new Event('input', { bubbles: true }));
+          // Open search expand
+          if (searchExpand && !searchExpand.classList.contains('active')) {
+            searchExpand.classList.add('active');
+          }
+          // Focus on main search
+          setTimeout(() => mainSearchInput.focus(), 100);
+        }
+      }
+
+      if (heroSearchBtn) {
+        heroSearchBtn.addEventListener('click', function() {
+          const query = heroSearchInput.value.trim();
+          if (query) {
+            triggerSearch(query);
+          }
+        });
+      }
+
+      if (heroSearchInput) {
+        heroSearchInput.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            const query = heroSearchInput.value.trim();
+            if (query) {
+              triggerSearch(query);
+            }
+          }
+        });
+      }
+
+      // Hero search input - on focus, open main search
+      if (heroSearchInput) {
+        heroSearchInput.addEventListener('focus', function() {
+          if (searchExpand && !searchExpand.classList.contains('active')) {
+            searchExpand.classList.add('active');
+          }
+        });
+      }
+    });
+  </script>
+
 </body>
 </html>

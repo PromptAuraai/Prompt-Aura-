@@ -1,4 +1,11 @@
-// Global variables
+// ============================================================
+// PROMPTAURA - ULTRA PREMIUM SCRIPT
+// Complete JavaScript - Version 2.0 (FIXED)
+// ============================================================
+
+// ============================================================
+// GLOBAL VARIABLES
+// ============================================================
 let allPrompts = [];
 let currentCategory = 'all';
 let currentPage = 1;
@@ -11,12 +18,177 @@ let currentSearchQuery = '';
 let isSearchMode = false;
 let searchResults = [];
 
-// ========== FEATURED COLLECTIONS VARIABLES ==========
+// Featured Collections
 let collectionsData = [];
 let collectionPromptsData = {};
 
-// ========== SCROLL POSITION & PAGE FUNCTIONS ==========
-// Save scroll position AND current page
+// ============================================================
+// SCROLL REVEAL - INTERSECTION OBSERVER (FIXED)
+// ============================================================
+function initScrollReveal() {
+  // Reveal elements with .reveal class (Sections only)
+  const reveals = document.querySelectorAll('.reveal');
+  const scaleItems = document.querySelectorAll('.reveal-scale');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // Scale items
+  scaleItems.forEach(el => {
+    const observerScale = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    observerScale.observe(el);
+  });
+}
+
+// ============================================================
+// COUNT-UP ANIMATION
+// ============================================================
+function animateCountUp(element, target, duration = 2000, suffix = '+') {
+  if (!element) return;
+  let start = 0;
+  const step = Math.ceil(target / (duration / 16));
+  let current = 0;
+  
+  const timer = setInterval(() => {
+    current += step;
+    if (current >= target) {
+      current = target;
+      clearInterval(timer);
+    }
+    element.textContent = current + suffix;
+  }, 16);
+}
+
+function initCountUps() {
+  const statPrompts = document.getElementById('statPrompts');
+  const statCategories = document.getElementById('statCategories');
+  const statUsers = document.getElementById('statUsers');
+
+  if (statPrompts) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCountUp(statPrompts, 1000, 2000, '+');
+          observer.unobserve(statPrompts);
+        }
+      });
+    }, { threshold: 0.5 });
+    observer.observe(statPrompts);
+  }
+
+  if (statCategories) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCountUp(statCategories, 50, 1500, '+');
+          observer.unobserve(statCategories);
+        }
+      });
+    }, { threshold: 0.5 });
+    observer.observe(statCategories);
+  }
+
+  if (statUsers) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCountUp(statUsers, 10000, 2500, '+');
+          observer.unobserve(statUsers);
+        }
+      });
+    }, { threshold: 0.5 });
+    observer.observe(statUsers);
+  }
+}
+
+// ============================================================
+// RIPPLE EFFECT ON BUTTONS
+// ============================================================
+function initRippleEffect() {
+  document.addEventListener('click', function(e) {
+    const button = e.target.closest('.btn-copy, .btn-copy-large, .load-more-btn, .hero-search-btn, .category-pill');
+    if (!button) return;
+    
+    if (button.querySelector('.ripple')) return;
+    
+    const rect = button.getBoundingClientRect();
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple';
+    const size = Math.max(rect.width, rect.height);
+    ripple.style.width = ripple.style.height = size + 'px';
+    ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+    ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+    button.appendChild(ripple);
+    
+    setTimeout(() => {
+      ripple.remove();
+    }, 600);
+  });
+}
+
+// Add ripple CSS dynamically
+function injectRippleStyles() {
+  const style = document.createElement('style');
+  style.textContent = `
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(0);
+      animation: rippleAnim 0.6s ease-out forwards;
+      pointer-events: none;
+    }
+    @keyframes rippleAnim {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+    .btn-copy, .btn-copy-large, .load-more-btn, .hero-search-btn, .category-pill {
+      position: relative;
+      overflow: hidden;
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+// ============================================================
+// HEADER SCROLL EFFECT
+// ============================================================
+function initHeaderScroll() {
+  const header = document.querySelector('.site-header');
+  if (!header) return;
+  
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > 50) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  }, { passive: true });
+}
+
+// ============================================================
+// SCROLL POSITION & PAGE FUNCTIONS
+// ============================================================
 function saveScrollPositionAndPage() {
   sessionStorage.setItem('scrollPosition', window.scrollY);
   sessionStorage.setItem('savedCurrentPage', currentPage);
@@ -25,7 +197,6 @@ function saveScrollPositionAndPage() {
   sessionStorage.setItem('savedSearchQuery', currentSearchQuery);
 }
 
-// Restore scroll position AND current page
 function restoreScrollPositionAndPage() {
   const savedPosition = sessionStorage.getItem('scrollPosition');
   const savedPage = sessionStorage.getItem('savedCurrentPage');
@@ -49,12 +220,10 @@ function restoreScrollPositionAndPage() {
   }
 }
 
-// Save only scroll position (for navigation within same page)
 function saveScrollPosition() {
   sessionStorage.setItem('scrollPosition', window.scrollY);
 }
 
-// Restore scroll position only
 function restoreScrollPosition() {
   const savedPosition = sessionStorage.getItem('scrollPosition');
   if (savedPosition) {
@@ -65,23 +234,19 @@ function restoreScrollPosition() {
   }
 }
 
-// Save shuffled prompts to session storage
 function saveShuffledPrompts(prompts) {
   sessionStorage.setItem('shuffledPrompts', JSON.stringify(prompts));
 }
 
-// Get saved shuffled prompts from session storage
 function getSavedShuffledPrompts() {
   const saved = sessionStorage.getItem('shuffledPrompts');
   return saved ? JSON.parse(saved) : null;
 }
 
-// Clear saved shuffled prompts (for new visit)
 function clearSavedShuffledPrompts() {
   sessionStorage.removeItem('shuffledPrompts');
 }
 
-// Scroll to cards section (for pagination)
 function scrollToCardsSection() {
   const cardsSection = document.querySelector('.prompts-main') || document.querySelector('.prompts-grid');
   if (cardsSection) {
@@ -94,7 +259,6 @@ function scrollToCardsSection() {
   }
 }
 
-// Scroll to specific card by ID
 function scrollToCardById(cardId) {
   setTimeout(() => {
     const card = document.querySelector(`.prompt-card[data-id="${cardId}"]`);
@@ -106,7 +270,7 @@ function scrollToCardById(cardId) {
         behavior: 'smooth'
       });
       card.style.transition = 'all 0.3s';
-      card.style.boxShadow = '0 0 0 3px #7b5cff';
+      card.style.boxShadow = '0 0 0 3px #7C3AED';
       setTimeout(() => {
         card.style.boxShadow = '';
       }, 2000);
@@ -114,7 +278,9 @@ function scrollToCardById(cardId) {
   }, 300);
 }
 
-// Escape HTML to prevent XSS
+// ============================================================
+// UTILITY FUNCTIONS
+// ============================================================
 function escapeHtml(text) {
   if (!text) return '';
   const div = document.createElement('div');
@@ -122,7 +288,30 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
-// ========== ADVANCED FUZZY SEARCH FUNCTION ==========
+function escapeRegex(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function shuffleArray(array) {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+function fixImagePath(imageUrl) {
+  if (!imageUrl) return 'https://via.placeholder.com/400x300?text=No+Image';
+  if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) return imageUrl;
+  if (imageUrl.startsWith('../')) return imageUrl;
+  if (imageUrl.startsWith('assets/')) return imageUrl;
+  return imageUrl;
+}
+
+// ============================================================
+// FUZZY SEARCH
+// ============================================================
 function fuzzyMatch(str, pattern) {
   str = str.toLowerCase();
   pattern = pattern.toLowerCase();
@@ -146,7 +335,6 @@ function fuzzyMatch(str, pattern) {
       return true;
     }
   }
-  
   return false;
 }
 
@@ -160,12 +348,9 @@ function calculateSearchScore(prompt, query) {
   
   if (title.includes(query)) score += 10;
   else if (fuzzyMatch(title, query)) score += 5;
-  
   if (title === query) score += 15;
-  
   if (category.includes(query)) score += 8;
   else if (fuzzyMatch(category, query)) score += 4;
-  
   if (category === query) score += 10;
   
   tags.forEach(tag => {
@@ -176,29 +361,22 @@ function calculateSearchScore(prompt, query) {
   
   if (shortPrompt.includes(query)) score += 3;
   else if (fuzzyMatch(shortPrompt.substring(0, 50), query)) score += 1;
-  
   if (fullPrompt.includes(query)) score += 1;
   
   return score;
 }
 
-// ========== GET SEARCH SUGGESTIONS - NO LIMIT ==========
 function getSearchSuggestions(query) {
   if (!query || query.trim().length === 0) return [];
-  
   const searchTerm = query.toLowerCase().trim();
-  
   const scoredResults = allPrompts.map(prompt => {
     const score = calculateSearchScore(prompt, searchTerm);
     return { prompt, score };
   });
-  
-  const results = scoredResults
+  return scoredResults
     .filter(item => item.score > 0)
     .sort((a, b) => b.score - a.score)
     .map(item => item.prompt);
-  
-  return results;
 }
 
 function highlightMatch(text, query) {
@@ -207,177 +385,9 @@ function highlightMatch(text, query) {
   return escapeHtml(text).replace(regex, '<strong>$1</strong>');
 }
 
-function escapeRegex(string) {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-// ========== FEATURED COLLECTIONS FUNCTIONS ==========
-// Load collections
-async function loadCollections() {
-  try {
-    const response = await fetch('data/collections.json');
-    if (response.ok) {
-      collectionsData = await response.json();
-      await loadCollectionPromptCounts();
-      renderCollections();
-    } else {
-      console.log('Collections file not found, skipping...');
-    }
-  } catch (error) {
-    console.error('Error loading collections:', error);
-  }
-}
-
-// Load prompt count for each collection
-async function loadCollectionPromptCounts() {
-  for (const collection of collectionsData) {
-    try {
-      const response = await fetch(collection.file);
-      if (response.ok) {
-        const prompts = await response.json();
-        collection.promptCount = prompts.length;
-        collectionPromptsData[collection.id] = prompts;
-      } else {
-        collection.promptCount = 0;
-      }
-    } catch (e) {
-      console.warn('Could not load prompt count for:', collection.id);
-      collection.promptCount = 0;
-    }
-  }
-}
-
-// ========== ✅ FIXED: Render Featured Collections (opens featured.html) ==========
-function renderCollections() {
-  const grid = document.getElementById('collectionsGrid');
-  if (!grid) return;
-  
-  if (!collectionsData || collectionsData.length === 0) {
-    grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #888888; padding: 40px 0;">No collections available</p>';
-    return;
-  }
-  
-  grid.innerHTML = collectionsData.map(collection => `
-    <div class="collection-cover-card" data-collection="${collection.id}" onclick="window.location.href='pages/featured.html?id=${collection.id}'">
-      <img src="${collection.cover}" alt="${escapeHtml(collection.title)}" loading="lazy" onerror="this.src='https://via.placeholder.com/800x450?text=${escapeHtml(collection.title)}'">
-      <div class="collection-cover-overlay">
-        <h3>${escapeHtml(collection.title)}</h3>
-        <p>${escapeHtml(collection.description)}</p>
-        <span class="collection-cover-badge"><i class="fas fa-arrow-right"></i> Explore</span>
-        <span class="collection-cover-count"><i class="fas fa-file-alt"></i> ${collection.promptCount || 0} prompts</span>
-      </div>
-    </div>
-  `).join('');
-}
-
-// Load data and initialize
-async function loadData() {
-  try {
-    const [galleryRes, trendingRes, promptsRes, categoriesRes] = await Promise.all([
-      fetch('data/gallery.json'),
-      fetch('data/trending.json'),
-      fetch('data/prompts.json'),
-      fetch('data/categories.json')
-    ]);
-    
-    galleryImages = await galleryRes.json();
-    let trendingData = await trendingRes.json();
-    allPrompts = await promptsRes.json();
-    const categories = await categoriesRes.json();
-    
-    trendingData = shuffleArray(trendingData);
-    
-    const savedPrompts = getSavedShuffledPrompts();
-    
-    if (savedPrompts) {
-      shuffledPrompts = savedPrompts;
-    } else {
-      shuffledPrompts = shuffleArray([...allPrompts]);
-      saveShuffledPrompts(shuffledPrompts);
-    }
-    
-    const urlParams = new URLSearchParams(window.location.search);
-    const searchQuery = urlParams.get('q') || urlParams.get('search') || urlParams.get('query');
-    
-    if (searchQuery) {
-      currentSearchQuery = searchQuery.toLowerCase();
-      performSearch(currentSearchQuery, true);
-    }
-    
-    initializeGallery();
-    initializeTrending(trendingData);
-    initializeCategories(categories);
-    
-    restoreScrollPositionAndPage();
-    
-    renderPrompts();
-    setupEventListeners();
-    
-    // Load J-Style Hub (J-Style Collections - opens collection.html)
-    try {
-      const jstyleRes = await fetch('data/jstylehub.json');
-      if (jstyleRes.ok) {
-        const jstyleCollections = await jstyleRes.json();
-        initializeJStyleHub(jstyleCollections);
-      }
-    } catch (jstyleError) {
-      console.log('J-Style Hub file not found, skipping...');
-    }
-    
-    // ========== LOAD FEATURED COLLECTIONS (opens featured.html) ==========
-    await loadCollections();
-    
-  } catch (error) {
-    console.error('Error loading data:', error);
-  }
-}
-
-function shuffleArray(array) {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-}
-
-// ========== J-STYLE HUB (opens collection.html) ==========
-function initializeJStyleHub(jstyleCollections) {
-  const container = document.getElementById('jstylehubGrid');
-  if (!container) return;
-  
-  if (!jstyleCollections || jstyleCollections.length === 0) {
-    container.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">No collections available</p>';
-    return;
-  }
-  
-  container.innerHTML = jstyleCollections.map(collection => `
-    <div class="jstyle-card" data-collection="${collection.collection}" data-id="${collection.id}">
-      <img src="${collection.thumbnail}" alt="${escapeHtml(collection.title)}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=No+Image'">
-      <div class="jstyle-card-overlay">
-        <h3 class="jstyle-card-title">${escapeHtml(collection.title)}</h3>
-      </div>
-    </div>
-  `).join('');
-  
-  document.querySelectorAll('.jstyle-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const collectionId = card.dataset.collection;
-      saveScrollPosition();
-      // ✅ J-Style opens collection.html
-      window.location.href = `pages/collection.html?collection=${collectionId}`;
-    });
-  });
-}
-
-function fixImagePath(imageUrl) {
-  if (!imageUrl) return 'https://via.placeholder.com/400x300?text=No+Image';
-  if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) return imageUrl;
-  if (imageUrl.startsWith('../')) return imageUrl;
-  if (imageUrl.startsWith('assets/')) return imageUrl;
-  return imageUrl;
-}
-
+// ============================================================
+// SEARCH FUNCTIONS
+// ============================================================
 function performSearch(query, isFromURL = false) {
   if (!query || query.trim() === '') {
     isSearchMode = false;
@@ -389,7 +399,6 @@ function performSearch(query, isFromURL = false) {
   }
   
   const searchTerm = query.toLowerCase().trim();
-  
   const scoredResults = allPrompts.map(prompt => {
     const score = calculateSearchScore(prompt, searchTerm);
     return { prompt, score };
@@ -410,6 +419,23 @@ function performSearch(query, isFromURL = false) {
   }
   
   renderPrompts();
+}
+
+function clearSearch() {
+  isSearchMode = false;
+  currentSearchQuery = '';
+  searchResults = [];
+  currentPage = 1;
+  renderPrompts();
+  
+  const banner = document.getElementById('searchResultsBanner');
+  if (banner) banner.remove();
+  
+  const searchInput = document.getElementById('liveSearchInput');
+  if (searchInput) searchInput.value = '';
+  
+  const heroSearchInput = document.getElementById('heroSearchInput');
+  if (heroSearchInput) heroSearchInput.value = '';
 }
 
 function showSearchResultsBanner(query, count) {
@@ -439,22 +465,13 @@ function showSearchResultsBanner(query, count) {
   });
 }
 
-function clearSearch() {
-  isSearchMode = false;
-  currentSearchQuery = '';
-  searchResults = [];
-  currentPage = 1;
-  renderPrompts();
-  
-  const banner = document.getElementById('searchResultsBanner');
-  if (banner) banner.remove();
-  
-  const searchInput = document.getElementById('liveSearchInput');
-  if (searchInput) searchInput.value = '';
-}
-
+// ============================================================
+// GALLERY
+// ============================================================
 function initializeGallery() {
   const slider = document.getElementById('gallerySlider');
+  if (!slider || !galleryImages.length) return;
+  
   slider.innerHTML = galleryImages.map((img, idx) => `
     <div class="gallery-slide ${idx === 0 ? 'active' : ''}" data-category="${img.category}">
       <img src="${img.url}" alt="Gallery image" loading="lazy">
@@ -472,6 +489,7 @@ function initializeGallery() {
         currentPage = 1;
         renderPrompts();
         updateActiveCategory();
+        setTimeout(scrollToCardsSection, 300);
       }
     });
   });
@@ -490,8 +508,12 @@ function startGalleryRotation() {
   }, 4000);
 }
 
+// ============================================================
+// TRENDING
+// ============================================================
 function initializeTrending(trending) {
   const track = document.getElementById('trendingTrack');
+  if (!track || !trending.length) return;
   
   const promptTitleToId = {};
   allPrompts.forEach(prompt => {
@@ -500,7 +522,6 @@ function initializeTrending(trending) {
   
   track.innerHTML = trending.map(prompt => {
     const actualPromptId = promptTitleToId[prompt.title.toLowerCase()] || prompt.id;
-    
     return `
       <div class="trending-card" data-id="${actualPromptId}" style="cursor: pointer;">
         <div class="trending-card-img-wrapper">
@@ -551,8 +572,13 @@ function initializeTrending(trending) {
   });
 }
 
+// ============================================================
+// CATEGORIES
+// ============================================================
 function initializeCategories(categories) {
   const container = document.getElementById('categoriesList');
+  if (!container) return;
+  
   container.innerHTML = `
     <button class="category-pill active" data-category="all">All</button>
     ${categories.map(cat => `
@@ -583,41 +609,124 @@ function updateActiveCategory() {
   });
 }
 
+// ============================================================
+// J-STYLE HUB
+// ============================================================
+function initializeJStyleHub(jstyleCollections) {
+  const container = document.getElementById('jstylehubGrid');
+  if (!container) return;
+  
+  if (!jstyleCollections || jstyleCollections.length === 0) {
+    container.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">No collections available</p>';
+    return;
+  }
+  
+  container.innerHTML = jstyleCollections.map(collection => `
+    <div class="jstyle-card" data-collection="${collection.collection}" data-id="${collection.id}">
+      <img src="${collection.thumbnail}" alt="${escapeHtml(collection.title)}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=No+Image'">
+      <div class="jstyle-card-overlay">
+        <h3 class="jstyle-card-title">${escapeHtml(collection.title)}</h3>
+      </div>
+    </div>
+  `).join('');
+  
+  document.querySelectorAll('.jstyle-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const collectionId = card.dataset.collection;
+      saveScrollPosition();
+      window.location.href = `pages/collection.html?collection=${collectionId}`;
+    });
+  });
+}
+
+// ============================================================
+// FEATURED COLLECTIONS
+// ============================================================
+async function loadCollections() {
+  try {
+    const response = await fetch('data/collections.json');
+    if (response.ok) {
+      collectionsData = await response.json();
+      await loadCollectionPromptCounts();
+      renderCollections();
+    } else {
+      console.log('Collections file not found, skipping...');
+    }
+  } catch (error) {
+    console.error('Error loading collections:', error);
+  }
+}
+
+async function loadCollectionPromptCounts() {
+  for (const collection of collectionsData) {
+    try {
+      const response = await fetch(collection.file);
+      if (response.ok) {
+        const prompts = await response.json();
+        collection.promptCount = prompts.length;
+        collectionPromptsData[collection.id] = prompts;
+      } else {
+        collection.promptCount = 0;
+      }
+    } catch (e) {
+      console.warn('Could not load prompt count for:', collection.id);
+      collection.promptCount = 0;
+    }
+  }
+}
+
+function renderCollections() {
+  const grid = document.getElementById('collectionsGrid');
+  if (!grid) return;
+  
+  if (!collectionsData || collectionsData.length === 0) {
+    grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #888888; padding: 40px 0;">No collections available</p>';
+    return;
+  }
+  
+  grid.innerHTML = collectionsData.map(collection => `
+    <div class="collection-cover-card" data-collection="${collection.id}" onclick="window.location.href='pages/featured.html?id=${collection.id}'">
+      <img src="${collection.cover}" alt="${escapeHtml(collection.title)}" loading="lazy" onerror="this.src='https://via.placeholder.com/800x450?text=${escapeHtml(collection.title)}'">
+      <div class="collection-cover-overlay">
+        <h3>${escapeHtml(collection.title)}</h3>
+        <p>${escapeHtml(collection.description)}</p>
+        <span class="collection-cover-badge"><i class="fas fa-arrow-right"></i> Explore</span>
+        <span class="collection-cover-count"><i class="fas fa-file-alt"></i> ${collection.promptCount || 0} prompts</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ============================================================
+// PROMPTS GRID
+// ============================================================
 function getCurrentPrompts() {
   if (isSearchMode && currentSearchQuery) {
     return searchResults;
   }
-  
   if (currentCategory !== 'all') {
     return allPrompts.filter(p => p.category === currentCategory);
   }
-  
   return shuffledPrompts;
 }
 
 function renderPagination(totalItems) {
   const totalPages = Math.ceil(totalItems / promptsPerPage);
-  if (totalPages <= 1) {
-    const existingPagination = document.querySelector('.pagination-container');
-    if (existingPagination) existingPagination.remove();
-    return;
-  }
-  
   const existingPagination = document.querySelector('.pagination-container');
   if (existingPagination) existingPagination.remove();
+  
+  if (totalPages <= 1) return;
   
   const paginationDiv = document.createElement('div');
   paginationDiv.className = 'pagination-container';
   
   let paginationHTML = '<div class="pagination">';
-  
   paginationHTML += `<button class="page-btn prev-btn" ${currentPage === 1 ? 'disabled' : ''} data-page="${currentPage - 1}">
     <i class="fas fa-chevron-left"></i>
   </button>`;
   
   let startPage = Math.max(1, currentPage - 2);
   let endPage = Math.min(totalPages, startPage + 4);
-  
   if (endPage - startPage < 4) {
     startPage = Math.max(1, endPage - 4);
   }
@@ -639,7 +748,6 @@ function renderPagination(totalItems) {
   paginationHTML += `<button class="page-btn next-btn" ${currentPage === totalPages ? 'disabled' : ''} data-page="${currentPage + 1}">
     <i class="fas fa-chevron-right"></i>
   </button>`;
-  
   paginationHTML += '</div>';
   paginationDiv.innerHTML = paginationHTML;
   
@@ -652,22 +760,21 @@ function renderPagination(totalItems) {
         saveScrollPositionAndPage();
         currentPage = parseInt(btn.dataset.page);
         renderPrompts();
-        setTimeout(() => {
-          scrollToCardsSection();
-        }, 100);
+        setTimeout(scrollToCardsSection, 100);
       });
     }
   });
 }
 
+// ============================================================
+// ✅ FIXED: RENDER PROMPTS - CARDS ALWAYS VISIBLE
+// ============================================================
 function renderPrompts() {
   let promptsList = getCurrentPrompts();
   const totalItems = promptsList.length;
-  
   const start = (currentPage - 1) * promptsPerPage;
   const end = start + promptsPerPage;
   const paginated = promptsList.slice(start, end);
-  
   const grid = document.getElementById('promptsGrid');
   
   if (paginated.length === 0) {
@@ -684,13 +791,9 @@ function renderPrompts() {
   
   grid.innerHTML = paginated.map((prompt, idx) => {
     let aspectRatioValue = '16 / 9';
-    if (prompt.ratio === '9:16') {
-      aspectRatioValue = '9 / 16';
-    } else if (prompt.ratio === '4:5') {
-      aspectRatioValue = '4 / 5';
-    } else if (prompt.ratio === '1:1') {
-      aspectRatioValue = '1 / 1';
-    }
+    if (prompt.ratio === '9:16') aspectRatioValue = '9 / 16';
+    else if (prompt.ratio === '4:5') aspectRatioValue = '4 / 5';
+    else if (prompt.ratio === '1:1') aspectRatioValue = '1 / 1';
     
     return `
       <div class="prompt-card" data-id="${prompt.id}" style="cursor: pointer;">
@@ -707,6 +810,8 @@ function renderPrompts() {
       </div>
     `;
   }).join('');
+  
+  // ✅ FIX: Cards are now directly visible - removed reveal-stagger class
   
   document.querySelectorAll('.prompt-card').forEach(card => {
     const cardId = card.dataset.id;
@@ -760,41 +865,36 @@ function renderPrompts() {
   });
   
   renderPagination(totalItems);
-  
   const loadMoreBtn = document.getElementById('loadMoreBtn');
   if (loadMoreBtn) loadMoreBtn.style.display = 'none';
 }
 
+// ============================================================
+// INLINE ADS
+// ============================================================
 function insertInlineAds() {
   const grid = document.getElementById('promptsGrid');
   if (!grid) return;
   
   const cards = grid.children;
   const cardsArray = Array.from(cards);
-  
   const existingAds = grid.querySelectorAll('.ad-container');
   existingAds.forEach(ad => ad.remove());
   
-  cardsArray.forEach(card => {
-    grid.appendChild(card);
-  });
+  cardsArray.forEach(card => grid.appendChild(card));
   
   const adPositions = [];
   for (let i = 2; i <= cardsArray.length; i += 2) {
     adPositions.push(i);
   }
   
-  let inserted = 0;
   for (let i = 0; i < cardsArray.length; i++) {
     const card = cardsArray[i];
-    const cardIndex = i;
-    
-    if (adPositions.includes(cardIndex + 1)) {
+    if (adPositions.includes(i + 1)) {
       const adDiv = document.createElement('div');
       adDiv.className = 'ad-container';
       adDiv.style.margin = '0';
       adDiv.style.marginBottom = '20px';
-      adDiv.style.marginTop = '0';
       adDiv.innerHTML = `
         <div class="ad-label">Sponsored</div>
         <div class="ad-placeholder">
@@ -802,7 +902,6 @@ function insertInlineAds() {
           Advertisement Space
         </div>
       `;
-      
       if (card.nextSibling) {
         grid.insertBefore(adDiv, card.nextSibling);
       } else {
@@ -812,6 +911,9 @@ function insertInlineAds() {
   }
 }
 
+// ============================================================
+// SEARCH SETUP
+// ============================================================
 function setupSearch() {
   const searchInput = document.getElementById('liveSearchInput');
   const suggestionsDiv = document.getElementById('searchSuggestions');
@@ -871,17 +973,12 @@ function setupSearch() {
   
   searchInput.addEventListener('input', (e) => {
     const query = e.target.value.trim();
-    
     clearTimeout(debounceTimer);
-    
     if (query.length === 0) {
       suggestionsDiv.classList.remove('active');
-      if (isSearchMode) {
-        performSearch('');
-      }
+      if (isSearchMode) performSearch('');
       return;
     }
-    
     debounceTimer = setTimeout(() => {
       renderSuggestions(query);
     }, 150);
@@ -904,6 +1001,9 @@ function setupSearch() {
   });
 }
 
+// ============================================================
+// EVENT LISTENERS
+// ============================================================
 function setupEventListeners() {
   const searchToggle = document.getElementById('searchToggleBtn');
   const searchExpand = document.getElementById('searchExpand');
@@ -940,5 +1040,81 @@ function setupEventListeners() {
   setupSearch();
 }
 
-// Initialize
+// ============================================================
+// LOAD DATA & INITIALIZE
+// ============================================================
+async function loadData() {
+  try {
+    const [galleryRes, trendingRes, promptsRes, categoriesRes] = await Promise.all([
+      fetch('data/gallery.json'),
+      fetch('data/trending.json'),
+      fetch('data/prompts.json'),
+      fetch('data/categories.json')
+    ]);
+    
+    galleryImages = await galleryRes.json();
+    let trendingData = await trendingRes.json();
+    allPrompts = await promptsRes.json();
+    const categories = await categoriesRes.json();
+    
+    trendingData = shuffleArray(trendingData);
+    
+    const savedPrompts = getSavedShuffledPrompts();
+    if (savedPrompts) {
+      shuffledPrompts = savedPrompts;
+    } else {
+      shuffledPrompts = shuffleArray([...allPrompts]);
+      saveShuffledPrompts(shuffledPrompts);
+    }
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchQuery = urlParams.get('q') || urlParams.get('search') || urlParams.get('query');
+    if (searchQuery) {
+      currentSearchQuery = searchQuery.toLowerCase();
+      performSearch(currentSearchQuery, true);
+    }
+    
+    initializeGallery();
+    initializeTrending(trendingData);
+    initializeCategories(categories);
+    
+    restoreScrollPositionAndPage();
+    renderPrompts();
+    setupEventListeners();
+    
+    // Load J-Style Hub
+    try {
+      const jstyleRes = await fetch('data/jstylehub.json');
+      if (jstyleRes.ok) {
+        const jstyleCollections = await jstyleRes.json();
+        initializeJStyleHub(jstyleCollections);
+      }
+    } catch (jstyleError) {
+      console.log('J-Style Hub file not found, skipping...');
+    }
+    
+    // Load Featured Collections
+    await loadCollections();
+    
+    // Initialize premium features after data loads
+    setTimeout(() => {
+      initScrollReveal();
+      initCountUps();
+      initHeaderScroll();
+      initRippleEffect();
+    }, 300);
+    
+  } catch (error) {
+    console.error('Error loading data:', error);
+  }
+}
+
+// ============================================================
+// INJECT RIPPLE STYLES
+// ============================================================
+injectRippleStyles();
+
+// ============================================================
+// START
+// ============================================================
 loadData();

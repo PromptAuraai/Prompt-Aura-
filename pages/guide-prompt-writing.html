@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2051096973053893"
+     crossorigin="anonymous"></script>
+  
+  <!-- ========== PRIMARY META TAGS ========== -->
+  <title>How to Write Better AI Image Prompts - Complete Guide | PromptAura</title>
+  <meta name="description" content="Learn how to write better AI image prompts with this complete guide. Master prompt structure, style, techniques, and proven strategies for Midjourney, DALL-E, and Stable Diffusion.">
+  <meta name="keywords" content="how to write AI prompts, AI prompt guide, prompt engineering, Midjourney prompts, DALL-E prompts, Stable Diffusion prompts, AI art tips">
+  <meta name="author" content="PromptAura">
+  <meta name="theme-color" content="#7C3AED">
+  
+  <!-- ========== FAVICON ========== -->
+  <link rel="icon" type="image/x-icon" href="../assets/icons/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="../assets/icons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
+  
+  <!-- ========== OPEN GRAPH / FACEBOOK ========== -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://promptauraai.com/pages/guide-prompt-writing.html">
+  <meta property="og:title" content="How to Write Better AI Image Prompts - Complete Guide">
+  <meta property="og:description" content="Learn how to write better AI image prompts with this complete guide. Master prompt structure, style, techniques, and proven strategies.">
+  <meta property="og:image" content="https://promptauraai.com/assets/icons/og-image.jpg">
+  
+  <!-- ========== TWITTER CARD ========== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://promptauraai.com/pages/guide-prompt-writing.html">
+  <meta name="twitter:title" content="How to Write Better AI Image Prompts - Complete Guide">
+  <meta name="twitter:description" content="Learn how to write better AI image prompts with this complete guide. Master prompt structure, style, techniques, and proven strategies.">
+  <meta name="twitter:image" content="https://promptauraai.com/assets/icons/og-image.jpg">
+  
+  <!-- ========== CANONICAL URL ========== -->
+  <link rel="canonical" href="https://promptauraai.com/pages/guide-prompt-writing.html">
+  
+  <!-- ========== MANIFEST ========== -->
+  <link rel="manifest" href="../manifest.json">
+  
+  <!-- ========== CSS ========== -->
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <style>
+    /* ============================================================
+       GUIDE PAGE - PREMIUM STYLES
+       ============================================================ */
+
+    .guide-page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .breadcrumb a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .breadcrumb a:hover {
+      color: var(--primary-light);
+      text-decoration: underline;
+    }
+    .breadcrumb span {
+      color: var(--text-light);
+    }
+    .breadcrumb .separator {
+      color: var(--border-light);
+    }
+
+    /* Back Button */
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 10px 22px;
+      border-radius: var(--radius-full);
+      color: var(--text-secondary);
+      text-decoration: none;
+      margin-bottom: 24px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+    .back-button:hover {
+      background: var(--bg-white);
+      transform: translateX(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* Guide Header */
+    .guide-header {
+      margin-bottom: 30px;
+    }
+
+    .guide-header .guide-badge {
+      display: inline-block;
+      background: var(--primary-glow-soft);
+      color: var(--primary);
+      padding: 4px 16px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .guide-header h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .guide-header .guide-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 14px;
+      color: var(--text-light);
+    }
+
+    .guide-header .guide-meta i {
+      color: var(--primary);
+      margin-right: 6px;
+    }
+
+    /* Guide Content */
+    .guide-content {
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(8px);
+      border-radius: var(--radius-lg);
+      padding: 32px 36px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .guide-content h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 30px 0 16px;
+    }
+
+    .guide-content h2:first-child {
+      margin-top: 0;
+    }
+
+    .guide-content h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 20px 0 10px;
+    }
+
+    .guide-content p {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .guide-content ul, 
+    .guide-content ol {
+      margin: 12px 0 16px;
+      padding-left: 24px;
+    }
+
+    .guide-content li {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+
+    .guide-content .highlight-box {
+      background: var(--primary-glow-soft);
+      padding: 16px 20px;
+      border-radius: var(--radius-sm);
+      border-left: 4px solid var(--primary);
+      margin: 16px 0;
+    }
+
+    .guide-content .highlight-box p {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .guide-content .highlight-box strong {
+      color: var(--text-primary);
+    }
+
+    .guide-content .example-box {
+      background: rgba(255, 255, 255, 0.7);
+      padding: 16px 20px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-light);
+      margin: 12px 0;
+      font-family: monospace;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .guide-content .example-box .bad {
+      color: #ef4444;
+    }
+
+    .guide-content .example-box .good {
+      color: #10b981;
+    }
+
+    .guide-content .tip-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 16px 0;
+    }
+
+    .guide-content .tip-item {
+      background: rgba(255, 255, 255, 0.5);
+      padding: 16px 20px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .guide-content .tip-item h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .guide-content .tip-item p {
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    /* Table of Contents */
+    .toc {
+      background: rgba(255, 255, 255, 0.5);
+      padding: 20px 24px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      margin-bottom: 24px;
+    }
+
+    .toc h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+
+    .toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc li {
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .toc li:last-child {
+      border-bottom: none;
+    }
+
+    .toc a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+    .toc a:hover {
+      color: var(--primary);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+
+    @media (max-width: 768px) {
+      .guide-content {
+        padding: 20px 18px;
+      }
+      .guide-content h2 {
+        font-size: 1.3rem;
+      }
+      .tip-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .guide-content {
+        padding: 16px 14px;
+      }
+      .guide-header h1 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="logo" onclick="window.location.href='../index.html'">
+        <img src="../assets/prompts/logo.png" alt="PromptAura Logo" width="42" height="42">
+        <span>PromptAura</span>
+      </div>
+      <div class="header-actions">
+        <a href="../index.html" class="icon-btn" aria-label="Home">
+          <i class="fas fa-home"></i>
+        </a>
+        <button class="icon-btn search-toggle-btn" id="searchToggleBtn" aria-label="Search">
+          <i class="fas fa-search"></i>
+        </button>
+        <button class="icon-btn menu-toggle-btn" id="menuToggleBtn" aria-label="Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+    <div class="search-expand" id="searchExpand">
+      <div class="search-wrapper">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" id="liveSearchInput" placeholder="Search..." autocomplete="off">
+        <button id="clearSearchBtn" class="clear-search"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="searchSuggestions" class="search-suggestions"></div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       SLIDING MENU
+       ============================================================ -->
+  <div class="menu-overlay" id="menuOverlay"></div>
+  <div class="sliding-menu" id="slidingMenu">
+    <div class="menu-header">
+      <div class="menu-logo">
+        <img src="../assets/prompts/logo.png" alt="PromptAura Logo" width="42" height="42">
+        <span>PromptAura</span>
+      </div>
+      <button class="menu-close" id="menuCloseBtn">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="menu-content">
+      <div class="menu-section">
+        <a href="../index.html" class="menu-item">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </a>
+        <a href="../index.html#trending" class="menu-item">
+          <i class="fas fa-chart-line"></i>
+          <span>Trending</span>
+        </a>
+        <a href="../index.html#jstylehub" class="menu-item">
+          <i class="fas fa-layer-group"></i>
+          <span>J-Style</span>
+        </a>
+        <a href="../index.html#featuredCollections" class="menu-item">
+          <i class="fas fa-star"></i>
+          <span>Featured</span>
+        </a>
+        <a href="guides.html" class="menu-item active">
+          <i class="fas fa-book"></i>
+          <span>Guides</span>
+        </a>
+      </div>
+      <div class="menu-divider"></div>
+      <div class="menu-section">
+        <a href="../about.html" class="menu-item">
+          <i class="fas fa-info-circle"></i>
+          <span>About Us</span>
+        </a>
+        <a href="../contact.html" class="menu-item">
+          <i class="fas fa-envelope"></i>
+          <span>Contact Us</span>
+        </a>
+        <a href="../privacy.html" class="menu-item">
+          <i class="fas fa-lock"></i>
+          <span>Privacy Policy</span>
+        </a>
+        <a href="../terms.html" class="menu-item">
+          <i class="fas fa-file-contract"></i>
+          <span>Terms &amp; Conditions</span>
+        </a>
+        <a href="../disclaimer.html" class="menu-item">
+          <i class="fas fa-exclamation-triangle"></i>
+          <span>Disclaimer</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
+  <main class="main-container">
+    <div class="guide-page">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="separator">›</span>
+        <a href="guides.html">AI Guides</a>
+        <span class="separator">›</span>
+        <span>Prompt Writing Guide</span>
+      </nav>
+
+      <!-- Back Button -->
+      <a href="guides.html" class="back-button">
+        <i class="fas fa-arrow-left"></i> All Guides
+      </a>
+
+      <!-- Guide Header -->
+      <div class="guide-header reveal">
+        <span class="guide-badge"><i class="fas fa-pen-fancy"></i> Beginner's Guide</span>
+        <h1>How to Write Better AI Image Prompts</h1>
+        <div class="guide-meta">
+          <span><i class="fas fa-clock"></i> 10 min read</span>
+          <span><i class="fas fa-signal"></i> All Levels</span>
+          <span><i class="fas fa-calendar-alt"></i> Updated 2026</span>
+        </div>
+      </div>
+
+      <!-- Guide Content -->
+      <div class="guide-content reveal">
+
+        <!-- Table of Contents -->
+        <div class="toc">
+          <h3><i class="fas fa-list"></i> Table of Contents</h3>
+          <ul>
+            <li><a href="#intro">1. Introduction</a></li>
+            <li><a href="#structure">2. The Structure of a Good Prompt</a></li>
+            <li><a href="#components">3. Key Prompt Components</a></li>
+            <li><a href="#examples">4. Bad vs Good Prompts</a></li>
+            <li><a href="#tips">5. Tips for Better Results</a></li>
+            <li><a href="#conclusion">6. Conclusion</a></li>
+          </ul>
+        </div>
+
+        <!-- Section 1: Introduction -->
+        <h2 id="intro">1. Introduction</h2>
+        <p>
+          Writing effective AI prompts is both an art and a science. The quality of your prompt 
+          directly determines the quality of the image your AI generator produces. Whether you're 
+          using <strong>Midjourney, DALL-E, Stable Diffusion</strong>, or any other AI image tool, 
+          mastering prompt writing is essential.
+        </p>
+        <p>
+          A great prompt is <strong>clear, specific, descriptive, and well-structured</strong>. 
+          It tells the AI exactly what you want, how you want it, and what style you prefer. 
+          This guide will walk you through the anatomy of a perfect prompt.
+        </p>
+        <div class="highlight-box">
+          <p><strong>💡 Key Insight:</strong> The more detail you provide, the more control you have over the final output. Think of prompting as giving directions — the clearer you are, the better the result.</p>
+        </div>
+
+        <!-- Section 2: Structure -->
+        <h2 id="structure">2. The Structure of a Good Prompt</h2>
+        <p>
+          A well-structured prompt typically follows this format:
+        </p>
+        <div class="example-box">
+          <strong>[Subject]</strong> + <strong>[Appearance/Details]</strong> + <strong>[Environment/Setting]</strong> + <strong>[Composition]</strong> + <strong>[Camera/Lens]</strong> + <strong>[Lighting]</strong> + <strong>[Mood]</strong> + <strong>[Style]</strong>
+        </div>
+        <p>
+          Each component adds a layer of detail that guides the AI toward your desired outcome. 
+          Here's a breakdown of each element:
+        </p>
+
+        <h3>Subject</h3>
+        <p>
+          <strong>What is the main focus of the image?</strong> This is the most important part. 
+          Be specific about the subject — a person, an object, a scene, or a concept.
+        </p>
+
+        <h3>Appearance/Details</h3>
+        <p>
+          <strong>How does the subject look?</strong> Describe age, gender, ethnicity, clothing, 
+          hairstyle, accessories, and any distinguishing features.
+        </p>
+
+        <h3>Environment/Setting</h3>
+        <p>
+          <strong>Where is the scene taking place?</strong> Be specific about the location — 
+          indoor/outdoor, urban/natural, specific landmarks, or abstract environments.
+        </p>
+
+        <h3>Composition</h3>
+        <p>
+          <strong>How is the image framed?</strong> Consider angles, perspective, depth of field, 
+          and the placement of subjects within the frame.
+        </p>
+
+        <h3>Camera/Lens</h3>
+        <p>
+          <strong>What photographic style does it evoke?</strong> Mention camera types, lens 
+          specifications, and focal lengths for different effects.
+        </p>
+
+        <h3>Lighting</h3>
+        <p>
+          <strong>How is the scene lit?</strong> Describe the lighting style — natural light, 
+          studio light, golden hour, dramatic shadows, soft or harsh lighting.
+        </p>
+
+        <h3>Mood</h3>
+        <p>
+          <strong>What feeling should the image convey?</strong> Describe the emotional tone — 
+          romantic, dramatic, peaceful, mysterious, joyful, melancholic.
+        </p>
+
+        <h3>Style</h3>
+        <p>
+          <strong>What artistic style should it have?</strong> Mention specific styles — 
+          photorealistic, cinematic, anime, oil painting, watercolor, minimalist, vintage, etc.
+        </p>
+
+        <!-- Section 3: Components -->
+        <h2 id="components">3. Key Prompt Components Explained</h2>
+
+        <div class="tip-grid">
+          <div class="tip-item">
+            <h4><i class="fas fa-user" style="color: var(--primary);"></i> Subject</h4>
+            <p>"A young woman," "A majestic lion," "A futuristic cityscape"</p>
+          </div>
+          <div class="tip-item">
+            <h4><i class="fas fa-palette" style="color: var(--primary);"></i> Style</h4>
+            <p>"Cinematic," "Photorealistic," "Anime style," "Watercolor painting"</p>
+          </div>
+          <div class="tip-item">
+            <h4><i class="fas fa-sun" style="color: var(--primary);"></i> Lighting</h4>
+            <p>"Golden hour," "Studio lighting," "Dramatic shadows," "Soft diffused light"</p>
+          </div>
+          <div class="tip-item">
+            <h4><i class="fas fa-camera" style="color: var(--primary);"></i> Camera</h4>
+            <p>"Portrait lens 85mm," "Wide angle 24mm," "Macro lens," "Film grain"</p>
+          </div>
+        </div>
+
+        <!-- Section 4: Bad vs Good -->
+        <h2 id="examples">4. Bad vs Good Prompts</h2>
+
+        <h3>Bad Prompt (Too Simple)</h3>
+        <div class="example-box bad">
+          "A woman"
+        </div>
+        <p>
+          <span class="bad">✗</span> This prompt is vague and gives the AI almost no direction. 
+          The result will be generic and unpredictable.
+        </p>
+
+        <h3>Better Prompt (More Detail)</h3>
+        <div class="example-box good">
+          "A young woman with long flowing red hair, wearing a vintage floral dress, standing in a sunflower field during golden hour, soft natural lighting, shallow depth of field, romantic mood, cinematic style, 85mm portrait lens"
+        </div>
+        <p>
+          <span class="good">✓</span> This prompt is specific and guides the AI toward a clear 
+          vision. Each detail contributes to the final image.
+        </p>
+
+        <div class="highlight-box">
+          <p><strong>📝 Key Takeaway:</strong> Always aim for specificity. The more descriptive you are, the closer the result will match your vision.</p>
+        </div>
+
+        <!-- Section 5: Tips -->
+        <h2 id="tips">5. Tips for Better Results</h2>
+
+        <div class="tip-grid">
+          <div class="tip-item">
+            <h4><i class="fas fa-quote-right" style="color: var(--primary);"></i> Be Specific</h4>
+            <p>Use concrete details about the subject, setting, and style. Avoid vague terms.</p>
+          </div>
+          <div class="tip-item">
+            <h4><i class="fas fa-sync" style="color: var(--primary);"></i> Iterate</h4>
+            <p>Generate multiple versions and refine based on the results. Each iteration improves the output.</p>
+          </div>
+          <div class="tip-item">
+            <h4><i class="fas fa-arrows-alt" style="color: var(--primary);"></i> Use Aspect Ratio</h4>
+            <p>Specify the desired aspect ratio for better composition. Common ratios: 16:9, 4:5, 1:1, 9:16.</p>
+          </div>
+          <div class="tip-item">
+            <h4><i class="fas fa-undo" style="color: var(--primary);"></i> Start Simple</h4>
+            <p>Begin with a simple prompt and gradually add details. This helps you understand what works.</p>
+          </div>
+          <div class="tip-item">
+            <h4><i class="fas fa-copy" style="color: var(--primary);"></i> Learn from Examples</h4>
+            <p>Study successful prompts from others and understand why they work.</p>
+          </div>
+          <div class="tip-item">
+            <h4><i class="fas fa-tag" style="color: var(--primary);"></i> Use Keywords</h4>
+            <p>Include quality keywords like "high quality," "professional," "detailed," "sharp" for better results.</p>
+          </div>
+        </div>
+
+        <!-- Section 6: Conclusion -->
+        <h2 id="conclusion">6. Conclusion</h2>
+        <p>
+          Writing better AI prompts is a skill that develops with practice. By following the structure 
+          and tips outlined in this guide, you'll be able to create more detailed and effective prompts 
+          that consistently produce stunning results.
+        </p>
+        <p>
+          Remember: <strong>specificity is your best friend</strong>. The more detail you provide, the 
+          more control you have over the final image. Experiment, iterate, and learn from your results.
+        </p>
+        <div class="highlight-box">
+          <p><strong>🚀 Next Steps:</strong> Browse our <a href="../index.html" style="color: var(--primary); font-weight: 600;">AI Prompt Library</a> to see real examples of effective prompts, and check out our other <a href="guides.html" style="color: var(--primary); font-weight: 600;">AI Guides</a> for more advanced techniques.</p>
+        </div>
+
+      </div>
+
+      <!-- Related Guides -->
+      <div style="margin-top: 30px;">
+        <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">
+          <i class="fas fa-book-open" style="color: var(--primary);"></i> Related Guides
+        </h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px;">
+          <a href="guide-portrait-prompts.html" style="background: rgba(255,255,255,0.5); padding: 16px 20px; border-radius: var(--radius-md); text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: all 0.3s ease;">
+            <div style="font-size: 24px; margin-bottom: 6px;">👤</div>
+            <h4 style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin: 0;">Portrait Prompts</h4>
+          </a>
+          <a href="guide-cinematic-images.html" style="background: rgba(255,255,255,0.5); padding: 16px 20px; border-radius: var(--radius-md); text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: all 0.3s ease;">
+            <div style="font-size: 24px; margin-bottom: 6px;">🎬</div>
+            <h4 style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin: 0;">Cinematic Images</h4>
+          </a>
+          <a href="guide-wedding-prompts.html" style="background: rgba(255,255,255,0.5); padding: 16px 20px; border-radius: var(--radius-md); text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: all 0.3s ease;">
+            <div style="font-size: 24px; margin-bottom: 6px;">💍</div>
+            <h4 style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin: 0;">Wedding Prompts</h4>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo">
+            <img src="../assets/prompts/logo.png" alt="PromptAura Logo" width="42" height="42">
+            <span>PromptAura</span>
+          </div>
+          <p class="footer-description">Your ultimate destination for high-quality AI prompts. Generate stunning images with our carefully curated prompts.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../index.html#trending">Trending</a></li>
+            <li><a href="../index.html#jstylehub">J-Style</a></li>
+            <li><a href="../index.html#featuredCollections">Featured</a></li>
+            <li><a href="guides.html">AI Guides</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul class="footer-links">
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact Us</a></li>
+            <li><a href="../privacy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms &amp; Conditions</a></li>
+            <li><a href="../disclaimer.html">Disclaimer</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Stay Updated</h4>
+          <p class="footer-description" style="font-size: 13px;">
+            Get the latest prompts delivered to your inbox.
+          </p>
+          <div class="newsletter-form">
+            <input type="email" placeholder="Your email" aria-label="Email for newsletter">
+            <button><i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 PromptAura. All Rights Reserved.</p>
+        <p class="developer-credit">
+          Developed with <i class="fas fa-heart" style="color: #ff4d4d;"></i> by 
+          <a href="developer.html" class="developer-name">
+            Subhankar Bairagi
+          </a>
+        </p>
+        <p class="footer-tagline">PromptAura is a free AI prompt library where users can find prompts for AI image generation, cinematic prompts, wedding prompts, birthday prompts, anime prompts and more.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../menu.js"></script>
+  <script>
+    // ============================================================
+    // GUIDE PAGE - SCROLL REVEAL
+    // ============================================================
+    function initGuideScrollReveal() {
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+      reveals.forEach(el => observer.observe(el));
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(initGuideScrollReveal, 300);
+    });
+  </script>
+</body>
+</html>

@@ -12,7 +12,7 @@
   <meta name="description" content="Browse curated AI prompt collections for Midjourney, DALL-E, and Stable Diffusion. Find the best prompts organized by themes, styles, and categories. Free to use.">
   <meta name="keywords" content="AI prompt collection, Midjourney collection, DALL-E collection, prompt themes, curated prompts, AI art collection">
   <meta name="author" content="PromptAura">
-  <meta name="theme-color" content="#7b5cff">
+  <meta name="theme-color" content="#7C3AED">
   
   <!-- ========== FAVICON ========== -->
   <link rel="icon" type="image/x-icon" href="../assets/icons/favicon.ico">
@@ -46,187 +46,380 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   
   <style>
-    /* Additional styles for collection page */
-    .collection-header {
-      background: linear-gradient(135deg, #7b5cff20, #a855f720);
-      padding: 40px 20px;
+    /* ============================================================
+       COLLECTION PAGE - PREMIUM STYLES
+       ============================================================ */
+
+    /* Hero Section */
+    .collection-hero {
+      position: relative;
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(168, 85, 247, 0.08));
+      padding: 50px 20px;
       text-align: center;
       margin-bottom: 30px;
-      border-radius: 20px;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(124, 58, 237, 0.06);
     }
-    
-    .collection-header h1 {
-      font-size: 32px;
-      color: #111111;
-      margin-bottom: 10px;
+
+    .collection-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 60%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.04) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: floatBg 20s ease-in-out infinite;
     }
-    
-    .collection-header p {
-      color: #666666;
-      font-size: 16px;
+
+    .collection-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 40%;
+      height: 150%;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.03) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: floatBg 15s ease-in-out infinite reverse;
     }
-    
+
+    @keyframes floatBg {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.1) rotate(5deg); }
+    }
+
+    .collection-hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .collection-hero h1 .gradient-text {
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .collection-hero p {
+      font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+
+    .collection-hero .hero-badge {
+      display: inline-block;
+      background: var(--primary-glow-soft);
+      color: var(--primary);
+      padding: 4px 18px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Collection Info - Premium */
     .collection-info {
-      background: white;
-      padding: 20px;
-      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 16px 24px;
+      border-radius: var(--radius-md);
       margin-bottom: 30px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
     }
-    
+
     .collection-stats {
       display: flex;
       gap: 20px;
+      align-items: center;
     }
-    
+
     .stat {
       display: flex;
       align-items: center;
       gap: 8px;
-      color: #7b5cff;
+      color: var(--primary);
+      font-size: 0.95rem;
+      font-weight: 500;
     }
-    
+
+    .stat i {
+      font-size: 18px;
+    }
+
+    .stat .stat-count {
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    /* Back Button - Premium */
     .back-button {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: white;
-      border: 1px solid #e0e0e0;
-      padding: 10px 20px;
-      border-radius: 50px;
-      color: #555555;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 10px 22px;
+      border-radius: var(--radius-full);
+      color: var(--text-secondary);
       text-decoration: none;
       margin-bottom: 20px;
-      transition: all 0.2s;
+      transition: all 0.3s ease;
+      font-weight: 500;
     }
-    
+
     .back-button:hover {
-      background: #f5f6f8;
-      transform: translateX(-3px);
+      background: var(--bg-white);
+      transform: translateX(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary);
+      color: var(--primary);
     }
-    
-    .collection-header {
+
+    /* ============================================================
+       COLLECTION CONTENT SECTIONS - FOR ADSENSE VALUE
+       ============================================================ */
+
+    .collection-content-section {
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .collection-content-section:hover {
+      border-color: rgba(124, 58, 237, 0.1);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .collection-content-section h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin-bottom: 25px;
+      gap: 10px;
     }
-    
+
+    .collection-content-section h3 i {
+      color: var(--primary);
+      font-size: 18px;
+    }
+
+    .collection-content-section p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 8px;
+    }
+
+    .collection-content-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0;
+    }
+
+    .collection-content-section ul li {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      padding: 4px 0 4px 24px;
+      position: relative;
+    }
+
+    .collection-content-section ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .collection-content-section .highlight-box {
+      background: var(--primary-glow-soft);
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--primary);
+      margin-top: 10px;
+    }
+
+    .collection-content-section .highlight-box p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    .collection-content-section .highlight-box strong {
+      color: var(--text-primary);
+    }
+
+    /* No Results */
     .no-results {
       text-align: center;
       padding: 60px 20px;
-      background: white;
-      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.3);
     }
-    
+
     .no-results i {
-      font-size: 48px;
-      color: #cccccc;
-      margin-bottom: 20px;
+      font-size: 64px;
+      color: var(--text-light);
+      margin-bottom: 16px;
+      opacity: 0.5;
     }
-    
-    /* ========== ENHANCED SEARCH SUGGESTIONS STYLES ========== */
+
+    .no-results h3 {
+      font-size: 1.3rem;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .no-results p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .no-results a {
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .no-results a:hover {
+      color: var(--primary-light);
+      text-decoration: underline;
+    }
+
+    /* ========== ENHANCED SEARCH SUGGESTIONS ========== */
     .search-suggestions {
       max-width: 600px;
       margin: 10px auto 0;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-xl);
       display: none;
       overflow: hidden;
       z-index: 1001;
     }
-    
+
     .search-suggestions.active {
       display: block;
+      animation: slideDown 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    
-    /* Scrollable suggestions container */
+
+    @keyframes slideDown {
+      0% { opacity: 0; transform: translateY(-8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
     .suggestions-scroll-container {
       max-height: 400px;
       overflow-y: auto;
       overflow-x: hidden;
     }
-    
-    /* Custom scrollbar for suggestions */
+
     .suggestions-scroll-container::-webkit-scrollbar {
       width: 6px;
     }
-    
+
     .suggestions-scroll-container::-webkit-scrollbar-track {
-      background: #f0f2f5;
+      background: var(--bg-light);
       border-radius: 10px;
     }
-    
+
     .suggestions-scroll-container::-webkit-scrollbar-thumb {
-      background: linear-gradient(135deg, #7b5cff, #a855f7);
+      background: var(--primary-gradient);
       border-radius: 10px;
     }
-    
-    /* Enhanced Suggestion Item with Thumbnail */
+
     .suggestion-item {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 12px 15px;
+      padding: 12px 16px;
       cursor: pointer;
-      border-bottom: 1px solid #f0f2f5;
+      border-bottom: 1px solid var(--border-light);
       transition: background 0.2s ease;
     }
-    
+
     .suggestion-item:last-child {
       border-bottom: none;
     }
-    
+
     .suggestion-item:hover {
-      background: #f5f6f8;
+      background: var(--primary-glow-soft);
     }
-    
+
     .suggestion-thumbnail {
       width: 48px;
       height: 48px;
-      border-radius: 8px;
+      border-radius: var(--radius-sm);
       object-fit: cover;
       flex-shrink: 0;
-      background: #f0f2f5;
+      background: var(--bg-light);
     }
-    
+
     .suggestion-info {
       flex: 1;
       min-width: 0;
     }
-    
+
     .suggestion-title {
       font-size: 15px;
       font-weight: 600;
-      color: #111111;
-      margin-bottom: 4px;
+      color: var(--text-primary);
       line-height: 1.3;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    
+
     .suggestion-title strong {
-      color: #7b5cff;
+      color: var(--primary);
     }
-    
+
     .suggestion-category {
       display: inline-block;
       font-size: 11px;
       font-weight: 500;
-      color: #7b5cff;
-      background: #f0f2f5;
-      padding: 2px 8px;
-      border-radius: 20px;
+      color: var(--primary);
+      background: var(--primary-glow-soft);
+      padding: 2px 10px;
+      border-radius: var(--radius-full);
       margin-top: 4px;
     }
-    
+
     .suggestion-match {
       font-size: 12px;
-      color: #888888;
+      color: var(--text-light);
       margin-top: 4px;
       display: -webkit-box;
       -webkit-line-clamp: 1;
@@ -234,132 +427,140 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
-    
+
     .suggestion-match strong {
-      color: #7b5cff;
+      color: var(--primary);
       font-weight: 600;
     }
-    
-    /* No Results in Suggestions */
+
     .suggestion-no-results {
-      padding: 20px;
+      padding: 24px;
       text-align: center;
-      color: #888888;
+      color: var(--text-light);
       font-size: 14px;
     }
-    
-    /* Toast message for copy feedback */
+
+    /* Toast Message */
     .toast-message {
       position: fixed;
       bottom: 30px;
       left: 50%;
       transform: translateX(-50%);
-      background: #111111;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 50px;
+      padding: 14px 28px;
+      border-radius: var(--radius-full);
       z-index: 2000;
-      animation: slideUp 0.3s ease;
+      animation: toastSlide 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow-xl);
+      font-weight: 500;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    
-    @keyframes slideUp {
-      from {
-        transform: translateX(-50%) translateY(100px);
-        opacity: 0;
-      }
-      to {
-        transform: translateX(-50%) translateY(0);
-        opacity: 1;
-      }
+
+    .toast-message.success {
+      background: #10b981;
+      color: white;
     }
-    
+
+    .toast-message.error {
+      background: #ef4444;
+      color: white;
+    }
+
+    @keyframes toastSlide {
+      0% { transform: translateX(-50%) translateY(100px); opacity: 0; }
+      100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+
     @media (max-width: 768px) {
-      .collection-header h1 {
-        font-size: 24px;
+      .collection-hero {
+        padding: 32px 16px;
+        border-radius: 16px;
       }
-      
+      .collection-info {
+        padding: 14px 18px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .collection-stats {
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .stat {
+        font-size: 0.85rem;
+      }
       .suggestion-thumbnail {
         width: 40px;
         height: 40px;
       }
-      
       .suggestion-title {
         font-size: 13px;
       }
-      
       .suggestions-scroll-container {
         max-height: 300px;
       }
+      .back-button {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+      .toast-message {
+        padding: 12px 20px;
+        font-size: 0.85rem;
+        max-width: 90%;
+        white-space: normal;
+      }
+      .collection-content-section {
+        padding: 18px 16px;
+      }
     }
 
-    /* Developer Credit Styles */
-.developer-credit {
-  font-size: 13px;
-  color: #888888;
-  margin-top: 15px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  flex-wrap: wrap;
-}
+    @media (max-width: 480px) {
+      .collection-hero {
+        padding: 24px 12px;
+      }
+      .collection-hero h1 {
+        font-size: 1.5rem;
+      }
+      .collection-info {
+        padding: 12px 14px;
+      }
+      .stat {
+        font-size: 0.8rem;
+        gap: 4px;
+      }
+      .stat i {
+        font-size: 14px;
+      }
+      .collection-content-section {
+        padding: 14px 12px;
+      }
+    }
 
-.developer-credit i {
-  animation: heartbeat 1.5s ease infinite;
-  margin: 0 2px;
-}
-
-.developer-name {
-  font-weight: 600;
-  background: linear-gradient(135deg, #7b5cff, #a855f7);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  transition: all 0.3s ease;
-  cursor: default;
-}
-
-.developer-name:hover {
-  background: linear-gradient(135deg, #a855f7, #7b5cff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  transform: scale(1.02);
-}
-
-@keyframes heartbeat {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.15);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-/* Mobile Responsive */
-@media (max-width: 640px) {
-  .developer-credit {
-    font-size: 11px;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-  
-  .developer-name {
-    display: inline-block;
-  }
-}
+    /* ============================================================
+       REDUCED MOTION
+       ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      .collection-hero::before,
+      .collection-hero::after {
+        animation: none !important;
+      }
+    }
   </style>
 </head>
 <body>
 
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
   <header class="site-header">
     <div class="header-container">
-      <div class="logo">
-        <img src="../assets/prompts/logo.png" alt="PromptAura Logo">
+      <div class="logo" onclick="window.location.href='../index.html'">
+        <img src="../assets/prompts/logo.png" alt="PromptAura Logo" width="42" height="42">
         <span>PromptAura</span>
       </div>
       <div class="header-actions">
@@ -384,12 +585,14 @@
     </div>
   </header>
 
-  <!-- Sliding Menu -->
+  <!-- ============================================================
+       SLIDING MENU
+       ============================================================ -->
   <div class="menu-overlay" id="menuOverlay"></div>
   <div class="sliding-menu" id="slidingMenu">
     <div class="menu-header">
       <div class="menu-logo">
-        <img src="../assets/prompts/logo.png" alt="PromptAura Logo">
+        <img src="../assets/prompts/logo.png" alt="PromptAura Logo" width="42" height="42">
         <span>PromptAura</span>
       </div>
       <button class="menu-close" id="menuCloseBtn">
@@ -427,7 +630,7 @@
         </a>
         <a href="../terms.html" class="menu-item">
           <i class="fas fa-file-contract"></i>
-          <span>Terms & Conditions</span>
+          <span>Terms &amp; Conditions</span>
         </a>
         <a href="../disclaimer.html" class="menu-item">
           <i class="fas fa-exclamation-triangle"></i>
@@ -437,39 +640,61 @@
     </div>
   </div>
 
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
   <main class="main-container">
     <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+
+      <!-- Back Button -->
       <a href="../index.html" class="back-button">
         <i class="fas fa-arrow-left"></i> Back to Home
       </a>
-      
-      <div class="collection-header" id="collectionHeader">
+
+      <!-- Collection Hero -->
+      <div class="collection-hero reveal">
+        <span class="hero-badge"><i class="fas fa-folder-open"></i> Collection</span>
         <h1 id="collectionTitle">Loading...</h1>
         <p id="collectionDescription">Browse prompts in this collection</p>
       </div>
-      
-      <div class="collection-info" id="collectionInfo">
+
+      <!-- Collection Info -->
+      <div class="collection-info reveal">
         <div class="collection-stats" id="collectionStats">
           <div class="stat">
             <i class="fas fa-file-alt"></i>
-            <span id="promptCount">0 prompts</span>
+            <span class="stat-count" id="promptCount">0 prompts</span>
           </div>
         </div>
       </div>
-      
-      <div class="prompts-grid" id="promptsGrid"></div>
-      
+
+      <!-- ==========================================================
+           COLLECTION CONTENT SECTIONS - ADSENSE VALUE
+           ========================================================== -->
+      <div id="collectionContentSections">
+        <!-- Dynamic content inserted by JavaScript -->
+      </div>
+
+      <!-- Prompts Grid -->
+      <div class="prompts-grid" id="promptsGrid">
+        <!-- Dynamic content -->
+      </div>
+
+      <!-- Pagination -->
       <div class="pagination-container" id="paginationContainer"></div>
+
     </div>
   </main>
 
-  <!-- New Professional Footer -->
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-grid">
         <div class="footer-col">
           <div class="footer-logo">
-            <img src="../assets/prompts/logo.png" alt="PromptAura Logo">
+            <img src="../assets/prompts/logo.png" alt="PromptAura Logo" width="42" height="42">
             <span>PromptAura</span>
           </div>
           <p class="footer-description">Your ultimate destination for high-quality AI prompts. Generate stunning images with our carefully curated prompts.</p>
@@ -494,34 +719,52 @@
             <li><a href="../about.html">About Us</a></li>
             <li><a href="../contact.html">Contact Us</a></li>
             <li><a href="../privacy.html">Privacy Policy</a></li>
-            <li><a href="../terms.html">Terms & Conditions</a></li>
+            <li><a href="../terms.html">Terms &amp; Conditions</a></li>
             <li><a href="../disclaimer.html">Disclaimer</a></li>
           </ul>
         </div>
-        
+        <div class="footer-col">
+          <h4>Stay Updated</h4>
+          <p class="footer-description" style="font-size: 13px;">
+            Get the latest prompts delivered to your inbox.
+          </p>
+          <div class="newsletter-form">
+            <input type="email" placeholder="Your email" aria-label="Email for newsletter">
+            <button><i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
       </div>
       <div class="footer-bottom">
-  <p>&copy; 2026 PromptAura. All Rights Reserved.</p>
-  <p class="developer-credit">
-    Developed with <i class="fas fa-heart" style="color: #ff4d4d;"></i> by 
-    <a href="../pages/developer.html" class="developer-name" style="text-decoration: none; cursor: pointer; font-weight: 700; color: #7b5cff; transition: all 0.3s ease;">
-      Subhankar Bairagi
-    </a>
-  </p>
-  <p class="footer-tagline">PromptAura is a free AI prompt library where users can find prompts for AI image generation, cinematic prompts, wedding prompts, birthday prompts, anime prompts and more.</p>
-</div>
+        <p>&copy; 2026 PromptAura. All Rights Reserved.</p>
+        <p class="developer-credit">
+          Developed with <i class="fas fa-heart" style="color: #ff4d4d;"></i> by 
+          <a href="developer.html" class="developer-name">
+            Subhankar Bairagi
+          </a>
+        </p>
+        <p class="footer-tagline">PromptAura is a free AI prompt library where users can find prompts for AI image generation, cinematic prompts, wedding prompts, birthday prompts, anime prompts and more.</p>
+      </div>
     </div>
   </footer>
 
+  <!-- ============================================================
+       STICKY BOTTOM AD
+       ============================================================ -->
   <div class="sticky-bottom-ad mobile-only" id="stickyBottomAd">
     <div class="ad-label">Advertisement</div>
     <div class="ad-placeholder">Mobile Sticky Ad</div>
     <button id="closeStickyAd" class="close-sticky"><i class="fas fa-times"></i></button>
   </div>
 
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
   <script src="../menu.js"></script>
   <script>
-    // Get collection from URL parameter
+    // ============================================================
+    // COLLECTION PAGE - FULL FUNCTIONALITY + CONTENT
+    // ============================================================
+
     const urlParams = new URLSearchParams(window.location.search);
     const collectionName = urlParams.get('collection');
     
@@ -533,25 +776,28 @@
     let searchResults = [];
     let currentSearchQuery = '';
     let collectionsData = [];
-    
-    // Escape HTML
+
+    // ============================================================
+    // UTILITY FUNCTIONS
+    // ============================================================
+
     function escapeHtml(text) {
       if (!text) return '';
       const div = document.createElement('div');
       div.textContent = text;
       return div.innerHTML;
     }
-    
-    // Helper function to fix image path
-    function fixImagePath(imageUrl) {
-      if (!imageUrl) return 'https://via.placeholder.com/400x300?text=No+Image';
-      if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) return imageUrl;
-      if (imageUrl.startsWith('../')) return imageUrl;
-      if (imageUrl.startsWith('assets/')) return '../' + imageUrl;
-      return '../' + imageUrl;
+
+    function escapeRegex(string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
-    
-    // Function to get aspect ratio based on ratio string
+
+    function highlightMatch(text, query) {
+      if (!query) return escapeHtml(text);
+      const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
+      return escapeHtml(text).replace(regex, '<strong>$1</strong>');
+    }
+
     function getAspectRatio(ratio) {
       if (!ratio) return '16 / 9';
       switch(ratio) {
@@ -562,25 +808,237 @@
         default: return '16 / 9';
       }
     }
-    
-    // Highlight matching text
-    function highlightMatch(text, query) {
-      if (!query) return escapeHtml(text);
-      const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
-      return escapeHtml(text).replace(regex, '<strong>$1</strong>');
+
+    function fixImagePath(imageUrl) {
+      if (!imageUrl) return 'https://via.placeholder.com/400x300?text=No+Image';
+      if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) return imageUrl;
+      if (imageUrl.startsWith('../')) return imageUrl;
+      if (imageUrl.startsWith('assets/')) return '../' + imageUrl;
+      return '../' + imageUrl;
     }
-    
-    function escapeRegex(string) {
-      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+    function getCollectionDisplayName(name) {
+      const displayNames = {
+        'girl': 'Girl Portrait',
+        'double': 'Double Exposure',
+        'aura': 'Aura Collection',
+        'birthday': 'Birthday Collection',
+        'divine': 'Divine Collection',
+        'signature': 'Signature Collection',
+        'wedding': 'Wedding Collection',
+        'men': 'Men Portrait',
+        'lord': 'Lord Collection',
+        'name': 'Name Collection'
+      };
+      return displayNames[name] || name.charAt(0).toUpperCase() + name.slice(1);
     }
-    
-    // ========== FUZZY MATCH FUNCTION ==========
+
+    // ============================================================
+    // GENERATE COLLECTION CONTENT SECTIONS
+    // ============================================================
+
+    function generateCollectionContent(title, count, collectionId) {
+      const displayName = getCollectionDisplayName(collectionId);
+      
+      // Collection-specific descriptions
+      const collectionDescriptions = {
+        'girl': {
+          about: 'This collection features stunning AI-generated portraits of women with diverse styles, expressions, and settings. From elegant studio portraits to artistic conceptual photography.',
+          images: 'Beautiful female portraits, fashion photography, artistic portraits, character designs',
+          audience: 'portrait photographers, fashion designers, character artists, digital painters'
+        },
+        'double': {
+          about: 'Double exposure is a photographic technique where two images are combined into one. This collection features AI prompts that create stunning double exposure portraits where human silhouettes blend with natural landscapes, cityscapes, or abstract patterns.',
+          images: 'Double exposure portraits, silhouette overlays, nature blends, artistic composites',
+          audience: 'graphic designers, portrait photographers, digital artists, creative directors'
+        },
+        'wedding': {
+          about: 'This collection features romantic and cinematic AI prompts for wedding photography and portraiture. From candid moments to dramatic posed shots, these prompts capture the beauty and emotion of wedding celebrations.',
+          images: 'Wedding portraits, bridal shots, couple photography, wedding ceremonies',
+          audience: 'wedding photographers, couples, event planners, photography enthusiasts'
+        },
+        'birthday': {
+          about: 'Celebrate special moments with this collection of birthday-themed AI prompts. From colorful party scenes to elegant portrait photography, these prompts help create memorable birthday images.',
+          images: 'Birthday celebrations, cake smash, party scenes, portrait photography',
+          audience: 'event photographers, parents, party planners, photographers'
+        },
+        'divine': {
+          about: 'This collection features ethereal and spiritual AI prompts inspired by divine, celestial, and sacred themes. These prompts create images with a transcendent and otherworldly quality.',
+          images: 'Divine portraits, celestial scenes, spiritual imagery, ethereal compositions',
+          audience: 'spiritual artists, fantasy creators, concept artists, photographers'
+        }
+      };
+      
+      const desc = collectionDescriptions[collectionId] || {
+        about: `This collection features ${displayName}-themed AI prompts designed to help you create stunning, high-quality images with AI image generators. Each prompt is carefully crafted to produce specific visual results.`,
+        images: `${displayName} themed images, creative compositions, artistic photography`,
+        audience: 'photographers, designers, digital artists, creative professionals'
+      };
+      
+      return `
+        <!-- What This Collection Is About -->
+        <div class="collection-content-section reveal">
+          <h3><i class="fas fa-info-circle"></i> What This Collection Is About</h3>
+          <p>${desc.about}</p>
+          <div class="highlight-box">
+            <p><strong>📸 ${count} Prompts Available</strong> — Browse all prompts below to find the perfect match for your project.</p>
+          </div>
+        </div>
+
+        <!-- What Type of Images You Can Create -->
+        <div class="collection-content-section reveal">
+          <h3><i class="fas fa-image"></i> What Type of Images You Can Create</h3>
+          <p>With this collection, you can create:</p>
+          <ul>
+            <li><strong>${desc.images}</strong></li>
+            <li>High-quality, professional-grade AI images</li>
+            <li>Consistent visual styles across multiple prompts</li>
+            <li>Images suitable for portfolios, social media, and creative projects</li>
+          </ul>
+        </div>
+
+        <!-- Who Should Use These Prompts -->
+        <div class="collection-content-section reveal">
+          <h3><i class="fas fa-users"></i> Who Should Use These Prompts</h3>
+          <p>This collection is ideal for:</p>
+          <ul>
+            <li><strong>${desc.audience}</strong></li>
+            <li>AI art enthusiasts exploring new creative possibilities</li>
+            <li>Content creators looking for consistent visual themes</li>
+            <li>Anyone interested in ${displayName.toLowerCase()} themed AI imagery</li>
+          </ul>
+        </div>
+
+        <!-- How To Use These Prompts -->
+        <div class="collection-content-section reveal">
+          <h3><i class="fas fa-play-circle"></i> How To Use These Prompts</h3>
+          <p>Follow these steps to get started with this collection:</p>
+          <ul>
+            <li><strong>Step 1:</strong> Browse the prompts below and select one that matches your vision</li>
+            <li><strong>Step 2:</strong> Click on any prompt to view its full details and copy the prompt text</li>
+            <li><strong>Step 3:</strong> Paste the prompt into your preferred AI image generator</li>
+            <li><strong>Step 4:</strong> Adjust settings like aspect ratio and quality for best results</li>
+            <li><strong>Step 5:</strong> Generate, evaluate, and refine as needed</li>
+          </ul>
+          <div class="highlight-box">
+            <p><strong>💡 Pro Tip:</strong> Experiment with different prompts in this collection to find the style that best matches your creative vision.</p>
+          </div>
+        </div>
+
+        <!-- Tips For Better Results -->
+        <div class="collection-content-section reveal">
+          <h3><i class="fas fa-lightbulb"></i> Tips For Better Results</h3>
+          <p>Get the most out of this collection with these tips:</p>
+          <ul>
+            <li><strong>Start with the base prompt:</strong> Use the prompt as-is first to see the baseline result</li>
+            <li><strong>Experiment with variations:</strong> Modify details like colors, lighting, or composition</li>
+            <li><strong>Use consistent settings:</strong> Keep the same aspect ratio and quality settings for a cohesive look</li>
+            <li><strong>Combine styles:</strong> Mix elements from different prompts in this collection</li>
+            <li><strong>Iterate and refine:</strong> Generate multiple versions and choose the best</li>
+          </ul>
+        </div>
+      `;
+    }
+
+    // ============================================================
+    // SCROLL REVEAL
+    // ============================================================
+
+    function initCollectionScrollReveal() {
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+      reveals.forEach(el => observer.observe(el));
+    }
+
+    // ============================================================
+    // STICKY AD CLOSE
+    // ============================================================
+
+    function initStickyAdClose() {
+      const closeBtn = document.getElementById('closeStickyAd');
+      const stickyAd = document.getElementById('stickyBottomAd');
+      
+      if (closeBtn && stickyAd) {
+        closeBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          stickyAd.style.display = 'none';
+          sessionStorage.setItem('stickyAdClosed_collection', 'true');
+        });
+        if (sessionStorage.getItem('stickyAdClosed_collection') === 'true') {
+          stickyAd.style.display = 'none';
+        }
+      }
+    }
+
+    // ============================================================
+    // COPY TO CLIPBOARD
+    // ============================================================
+
+    function copyToClipboard(text, buttonElement = null) {
+      navigator.clipboard.writeText(text).then(() => {
+        let btn = buttonElement;
+        if (!btn && window.event && window.event.target) {
+          btn = window.event.target;
+        }
+        if (btn && btn.classList && btn.classList.contains('btn-copy')) {
+          const originalText = btn.textContent;
+          btn.textContent = 'Copied! ✓';
+          setTimeout(() => {
+            btn.textContent = originalText;
+          }, 1500);
+        }
+      }).catch(() => {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.top = '-9999px';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          showToast('Prompt copied to clipboard!', 'success');
+        } catch (e) {
+          showToast('Failed to copy prompt', 'error');
+        }
+        document.body.removeChild(textarea);
+      });
+    }
+
+    // ============================================================
+    // TOAST
+    // ============================================================
+
+    function showToast(message, type = 'success') {
+      const existingToast = document.querySelector('.toast-message');
+      if (existingToast) existingToast.remove();
+      
+      const toast = document.createElement('div');
+      toast.className = `toast-message ${type}`;
+      const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+      toast.innerHTML = `<i class="fas ${icon}"></i> ${message}`;
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.remove();
+      }, 3000);
+    }
+
+    // ============================================================
+    // FUZZY SEARCH
+    // ============================================================
+
     function fuzzyMatch(str, pattern) {
       str = str.toLowerCase();
       pattern = pattern.toLowerCase();
-      
       if (str.includes(pattern)) return true;
-      
       if (pattern.length <= 10) {
         let distance = 0;
         let i = 0, j = 0;
@@ -600,8 +1058,7 @@
       }
       return false;
     }
-    
-    // ========== CALCULATE SEARCH SCORE ==========
+
     function calculateSearchScore(prompt, query) {
       let score = 0;
       const title = prompt.title.toLowerCase();
@@ -612,12 +1069,9 @@
       
       if (title.includes(query)) score += 10;
       else if (fuzzyMatch(title, query)) score += 5;
-      
       if (title === query) score += 15;
-      
       if (category.includes(query)) score += 8;
       else if (fuzzyMatch(category, query)) score += 4;
-      
       if (category === query) score += 10;
       
       tags.forEach(tag => {
@@ -628,182 +1082,28 @@
       
       if (shortPrompt.includes(query)) score += 3;
       else if (fuzzyMatch(shortPrompt.substring(0, 50), query)) score += 1;
-      
       if (fullPrompt.includes(query)) score += 1;
       
       return score;
     }
-    
-    // ========== GET SEARCH SUGGESTIONS (ALL MATCHING - SCROLLABLE) ==========
+
     function getSearchSuggestions(query) {
       if (!query || query.trim().length === 0) return [];
-      
       const searchTerm = query.toLowerCase().trim();
-      
       const scoredResults = collectionPrompts.map(prompt => {
         const score = calculateSearchScore(prompt, searchTerm);
         return { prompt, score };
       });
-      
-      // Return ALL results with score > 0 (no limit)
-      const results = scoredResults
+      return scoredResults
         .filter(item => item.score > 0)
         .sort((a, b) => b.score - a.score)
         .map(item => item.prompt);
-      
-      return results;
     }
-    
-    // ========== STICKY AD CLOSE FUNCTION ==========
-    function initStickyAdClose() {
-      const closeBtn = document.getElementById('closeStickyAd');
-      const stickyAd = document.getElementById('stickyBottomAd');
-      
-      if (closeBtn && stickyAd) {
-        closeBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          stickyAd.style.display = 'none';
-          // Save to session storage so it stays closed
-          sessionStorage.setItem('stickyAdClosed_collection', 'true');
-        });
-        
-        // Check if user already closed it before
-        if (sessionStorage.getItem('stickyAdClosed_collection') === 'true') {
-          stickyAd.style.display = 'none';
-        }
-      }
-    }
-    
-    // COPY TO CLIPBOARD
-    function copyToClipboard(text, buttonElement = null) {
-      navigator.clipboard.writeText(text).then(() => {
-        let btn = buttonElement;
-        if (!btn && window.event && window.event.target) {
-          btn = window.event.target;
-        }
-        
-        if (btn && btn.classList && btn.classList.contains('btn-copy')) {
-          const originalText = btn.textContent;
-          btn.textContent = 'Copied! ✓';
-          setTimeout(() => {
-            btn.textContent = originalText;
-          }, 1500);
-        }
-      }).catch((err) => {
-        console.error('Clipboard write failed:', err);
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        textarea.style.position = 'fixed';
-        textarea.style.top = '-9999px';
-        textarea.style.left = '-9999px';
-        document.body.appendChild(textarea);
-        textarea.select();
-        try {
-          document.execCommand('copy');
-          alert('Prompt copied to clipboard!');
-        } catch (e) {
-          alert('Failed to copy prompt. Please copy manually.');
-        }
-        document.body.removeChild(textarea);
-      });
-    }
-    
-    // Load data
-    async function loadCollectionData() {
-      try {
-        const [promptsRes, collectionsRes] = await Promise.all([
-          fetch('../data/prompts.json'),
-          fetch('../data/jstylehub.json')
-        ]);
-        
-        allPrompts = await promptsRes.json();
-        collectionsData = await collectionsRes.json();
-        
-        collectionPrompts = allPrompts.filter(p => p.collection === collectionName);
-        
-        collectionPrompts = collectionPrompts.map(p => {
-          if (p.image) {
-            p.image = fixImagePath(p.image);
-          }
-          return p;
-        });
-        
-        const collectionInfo = collectionsData.find(c => c.collection === collectionName);
-        
-        if (collectionInfo) {
-          document.getElementById('collectionTitle').textContent = collectionInfo.title;
-          document.getElementById('collectionDescription').textContent = `Browse ${collectionPrompts.length} amazing prompts in this collection`;
-        } else {
-          document.getElementById('collectionTitle').textContent = collectionName ? collectionName.charAt(0).toUpperCase() + collectionName.slice(1) : 'Collection';
-          document.getElementById('collectionDescription').textContent = `Browse ${collectionPrompts.length} amazing prompts`;
-        }
-        
-        document.getElementById('promptCount').textContent = `${collectionPrompts.length} prompts`;
-        
-        renderPrompts();
-        setupSearch();
-        setupEventListeners();
-        
-        // Initialize sticky ad close button
-        initStickyAdClose();
-        
-      } catch (error) {
-        console.error('Error loading collection data:', error);
-        showError('Failed to load collection');
-      }
-    }
-    
-    function getCurrentPrompts() {
-      if (isSearchMode && currentSearchQuery) {
-        return searchResults;
-      }
-      return collectionPrompts;
-    }
-    
-    function performSearch(query) {
-      if (!query || query.trim() === '') {
-        isSearchMode = false;
-        currentSearchQuery = '';
-        searchResults = [];
-        currentPage = 1;
-        renderPrompts();
-        return;
-      }
-      
-      const results = collectionPrompts.filter(p => {
-        const title = p.title.toLowerCase();
-        const shortPrompt = p.short_prompt.toLowerCase();
-        const fullPrompt = p.full_prompt.toLowerCase();
-        const category = p.category.toLowerCase();
-        const tags = p.tags ? p.tags.map(t => t.toLowerCase()) : [];
-        
-        return title.includes(query) ||
-               shortPrompt.includes(query) ||
-               fullPrompt.includes(query) ||
-               category.includes(query) ||
-               tags.some(tag => tag.includes(query));
-      });
-      
-      searchResults = results;
-      isSearchMode = true;
-      currentSearchQuery = query;
-      currentPage = 1;
-      
-      renderPrompts();
-    }
-    
-    function clearSearch() {
-      isSearchMode = false;
-      currentSearchQuery = '';
-      searchResults = [];
-      currentPage = 1;
-      renderPrompts();
-      
-      const searchInput = document.getElementById('liveSearchInput');
-      if (searchInput) searchInput.value = '';
-    }
-    
+
+    // ============================================================
+    // RENDER PAGINATION
+    // ============================================================
+
     function renderPagination(totalItems) {
       const totalPages = Math.ceil(totalItems / promptsPerPage);
       const paginationContainer = document.getElementById('paginationContainer');
@@ -814,14 +1114,12 @@
       }
       
       let paginationHTML = '<div class="pagination">';
-      
       paginationHTML += `<button class="page-btn prev-btn" ${currentPage === 1 ? 'disabled' : ''} data-page="${currentPage - 1}">
         <i class="fas fa-chevron-left"></i>
       </button>`;
       
       let startPage = Math.max(1, currentPage - 2);
       let endPage = Math.min(totalPages, startPage + 4);
-      
       if (endPage - startPage < 4) {
         startPage = Math.max(1, endPage - 4);
       }
@@ -843,7 +1141,6 @@
       paginationHTML += `<button class="page-btn next-btn" ${currentPage === totalPages ? 'disabled' : ''} data-page="${currentPage + 1}">
         <i class="fas fa-chevron-right"></i>
       </button>`;
-      
       paginationHTML += '</div>';
       paginationContainer.innerHTML = paginationHTML;
       
@@ -857,16 +1154,17 @@
         }
       });
     }
-    
-    // ========== UPDATED: RENDER PROMPTS WITH DYNAMIC IMAGE RATIO ==========
+
+    // ============================================================
+    // RENDER PROMPTS
+    // ============================================================
+
     function renderPrompts() {
-      let promptsList = getCurrentPrompts();
+      let promptsList = isSearchMode ? searchResults : collectionPrompts;
       const totalItems = promptsList.length;
-      
       const start = (currentPage - 1) * promptsPerPage;
       const end = start + promptsPerPage;
       const paginated = promptsList.slice(start, end);
-      
       const grid = document.getElementById('promptsGrid');
       
       if (paginated.length === 0) {
@@ -881,15 +1179,13 @@
         return;
       }
       
-      // Generate cards HTML with inline ads
       let cardsHTML = '';
       paginated.forEach((prompt, index) => {
         const aspectRatio = getAspectRatio(prompt.ratio);
-        
         cardsHTML += `
-          <div class="prompt-card" data-id="${prompt.id}" style="cursor: pointer;">
+          <div class="prompt-card reveal-stagger" data-id="${prompt.id}" style="cursor: pointer;">
             <h3>${escapeHtml(prompt.title)}</h3>
-            <div style="width: 100%; overflow: hidden; border-radius: 14px; margin-bottom: 12px; background: #f0f2f5; aspect-ratio: ${aspectRatio}; display: flex; align-items: center; justify-content: center;">
+            <div style="width: 100%; overflow: hidden; border-radius: 14px; margin-bottom: 12px; background: #f0f2f5; aspect-ratio: ${aspectRatio} !important; display: flex; align-items: center; justify-content: center;">
               <img src="${prompt.image}" alt="${escapeHtml(prompt.title)}" style="width: 100%; height: 100%; object-fit: contain; display: block;" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=No+Image'">
             </div>
             <div class="short-prompt">${escapeHtml(prompt.short_prompt)}</div>
@@ -900,8 +1196,6 @@
             </div>
           </div>
         `;
-        
-        // Insert ad after every 2 cards
         if ((index + 1) % 2 === 0 && index + 1 < paginated.length) {
           cardsHTML += `
             <div class="ad-container" style="margin: 0; margin-bottom: 20px;">
@@ -916,6 +1210,23 @@
       });
       
       grid.innerHTML = cardsHTML;
+      
+      // Stagger animation for new cards
+      const staggerContainers = document.querySelectorAll('.reveal-stagger');
+      staggerContainers.forEach(container => {
+        const children = container.children;
+        if (children.length > 0) {
+          const rect = container.getBoundingClientRect();
+          const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+          if (isVisible) {
+            Array.from(children).forEach((child, index) => {
+              setTimeout(() => {
+                child.classList.add('visible');
+              }, index * 60);
+            });
+          }
+        }
+      });
       
       document.querySelectorAll('.prompt-card').forEach(card => {
         const cardId = card.dataset.id;
@@ -954,8 +1265,53 @@
       
       renderPagination(totalItems);
     }
-    
-    // ========== FIXED: ENHANCED SEARCH WITH DIRECT PROMPT NAVIGATION ==========
+
+    // ============================================================
+    // SEARCH FUNCTIONS
+    // ============================================================
+
+    function performSearch(query) {
+      if (!query || query.trim() === '') {
+        isSearchMode = false;
+        searchResults = [];
+        currentSearchQuery = '';
+        currentPage = 1;
+        renderPrompts();
+        return;
+      }
+      
+      const results = collectionPrompts.filter(p => {
+        const title = p.title.toLowerCase();
+        const shortPrompt = p.short_prompt.toLowerCase();
+        const fullPrompt = p.full_prompt.toLowerCase();
+        const category = p.category.toLowerCase();
+        const tags = p.tags ? p.tags.map(t => t.toLowerCase()) : [];
+        return title.includes(query) || shortPrompt.includes(query) || 
+               fullPrompt.includes(query) || category.includes(query) ||
+               tags.some(tag => tag.includes(query));
+      });
+      
+      searchResults = results;
+      isSearchMode = true;
+      currentSearchQuery = query;
+      currentPage = 1;
+      renderPrompts();
+    }
+
+    function clearSearch() {
+      isSearchMode = false;
+      searchResults = [];
+      currentSearchQuery = '';
+      currentPage = 1;
+      renderPrompts();
+      const searchInput = document.getElementById('liveSearchInput');
+      if (searchInput) searchInput.value = '';
+    }
+
+    // ============================================================
+    // SETUP SEARCH
+    // ============================================================
+
     function setupSearch() {
       const searchInput = document.getElementById('liveSearchInput');
       const suggestionsDiv = document.getElementById('searchSuggestions');
@@ -968,9 +1324,7 @@
           suggestionsDiv.classList.remove('active');
           return;
         }
-        
         const suggestions = getSearchSuggestions(query);
-        
         if (suggestions.length === 0) {
           suggestionsDiv.innerHTML = `
             <div class="suggestion-no-results">
@@ -980,7 +1334,6 @@
           suggestionsDiv.classList.add('active');
           return;
         }
-        
         suggestionsDiv.innerHTML = `
           <div class="suggestions-scroll-container">
             ${suggestions.map(prompt => `
@@ -995,19 +1348,13 @@
             `).join('')}
           </div>
         `;
-        
         suggestionsDiv.classList.add('active');
-        
-        // ✅ FIXED: Direct navigation to prompt page on suggestion click
         document.querySelectorAll('.suggestion-item').forEach(item => {
           item.addEventListener('click', () => {
             const promptId = item.dataset.id;
-            
             if (promptId) {
-              // Navigate directly to prompt page
               window.location.href = `prompt.html?id=${promptId}`;
             }
-            
             suggestionsDiv.classList.remove('active');
           });
         });
@@ -1015,20 +1362,13 @@
       
       searchInput.addEventListener('input', (e) => {
         const query = e.target.value.trim();
-        
         clearTimeout(debounceTimer);
-        
         if (query.length === 0) {
           suggestionsDiv.classList.remove('active');
-          if (isSearchMode) {
-            performSearch('');
-          }
+          if (isSearchMode) performSearch('');
           return;
         }
-        
-        debounceTimer = setTimeout(() => {
-          renderSuggestions(query);
-        }, 150);
+        debounceTimer = setTimeout(() => renderSuggestions(query), 150);
       });
       
       searchInput.addEventListener('keypress', (e) => {
@@ -1047,7 +1387,11 @@
         }
       });
     }
-    
+
+    // ============================================================
+    // EVENT LISTENERS
+    // ============================================================
+
     function setupEventListeners() {
       const searchToggle = document.getElementById('searchToggleBtn');
       const searchExpand = document.getElementById('searchExpand');
@@ -1066,19 +1410,83 @@
           document.getElementById('searchSuggestions').classList.remove('active');
         });
       }
+      
+      setupSearch();
     }
-    
+
+    // ============================================================
+    // SHOW ERROR
+    // ============================================================
+
     function showError(message) {
       const grid = document.getElementById('promptsGrid');
       grid.innerHTML = `
         <div class="no-results" style="grid-column: 1/-1;">
           <i class="fas fa-exclamation-triangle" style="color: #ef4444;"></i>
           <h3>${message}</h3>
-          <p>Please go back to the <a href="../index.html" style="color: #7b5cff;">homepage</a> to browse other collections.</p>
+          <p>Please go back to the <a href="../index.html">homepage</a> to browse other collections.</p>
         </div>
       `;
     }
-    
+
+    // ============================================================
+    // LOAD COLLECTION DATA
+    // ============================================================
+
+    async function loadCollectionData() {
+      try {
+        const [promptsRes, collectionsRes] = await Promise.all([
+          fetch('../data/prompts.json'),
+          fetch('../data/jstylehub.json')
+        ]);
+        
+        allPrompts = await promptsRes.json();
+        collectionsData = await collectionsRes.json();
+        
+        collectionPrompts = allPrompts.filter(p => p.collection === collectionName);
+        collectionPrompts = collectionPrompts.map(p => {
+          if (p.image) p.image = fixImagePath(p.image);
+          return p;
+        });
+        
+        const collectionInfo = collectionsData.find(c => c.collection === collectionName);
+        
+        let displayTitle = collectionName ? getCollectionDisplayName(collectionName) : 'Collection';
+        let displayDescription = `Browse ${collectionPrompts.length} amazing prompts in this collection`;
+        
+        if (collectionInfo) {
+          displayTitle = collectionInfo.title || displayTitle;
+          displayDescription = collectionInfo.description || displayDescription;
+        }
+        
+        document.getElementById('collectionTitle').textContent = displayTitle;
+        document.getElementById('collectionDescription').textContent = `Browse ${collectionPrompts.length} amazing prompts in this collection`;
+        document.getElementById('promptCount').textContent = `${collectionPrompts.length} prompts`;
+        
+        // ✅ Generate collection content sections
+        const contentContainer = document.getElementById('collectionContentSections');
+        contentContainer.innerHTML = generateCollectionContent(
+          displayTitle, 
+          collectionPrompts.length, 
+          collectionName
+        );
+        
+        renderPrompts();
+        setupSearch();
+        setupEventListeners();
+        initStickyAdClose();
+        
+        setTimeout(initCollectionScrollReveal, 300);
+        
+      } catch (error) {
+        console.error('Error loading collection data:', error);
+        showError('Failed to load collection');
+      }
+    }
+
+    // ============================================================
+    // START
+    // ============================================================
     if (collectionName) {
       loadCollectionData();
     } else {
@@ -1086,7 +1494,7 @@
         <div class="no-results" style="grid-column: 1/-1;">
           <i class="fas fa-exclamation-triangle" style="color: #ef4444;"></i>
           <h3>No collection specified</h3>
-          <p>Please go back to the <a href="../index.html" style="color: #7b5cff;">homepage</a> to browse collections.</p>
+          <p>Please go back to the <a href="../index.html">homepage</a> to browse collections.</p>
         </div>
       `;
     }
